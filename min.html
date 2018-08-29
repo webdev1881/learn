@@ -1,0 +1,544 @@
+<!-- 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+http://markup.su/highlighter/ - синтаксис онлайн
+
+
+mail: kasjdflaskdg@ukr.net //23020023
+vlog.zzz.com.ua
+FTP:
+login: vlog //vLog23020023
+
+/*ENGLISH
+mail: kajsdhakjdhaskjahd@ukr.net pass: 230200023
+
+zzz.com.ua
+engl.zzz.com.ua
+log: learn_eng
+pass: Naiz23020023
+
+GIT
+log: LItvinovsk
+pass: naiz1516010
+mail: kasjdflaskdg@ukr.net
+<<<<<<< HEAD
+
+=======
+
+ 
+
+
+/*
+var a = prompt("День недели", a)
+switch (a){
+	case "1":
+	case "2":
+	case "3":
+	case "4":
+	case "5":
+	document.write("Это, сцуко, рабочий день(((");
+	break;
+	case "6":
+	case "7":
+	document.write("Ураа, выходной!");
+	break;
+}
+// тернарный оператор
+( условие ? Если условие ИСТИННО : Если условие ЛОЖНО )
+cost = quantity >= 10 ? quantity * price * discount : quantity * price;
+	
+	
+//________________________________________________________ split - строку в массив 
+var names = 'Маша, Петя, Марина, Василий';
+var arr = names.split(', '); // ["Маша", "Петя", "Марина", "Василий"]
+"a,b,c,d".split(',', 2); // a,b - второй аргумен это число значений, остальные отбрасываются
+"тест".str.split('') ); // т,е,с,т - пустой, разбивает по буквам
+
+// _________________________________________________________join -  массив в строку	
+var arr = ['Маша', 'Петя', 'Марина', 'Василий'];
+var str = arr.join(';');// Маша;Петя;Марина;Василий 
+new Array(4).join("ля"); // ляляля
+
+// _________________________________________________________delete  - удаление
+var arr = ["Я", "иду", "домой"];
+delete arr[1]; // ["Я", undefined, "домой"];
+
+//_________________________________________________________splice - удаление, вставка
+var arr = ["Я", "изучаю", "JavaScript"];
+// начиная с позиции 1, удалить 1 элемент
+arr.splice(1, 1); //["Я", "JavaScript"]
+
+var arr = ["Я", "сейчас", "изучаю", "JavaScript"];
+// удалить 3 первых элемента и добавить другие вместо них
+arr.splice(0, 3, "Мы", "изучаем") //["Мы", "изучаем", "JavaScript"]
+
+var arr = ["Я", "изучаю", "JavaScript"];
+// с позиции 2 удалить 0 и вставить "сложный", "язык"
+arr.splice(2, 0, "сложный", "язык"); //"Я", "изучаю", "сложный", "язык", "JavaScript"
+
+var arr = [1, 2, 5]
+// начиная с позиции индексом -1 (перед последним элементом)
+// удалить 0 элементов,
+// затем вставить числа 3 и 4
+arr.splice(-1, 0, 3, 4);//1,2,3,4,5
+
+// ________________________________________________________slice - копирует участок массива от begin до end, не включая end. Исходный массив при этом не меняется.
+var arr = ["Почему", "надо", "учить", "JavaScript"];
+// элементы 1, 2 (не включая 3)
+arr.slice(1, 3); // надо, учить
+
+arr.slice(1); // взять все элементы, начиная с номера 1
+arr.slice(-2); // копировать от 2-го элемента с конца и дальше
+arr.slice(); //скопируется весь массив
+
+// _______________________________________________________reverce - меняет порядок 
+var arr = [1, 2, 3];
+arr.reverse();// 3,2,1
+
+//________________________________________________________concat - создаёт новый массив, в который копируются элементы из arr, а также value1, value2...
+var arr = [1, 2];
+var newArr = arr.concat(3, 4);// 1,2,3,4
+
+// _______________________________________________________indexOf / lastIndexOf - возвращает номер элемента 
+var arr = [1, 0, false];
+arr.indexOf(0)  // 1
+arr.indexOf(false)  // 2
+arr.indexOf(null)  // -1 нету(-1)
+
+//________________________________________________________Object.keys(obj) - обьект в массив
+var user = {
+  name: "Петя",
+  age: 30
+};
+var keys = Object.keys(user);
+alert( keys ); // name, age
+
+// _______________________________________________________push/pop, shift/unshift
+arr.push();//	 вставляет последний в переменную
+arr.pop();//  	 вырезает последний в переменную
+arr.shift();//	 вырезает первый в переменную
+arr.unshift();// вставляет первый в переменную
+
+
+//hasOwnProperty - возращает true, если обьект rect1 имеет свойство wight Только свойства, без прототипов
+document.write(rect1.hasOwnProperty("wight"))
+
+//А что бы узнать имеется ли значение и в свойствах и в прототипе можно использовать in									  
+document.write( (""getArea"" in rect1) + ""<br/>"") 					
+
+//"equals - специальный прописаный вручную в прототипе метод для сравнения двух обьектов
+//Равен ли один обьект другому: false / true"						
+Rectangle.prototype.equals = function (otherObj) {
+	if (this.width === otherObj.width && this.height === otherObj.height) {
+		return true;
+	}
+	return false;
+rect1.equals(rect2)	//false
+
+//compareTo - специальный прописаный вручную в прототипе метод для сравнения двух обьектов
+//Какой обьект больше, какой меньше или равен: 1 / -1 / 0 "						
+Rectangle.prototype.compareTo = function (otherObject) {
+if (this.getArea() > otherObject.getArea()) {
+	return 1;
+}
+else if (this.getArea() < otherObject.getArea()) {
+	return -1;
+}
+else {
+	return 0;
+}"	
+rect1.compareTo(rect2)	//false   -1
+
+// instanceof - оператор для проверки типа объекта
+var x = new Array(10);
+if (x instanceof Array) { // аналог оператора is в C#
+	alert(""x is array"");
+}//x is array
+
+// typeof - оператор для получения типа объекта в виде строкового значения
+var test = ""hello""; document.write( typeof test);//string
+var test2 = 123; document.write (typeof test2);//number
+var test3 = true; document.write( typeof test3);//boolean
+var test4 = new Array(); document.write( typeof test4);//object       
+var test5 = new Date(); document.write (typeof test5);//object
+
+charAt() //- возвращает символ по указанной позиции.
+indexOf() //- возвращает индекс первого встречающегося в строке указанного символа.
+lastIndexOf() //- возвращает индекс последнего встречающегося в строке указанного символа.
+toLowerCase() //- перевод всех символов в нижний регистр, 
+toUpperCase() //- перевод всех символов в верхний регистр.
+substring() //-  возвращает строку между двумя указанными индексами, не включая индексы.Т.е. вырезает кусок текста с .. По.."
+substr() //- возвращает строку начиная с указанного индекса, указанной длины.Т.е. вырезает кусок текста с .. длинна..
+
+
+
+
+
+
+//Свойства для навигации по DOM
+childNodes //- массив всех дочерних узлов
+firstChild //- первый дочерний узел
+lastChild //- последний дочерний узел
+nextSibling //- следующий узел расположенный на одном уровне с текущим
+previousSibling //- предыдущий узел расположенный на одном уровне с текущим
+parentNode //- родительский узел для текущего элемента"
+
+
+setAttribute // установка атрибута
+removeAttribute;// удаление атрибута           
+getAttribute// чтение атрибута
+
+createElement// создание элемента 
+appendChild	// добавление созданного элемента в конце.
+removeChild	// удаление выбранного элемента из дерева.
+
+insertBefor("что вставляем","перед чем")
+replacechild("что"  "чем") 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+// Объект Navigator поддерживает пять свойств, по которым можно опередить версию браузера.
+appName // - Название веб браузера.
+appVersion // - Номер версии или другая информация о браузере
+userAgent // - строка, которую браузер посылает в HTTP заголовке USER-AGENT
+appCodeName -//  Кодовое имя браузера. Для Netscape используется кодовое имя ""Mozilla"" Для совместимости IE делает то же самое.
+platform // - Аппаратная платформа, на которой работает браузер.
+
+//window
+window.innerWidth; // ширина
+window.innerHeight; // высота
+
+
+
+//RegExp
+//   \d - метасимвол, заменяющий любой числовой символ
+//   \d\d\d - соответствует подстроке из трех чисел.
+var pattern1 = /\d\d\d/; 
+var pattern2 = new RegExp(""\d\d\d"");"	"есть два способа: через литерал и через ФК
+
+// search() - возвращает индекс ПЕРВОГО найденного символа подстроки по шаблону или -1 если подстрока не найдена	
+var text = ""Строка 123 для тестирования примера."";
+var pattern = /\d\d\d/;
+var firstIndex = text.search(pattern);
+document.write(""Подстрока найдена по индексу "" + firstIndex);//7
+
+// replace() -  производит операцию поиска с заменой.
+// g - глобальный поиск - все вхождения, а не только первое."	
+var text = ""Строка для 123тести456рования при789мера.;
+var pattern = /\d\d\d/g; 
+var result = text.replace(pattern, """");
+document.write(result);"	"
+	
+// match возвращает массив ['1', '2', '3']	
+var text = "1 плюс 2 равно 3";
+var res = text.match(/\d/g); 
+document.write(res);
+	
+//split - разбивает строку на массив подстрок в соответствии с регулярным выражением.
+var text = ""test-А123test-B123test-C111test-D567;
+var res = text.split(/\d\d\d/g); 
+document.write(res);// возвращает массив ['test-A', 'test-B', 'test-C', 'test-D']Разбито по ""123"""
+
+
+// exec -  работает точно так же как и метод match типа данных string.
+// Но всегда возвращает только одно значение или null
+// При глобальном поиске (флаг g) метод возвращает найденную подстроку и продолжает поиск далее по строке."
+var test = "Строка №2 для тестирования примера с регулярными выражениями в файле 6_RegExMethods_exec.htm";
+var pattern = /\d/g;
+var res;
+while ((res = pattern.exec(test)) != null) {
+	alert("Найдено " + res + " в позиции" 
+	+ res.index + ". Следующий поиск начнется с индекса " + pattern.lastIndex);
+} 
+		
+//  test -  возвращает true если метод exec возвращает не null;
+var pattern = /\d\d\d/;
+var input = ""hello world"";
+if (pattern.test(input)) {
+	document.write(""Строка "" + input + "" соответствует шаблону<br />"");
+}
+else {
+	document.write(""Строка "" + input + "" НЕ соответствует шаблону<br />"");
+}//	Проверяет, равен ли pattern=input (если да true)
+input = "123";
+if (pattern.test(input)) {
+	document.write("Строка " + input + " соответствует шаблону<br />");
+}
+else {
+	document.write("Строка " + input + " НЕ соответствует шаблону<br />"");
+}//	Проверяет, равен ли pattern=input (если да true)
+
+
+
+МЕТАДАННЫЕ
+\w	Любой алфавитно-цифровой символ в верхнем и нижнем регистре и символ подчеркивания(тоже самое, что и [a-zA-Z0-9_]). 
+\W	Любой символ не являющийся подчеркиванием и не относящийся к алфавитно-цифровым      
+\s	любой пробельный символ (тоже самое, что [\r\n\f\v\t])         
+\S	Любой не пробельный символ (тоже самое, что [^\r\n\f\v\t])        
+\d	любая цифра (digit)             
+\D	любой не цифровой символ (тоже самое, что [^0-9])        
+	               
+\v	(вертикальная табуляция)              
+\t	(табуляция)               
+\r	(перевод каретки)              
+\n	(перевод строки)              
+\f	(перевод страницы)              
+	               
+Наборы	символов               
+[RrGgBb]	- Соответствие указанным символам            
+[a-z]	Соответствие символам английского алфавита в нижнем регистре         
+[0-9]	Соответствие указанным цифрам             
+[^0-9]	Соответствие с чем угодно кроме цифр заданного диапазона        
+	               
+Квантификатор	(Кванторы)               
++	Один или несколько символов            
+*	ноль и более символов            
+?	ноль или одно вхождение            
+	               
+Интервалы	               
+{3}	точное количество совпадений             
+{2,3}	диапазон               
+{3,}	не менее              
+{,3}	не более              
+
+	
+
+	
+	
+	
+	function Model(){
+		//this
+	}
+	
+	Model.prototype.sum = function(a,b){
+		this.sum = a+b;
+		return this.sum;
+	}
+	
+	function View(){
+		this.tag = document.getElementsByTagName('body')[0]
+	}
+	
+	View.prototype.see  = function(a){
+		this.tag.innerHTML = a;
+	}
+	
+	
+
+	
+	//v.log(x)
+	//v.log(y)
+	
+	function con(){
+		this.x = new Model()
+		this.y = new View()
+		//v.log(x.sum)
+		this.y.see(this.x.sum(5,7))
+	}
+	
+	con()
+
+
+	var a = +prompt("введите первое число")
+	var b = +prompt("введите второе число")
+	alert(a+b)
+*/		
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <button id="btn-msg">Show message</button>
+<button id="btn-generate">Generate item</button>
+<p><strong id="tag">Tag:</strong></p>
+<ul>
+  <li>Item 1</li>
+  <li>Item 2</li>
+</ul>
+
+
+
+<script>
+window.addEventListener("DOMContentLoaded", function() {
+    var ul = document.querySelector("ul"),
+        btn = document.querySelector("#btn-generate");
+    btn.addEventListener("click", function(e) {
+        ul.dispatchEvent(myEvent);
+    });
+    ul.addEventListener("addItem", function(e) {
+        this.appendChild(e.detail.li);
+    });
+    var myEvent = new CustomEvent("addItem", {
+        detail: {
+            counter: 2,
+            get li() {
+                var node = document.createElement("li");
+                node.appendChild(document.createTextNode("Item " + ++this.counter));
+                return node;
+            }
+        },
+        bubbles: true,
+        cancelable: false
+    });
+});
+</script>
+</body>
+</html>
+
+
+<html>
+<button id="b">Автокнопка</button>
+</html>
+	
+<script>
+	b.onclick = function() {console.log("НАЖАТО")};
+	let ev = new Event("click");
+	b.dispatchEvent(ev);
+	
+</script>
+
+	 
+	 <html>
+	 <button id="b" >Add</button>
+	 </html>
+		<ul id="u"></ul>
+	<script>
+			let count = 1;	
+		b.addEventListener("click", function(){		
+	//	console.log('123')		
+			let li = document.createElement("li");
+			li.className = "myli";
+			li.innerHTML = "Item " + count++
+			u.appendChild(li);
+			
+		[].forEach.call( document.getElementsByClassName("myli"), function(li){
+
+			li.addEventListener("click", function(){
+			console.log(li)			
+				li.parentNode.removeChild(li);
+			} );
+		} );		
+		} );
+	</script>
+	 -->
+
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	

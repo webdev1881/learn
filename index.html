@@ -1,0 +1,866 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title class="fa fa-mortar-board">JavaScript</title>
+	<link rel="icon" href="http://rainstitute.in/images/file.png" type="image/gif" sizes="16x16">
+	
+	
+	
+</head>
+<body style="padding-top: 50px;">
+
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          </button>
+        </div>
+        <div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="./index.html">JavaScript</a></li>
+            <li><a href="./HTML5.html">HTML</a></li>
+            <li><a href="#css">CSS</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+<div  class="container">
+
+<p class="lead">
+<pre style="background:rgba(238,238,238,0.92);color:#000"><span style="color:#00f">&lt;</span><span style="color:#6782d3">script</span><span style="color:#00f">></span>
+<span style="color:#6782d3">var</span> <span style="color:#6782d3">v</span> <span style="color:#00f">=</span> <span style="color:#6782d3">console</span>;
+<span style="color:#6782d3">var</span> <span style="color:#6782d3">d</span> <span style="color:#00f">=</span> <span style="color:#6782d3">document</span>;
+<span style="color:#00f">&lt;</span><span style="color:#00f">/</span><span style="color:#6782d3">script</span><span style="color:#00f">></span>
+</pre>
+</p>
+
+<h4>Типы, сравнения</h4>
+<pre style="background:rgba(238,238,238,0.92);color:#000"><span style="color:#06f;font-style:italic">//hasOwnProperty - возращает true, если обьект rect1 имеет свойство wight Только свойства, без прототипов</span>
+<span style="color:#33f;font-weight:700">document</span>.<span style="color:#33f;font-weight:700">write</span>(rect1.hasOwnProperty(<span style="color:#093">"wight"</span>))
+<span style="color:#06f;font-style:italic">//А что бы узнать имеется ли значение и в свойствах и в прототипе можно использовать in                                   </span>
+<span style="color:#33f;font-weight:700">document</span>.<span style="color:#33f;font-weight:700">write</span>( (<span style="color:#093">""</span>getArea<span style="color:#093">""</span> <span style="color:#00f">in</span> rect1) <span style="color:#00f">+</span> <span style="color:#093">""</span><span style="color:#00f">&lt;</span>br/<span style="color:#00f">></span><span style="color:#093">""</span>)                     
+
+<span style="color:#06f;font-style:italic">//"equals - специальный прописаный вручную в прототипе метод для сравнения двух обьектов</span>
+<span style="color:#06f;font-style:italic">//Равен ли один обьект другому: false / true"                       </span>
+<span style="color:#33f;font-weight:700">Rectangle</span>.<span style="color:#6782d3">prototype</span>.<span style="color:#ff8000">equals</span> <span style="color:#00f">=</span> <span style="font-weight:700">function</span> (otherObj) {
+    <span style="color:#00f">if</span> (this.<span style="color:#6782d3">width</span> <span style="color:#00f">===</span> otherObj.<span style="color:#6782d3">width</span> <span style="color:#00f">&amp;</span><span style="color:#00f">&amp;</span> this.<span style="color:#6782d3">height</span> <span style="color:#00f">===</span> otherObj.<span style="color:#6782d3">height</span>) {
+        <span style="color:#00f">return</span> <span style="color:#9700cc">true</span>;
+    }
+    <span style="color:#00f">return</span> <span style="color:#9700cc">false</span>;
+rect1.equals(rect2) <span style="color:#06f;font-style:italic">//false</span>
+
+<span style="color:#06f;font-style:italic">//compareTo - специальный прописаный вручную в прототипе метод для сравнения двух обьектов</span>
+<span style="color:#06f;font-style:italic">//Какой обьект больше, какой меньше или равен: 1 / -1 / 0                       </span>
+<span style="color:#33f;font-weight:700">Rectangle</span>.<span style="color:#6782d3">prototype</span>.<span style="color:#ff8000">compareTo</span> <span style="color:#00f">=</span> <span style="font-weight:700">function</span> (otherObject) {
+<span style="color:#00f">if</span> (this.getArea() <span style="color:#00f">></span> otherObject.getArea()) {
+    <span style="color:#00f">return</span> <span style="color:#06f">1</span>;
+}
+<span style="color:#00f">else</span> <span style="color:#00f">if</span> (this.getArea() <span style="color:#00f">&lt;</span> otherObject.getArea()) {
+    <span style="color:#00f">return</span> <span style="color:#00f">-</span><span style="color:#06f">1</span>;
+}
+<span style="color:#00f">else</span> {
+    <span style="color:#00f">return</span> <span style="color:#06f">0</span>;
+}   
+rect1.compareTo(rect2)  <span style="color:#06f;font-style:italic">//false   -1</span>
+
+<span style="color:#06f;font-style:italic">// instanceof - оператор для проверки типа объекта</span>
+<span style="font-weight:700">var</span> x <span style="color:#00f">=</span> <span style="color:#00f">new</span> <span style="">Array</span>(<span style="color:#06f">10</span>);
+<span style="color:#00f">if</span> (x <span style="color:#00f">instanceof</span> <span style="color:#33f;font-weight:700">Array</span>) { <span style="color:#06f;font-style:italic">// аналог оператора is в C#</span>
+    <span style="color:#33f;font-weight:700">alert</span>(<span style="color:#093">""</span>x is array<span style="color:#093">""</span>);
+}<span style="color:#06f;font-style:italic">//x is array</span>
+
+<span style="color:#06f;font-style:italic">// typeof - оператор для получения типа объекта в виде строкового значения</span>
+<span style="font-weight:700">var</span> test <span style="color:#00f">=</span> <span style="color:#093">""</span>hello<span style="color:#093">""</span>; <span style="color:#33f;font-weight:700">document</span>.<span style="color:#33f;font-weight:700">write</span>( <span style="color:#00f">typeof</span> test);<span style="color:#06f;font-style:italic">//string</span>
+<span style="font-weight:700">var</span> test2 <span style="color:#00f">=</span> <span style="color:#06f">123</span>; <span style="color:#33f;font-weight:700">document</span>.write (<span style="color:#00f">typeof</span> test2);<span style="color:#06f;font-style:italic">//number</span>
+<span style="font-weight:700">var</span> test3 <span style="color:#00f">=</span> <span style="color:#9700cc">true</span>; <span style="color:#33f;font-weight:700">document</span>.<span style="color:#33f;font-weight:700">write</span>( <span style="color:#00f">typeof</span> test3);<span style="color:#06f;font-style:italic">//boolean</span>
+<span style="font-weight:700">var</span> test4 <span style="color:#00f">=</span> <span style="color:#00f">new</span> <span style="">Array</span>(); <span style="color:#33f;font-weight:700">document</span>.<span style="color:#33f;font-weight:700">write</span>( <span style="color:#00f">typeof</span> test4);<span style="color:#06f;font-style:italic">//object       </span>
+<span style="font-weight:700">var</span> test5 <span style="color:#00f">=</span> <span style="color:#00f">new</span> <span style="">Date</span>(); <span style="color:#33f;font-weight:700">document</span>.write (<span style="color:#00f">typeof</span> test5);<span style="color:#06f;font-style:italic">//object</span>
+<span style="color:#33f;font-weight:700">document</span>.<span style="color:#33f;font-weight:700">write</span>(<span style="color:#00f">typeof</span> test6.toString); <span style="color:#33f;font-weight:700">document</span>.<span style="color:#33f;font-weight:700">write</span>(<span style="color:#00f">typeof</span> test6);<span style="color:#06f;font-style:italic">//</span>
+</pre>
+
+
+
+
+
+
+
+
+<h4>Операторы</h4>
+<pre style="background:rgba(238,238,238,0.92);color:#000"><span style="color:#9700cc">true</span>  <span style="color:#00f">&amp;</span><span style="color:#00f">&amp;</span> <span style="color:#9700cc">true</span> <span style="color:#00f">=</span> <span style="color:#9700cc">true</span>
+<span style="color:#9700cc">false</span> <span style="color:#00f">&amp;</span><span style="color:#00f">&amp;</span> <span style="color:#9700cc">true</span> <span style="color:#00f">=</span> <span style="color:#9700cc">false</span>
+<span style="color:#9700cc">true</span>  <span style="color:#00f">&amp;</span><span style="color:#00f">&amp;</span> <span style="color:#9700cc">false</span> <span style="color:#00f">=</span> <span style="color:#9700cc">false</span>
+<span style="color:#9700cc">false</span> <span style="color:#00f">&amp;</span><span style="color:#00f">&amp;</span> <span style="color:#9700cc">false</span> <span style="color:#00f">=</span> <span style="color:#9700cc">false</span>
+_______________________
+<span style="color:#9700cc">true</span>  <span style="color:#00f">||</span> <span style="color:#9700cc">true</span> <span style="color:#00f">=</span> <span style="color:#9700cc">true</span>
+<span style="color:#9700cc">false</span> <span style="color:#00f">||</span> <span style="color:#9700cc">true</span> <span style="color:#00f">=</span> <span style="color:#9700cc">true</span>
+<span style="color:#9700cc">true</span>  <span style="color:#00f">||</span> <span style="color:#9700cc">false</span> <span style="color:#00f">=</span> <span style="color:#9700cc">true</span>
+<span style="color:#9700cc">false</span> <span style="color:#00f">||</span> <span style="color:#9700cc">false</span> <span style="color:#00f">=</span> <span style="color:#9700cc">false</span>
+</pre>
+<pre style="background:rgba(238,238,238,0.92);color:#000"><span style="font-weight:700">var</span> a <span style="color:#00f">=</span> <span style="color:#33f;font-weight:700">prompt</span>(<span style="color:#093">"День недели"</span>, a)
+<span style="color:#00f">switch</span> (a){
+    <span style="color:#00f">case</span> <span style="color:#093">"1"</span>:
+    <span style="color:#00f">case</span> <span style="color:#093">"2"</span>:
+    <span style="color:#00f">case</span> <span style="color:#093">"3"</span>:
+    <span style="color:#00f">case</span> <span style="color:#093">"4"</span>:
+    <span style="color:#00f">case</span> <span style="color:#093">"5"</span>:
+    <span style="color:#33f;font-weight:700">document</span>.<span style="color:#33f;font-weight:700">write</span>(<span style="color:#093">"Это, сцуко, рабочий день((("</span>);
+    <span style="color:#00f">break</span>;
+    <span style="color:#00f">case</span> <span style="color:#093">"6"</span>:
+    <span style="color:#00f">case</span> <span style="color:#093">"7"</span>:
+    <span style="color:#33f;font-weight:700">document</span>.<span style="color:#33f;font-weight:700">write</span>(<span style="color:#093">"Ураа, выходной!"</span>);
+    <span style="color:#00f">break</span>;
+}
+</pre>
+
+<pre style="background:rgba(238,238,238,0.92);color:#000"><span style="color:#06f;font-style:italic">// тернарный оператор</span>
+( условие ? Если условие ИСТИННО : Если условие ЛОЖНО )
+cost <span style="color:#00f">=</span> quantity <span style="color:#00f">>=</span> <span style="color:#06f">10</span> ? quantity <span style="color:#00f">*</span> price <span style="color:#00f">*</span> discount : quantity <span style="color:#00f">*</span> price;
+</pre>
+
+<h4>Массивы</h4>
+<pre style="background:rgba(238,238,238,0.92);color:#000"><span style="color:#06f;font-style:italic">//________________________________________________________ split - строку в массив </span>
+<span style="font-weight:700">var</span> names <span style="color:#00f">=</span> <span style="color:#093">'Маша, Петя, Марина, Василий'</span>;
+<span style="font-weight:700">var</span> arr <span style="color:#00f">=</span> names.<span style="color:#33f;font-weight:700">split</span>(<span style="color:#093">', '</span>); <span style="color:#06f;font-style:italic">// ["Маша", "Петя", "Марина", "Василий"]</span>
+<span style="color:#093">"a,b,c,d"</span>.<span style="color:#33f;font-weight:700">split</span>(<span style="color:#093">','</span>, <span style="color:#06f">2</span>); <span style="color:#06f;font-style:italic">// a,b - второй аргумен это число значений, остальные отбрасываются</span>
+<span style="color:#093">"тест"</span>.str.<span style="color:#33f;font-weight:700">split</span>(<span style="color:#093">''</span>) ); <span style="color:#06f;font-style:italic">// т,е,с,т - пустой, разбивает по буквам</span>
+
+<span style="color:#06f;font-style:italic">// _________________________________________________________join -  массив в строку    </span>
+<span style="font-weight:700">var</span> arr <span style="color:#00f">=</span> [<span style="color:#093">'Маша'</span>, <span style="color:#093">'Петя'</span>, <span style="color:#093">'Марина'</span>, <span style="color:#093">'Василий'</span>];
+<span style="font-weight:700">var</span> str <span style="color:#00f">=</span> arr.<span style="color:#33f;font-weight:700">join</span>(<span style="color:#093">';'</span>);<span style="color:#06f;font-style:italic">// Маша;Петя;Марина;Василий </span>
+<span style="color:#00f">new</span> <span style="">Array</span>(<span style="color:#06f">4</span>).<span style="color:#33f;font-weight:700">join</span>(<span style="color:#093">"ля"</span>); <span style="color:#06f;font-style:italic">// ляляля</span>
+
+<span style="color:#06f;font-style:italic">// _________________________________________________________delete  - удаление</span>
+<span style="font-weight:700">var</span> arr <span style="color:#00f">=</span> [<span style="color:#093">"Я"</span>, <span style="color:#093">"иду"</span>, <span style="color:#093">"домой"</span>];
+<span style="color:#00f">delete</span> arr[<span style="color:#06f">1</span>]; <span style="color:#06f;font-style:italic">// ["Я", undefined, "домой"];</span>
+
+<span style="color:#06f;font-style:italic">//_________________________________________________________splice - удаление, вставка</span>
+<span style="font-weight:700">var</span> arr <span style="color:#00f">=</span> [<span style="color:#093">"Я"</span>, <span style="color:#093">"изучаю"</span>, <span style="color:#093">"JavaScript"</span>];
+<span style="color:#06f;font-style:italic">// начиная с позиции 1, удалить 1 элемент</span>
+arr.<span style="color:#33f;font-weight:700">splice</span>(<span style="color:#06f">1</span>, <span style="color:#06f">1</span>); <span style="color:#06f;font-style:italic">//["Я", "JavaScript"]</span>
+
+<span style="font-weight:700">var</span> arr <span style="color:#00f">=</span> [<span style="color:#093">"Я"</span>, <span style="color:#093">"сейчас"</span>, <span style="color:#093">"изучаю"</span>, <span style="color:#093">"JavaScript"</span>];
+<span style="color:#06f;font-style:italic">// удалить 3 первых элемента и добавить другие вместо них</span>
+arr.<span style="color:#33f;font-weight:700">splice</span>(<span style="color:#06f">0</span>, <span style="color:#06f">3</span>, <span style="color:#093">"Мы"</span>, <span style="color:#093">"изучаем"</span>) <span style="color:#06f;font-style:italic">//["Мы", "изучаем", "JavaScript"]</span>
+
+<span style="font-weight:700">var</span> arr <span style="color:#00f">=</span> [<span style="color:#093">"Я"</span>, <span style="color:#093">"изучаю"</span>, <span style="color:#093">"JavaScript"</span>];
+<span style="color:#06f;font-style:italic">// с позиции 2 удалить 0 и вставить "сложный", "язык"</span>
+arr.<span style="color:#33f;font-weight:700">splice</span>(<span style="color:#06f">2</span>, <span style="color:#06f">0</span>, <span style="color:#093">"сложный"</span>, <span style="color:#093">"язык"</span>); <span style="color:#06f;font-style:italic">//"Я", "изучаю", "сложный", "язык", "JavaScript"</span>
+
+<span style="font-weight:700">var</span> arr <span style="color:#00f">=</span> [<span style="color:#06f">1</span>, <span style="color:#06f">2</span>, <span style="color:#06f">5</span>]
+<span style="color:#06f;font-style:italic">// начиная с позиции индексом -1 (перед последним элементом)</span>
+<span style="color:#06f;font-style:italic">// удалить 0 элементов,</span>
+<span style="color:#06f;font-style:italic">// затем вставить числа 3 и 4</span>
+arr.<span style="color:#33f;font-weight:700">splice</span>(<span style="color:#00f">-</span><span style="color:#06f">1</span>, <span style="color:#06f">0</span>, <span style="color:#06f">3</span>, <span style="color:#06f">4</span>);<span style="color:#06f;font-style:italic">//1,2,3,4,5</span>
+
+<span style="color:#06f;font-style:italic">// ________________________________________________________slice - копирует участок массива от begin до end, не включая end. Исходник не меняется.</span>
+<span style="font-weight:700">var</span> arr <span style="color:#00f">=</span> [<span style="color:#093">"Почему"</span>, <span style="color:#093">"надо"</span>, <span style="color:#093">"учить"</span>, <span style="color:#093">"JavaScript"</span>];
+<span style="color:#06f;font-style:italic">// элементы 1, 2 (не включая 3)</span>
+arr.<span style="color:#33f;font-weight:700">slice</span>(<span style="color:#06f">1</span>, <span style="color:#06f">3</span>); <span style="color:#06f;font-style:italic">// надо, учить</span>
+
+arr.<span style="color:#33f;font-weight:700">slice</span>(<span style="color:#06f">1</span>); <span style="color:#06f;font-style:italic">// взять все элементы, начиная с номера 1</span>
+arr.<span style="color:#33f;font-weight:700">slice</span>(<span style="color:#00f">-</span><span style="color:#06f">2</span>); <span style="color:#06f;font-style:italic">// копировать от 2-го элемента с конца и дальше</span>
+arr.<span style="color:#33f;font-weight:700">slice</span>(); <span style="color:#06f;font-style:italic">//скопируется весь массив</span>
+
+<span style="color:#06f;font-style:italic">// _______________________________________________________reverce - меняет порядок </span>
+<span style="font-weight:700">var</span> arr <span style="color:#00f">=</span> [<span style="color:#06f">1</span>, <span style="color:#06f">2</span>, <span style="color:#06f">3</span>];
+arr.<span style="color:#33f;font-weight:700">reverse</span>();<span style="color:#06f;font-style:italic">// 3,2,1</span>
+
+<span style="color:#06f;font-style:italic">//________________________________________________________concat - создаёт новый массив, в который копируются элементы из arr, а также value1, value2...</span>
+<span style="font-weight:700">var</span> arr <span style="color:#00f">=</span> [<span style="color:#06f">1</span>, <span style="color:#06f">2</span>];
+<span style="font-weight:700">var</span> newArr <span style="color:#00f">=</span> arr.<span style="color:#33f;font-weight:700">concat</span>(<span style="color:#06f">3</span>, <span style="color:#06f">4</span>);<span style="color:#06f;font-style:italic">// 1,2,3,4</span>
+
+<span style="color:#06f;font-style:italic">// _______________________________________________________indexOf / lastIndexOf - возвращает номер элемента </span>
+<span style="font-weight:700">var</span> arr <span style="color:#00f">=</span> [<span style="color:#06f">1</span>, <span style="color:#06f">0</span>, <span style="color:#9700cc">false</span>];
+arr.<span style="color:#33f;font-weight:700">indexOf</span>(<span style="color:#06f">0</span>)  <span style="color:#06f;font-style:italic">// 1</span>
+arr.<span style="color:#33f;font-weight:700">indexOf</span>(<span style="color:#9700cc">false</span>)  <span style="color:#06f;font-style:italic">// 2</span>
+arr.<span style="color:#33f;font-weight:700">indexOf</span>(<span style="color:#9700cc">null</span>)  <span style="color:#06f;font-style:italic">// -1 нету(-1)</span>
+
+<span style="color:#06f;font-style:italic">//________________________________________________________Object.keys(obj) - обьект в массив</span>
+<span style="font-weight:700">var</span> user <span style="color:#00f">=</span> {
+  name: <span style="color:#093">"Петя"</span>,
+  age: <span style="color:#06f">30</span>
+};
+<span style="font-weight:700">var</span> keys <span style="color:#00f">=</span> <span style="color:#33f;font-weight:700">Object</span>.keys(user);
+<span style="color:#33f;font-weight:700">alert</span>( keys ); <span style="color:#06f;font-style:italic">// name, age</span>
+
+<span style="color:#06f;font-style:italic">// _______________________________________________________push/pop, shift/unshift</span>
+arr.<span style="color:#33f;font-weight:700">push</span>();<span style="color:#06f;font-style:italic">//    вставляет последний в переменную</span>
+arr.<span style="color:#33f;font-weight:700">pop</span>();<span style="color:#06f;font-style:italic">//     вырезает последний в переменную</span>
+arr.<span style="color:#33f;font-weight:700">shift</span>();<span style="color:#06f;font-style:italic">//   вырезает первый в переменную</span>
+arr.<span style="color:#33f;font-weight:700">unshift</span>();<span style="color:#06f;font-style:italic">// вставляет первый в переменную</span>
+</pre>
+
+<pre style="background:rgba(238,238,238,0.92);color:#000"><span style="color:#33f;font-weight:700">charAt</span>() <span style="color:#06f;font-style:italic">//- возвращает символ по указанной позиции.</span>
+<span style="color:#33f;font-weight:700">indexOf</span>() <span style="color:#06f;font-style:italic">//- возвращает индекс первого встречающегося в строке указанного символа.</span>
+<span style="color:#33f;font-weight:700">lastIndexOf</span>() <span style="color:#06f;font-style:italic">//- возвращает индекс последнего встречающегося в строке указанного символа.</span>
+<span style="color:#33f;font-weight:700">toLowerCase</span>() <span style="color:#06f;font-style:italic">//- перевод всех символов в нижний регистр, </span>
+<span style="color:#33f;font-weight:700">toUpperCase</span>() <span style="color:#06f;font-style:italic">//- перевод всех символов в верхний регистр.</span>
+<span style="color:#33f;font-weight:700">substring</span>() <span style="color:#06f;font-style:italic">//-  возвращает строку между двумя указанными индексами, не включая индексы.Т.е. вырезает кусок текста с .. По.."</span>
+<span style="color:#33f;font-weight:700">substr</span>() <span style="color:#06f;font-style:italic">//- возвращает строку начиная с указанного индекса, указанной длины.Т.е. вырезает кусок текста с .. длинна..</span>
+</pre>
+
+
+
+
+
+<h4>DOM</h4>
+<pre style="background:rgba(238,238,238,0.92);color:#000"><span style="color:#06f;font-style:italic">//Свойства для навигации по DOM</span>
+childNodes <span style="color:#06f;font-style:italic">//- массив всех дочерних узлов</span>
+firstChild <span style="color:#06f;font-style:italic">//- первый дочерний узел</span>
+lastChild <span style="color:#06f;font-style:italic">//- последний дочерний узел</span>
+nextSibling <span style="color:#06f;font-style:italic">//- следующий узел расположенный на одном уровне с текущим</span>
+previousSibling <span style="color:#06f;font-style:italic">//- предыдущий узел расположенный на одном уровне с текущим</span>
+parentNode <span style="color:#06f;font-style:italic">//- родительский узел для текущего элемента"</span>
+
+
+setAttribute <span style="color:#06f;font-style:italic">// установка атрибута</span>
+removeAttribute;<span style="color:#06f;font-style:italic">// удаление атрибута           </span>
+getAttribute<span style="color:#06f;font-style:italic">// чтение атрибута</span>
+
+createElement<span style="color:#06f;font-style:italic">// создание элемента </span>
+appendChild <span style="color:#06f;font-style:italic">// добавление созданного элемента в конце.</span>
+removeChild <span style="color:#06f;font-style:italic">// удаление выбранного элемента из дерева.</span>
+
+insertBefor(<span style="color:#093">"что вставляем"</span>,<span style="color:#093">"перед чем"</span>)
+replacechild(<span style="color:#093">"что"</span>  <span style="color:#093">"чем"</span>) 
+</pre>
+
+<pre style="background:rgba(238,238,238,0.92);color:#000"><span style="color:#06f;font-style:italic">// Объект Navigator поддерживает пять свойств, по которым можно опередить версию браузера.</span>
+appName <span style="color:#06f;font-style:italic">// - Название веб браузера.</span>
+appVersion <span style="color:#06f;font-style:italic">// - Номер версии или другая информация о браузере</span>
+userAgent <span style="color:#06f;font-style:italic">// - строка, которую браузер посылает в HTTP заголовке USER-AGENT</span>
+appCodeName <span style="color:#00f">-</span><span style="color:#06f;font-style:italic">//  Кодовое имя браузера. Для Netscape используется кодовое имя ""Mozilla"" Для совместимости IE делает то же самое.</span>
+platform <span style="color:#06f;font-style:italic">// - Аппаратная платформа, на которой работает браузер.</span>
+
+<span style="color:#06f;font-style:italic">//window</span>
+<span style="color:#33f;font-weight:700">window</span>.<span style="color:#6782d3">innerWidth</span>; <span style="color:#06f;font-style:italic">// ширина</span>
+<span style="color:#33f;font-weight:700">window</span>.<span style="color:#6782d3">innerHeight</span>; <span style="color:#06f;font-style:italic">// высота</span>
+</pre>
+<pre style="background:rgba(238,238,238,0.92);color:#000">Обработчик    Условия вызова Поддержка
+onabort прерывание загрузки изображения    <span style="color:#00f">&lt;</span>img<span style="color:#00f">></span>
+onblur  Элемент теряет фокус  <span style="color:#00f">&lt;</span>button<span style="color:#00f">></span>, <span style="color:#00f">&lt;</span>input<span style="color:#00f">></span>, <span style="color:#00f">&lt;</span>label<span style="color:#00f">></span>, <span style="color:#00f">&lt;</span>select<span style="color:#00f">></span>, <span style="color:#00f">&lt;</span>textarea<span style="color:#00f">></span>, <span style="color:#00f">&lt;</span>body<span style="color:#00f">></span>
+onchange    Элемент потерял фокус и его значения с момента получения фокуса изменилось  <span style="color:#00f">&lt;</span>input<span style="color:#00f">></span>, <span style="color:#00f">&lt;</span>select<span style="color:#00f">></span>, <span style="color:#00f">&lt;</span>textarea<span style="color:#00f">></span>
+onclick Была нажата и отпущена клавиша мыши.  Большинство элементов.
+ondblclick  Двойной щелчок Большинство элементов.
+onerror Ошибка при загрузке изображения <span style="color:#00f">&lt;</span>img<span style="color:#00f">></span>
+onfocus Элемент получил фокус    <span style="color:#00f">&lt;</span>button<span style="color:#00f">></span>, <span style="color:#00f">&lt;</span>input<span style="color:#00f">></span>, <span style="color:#00f">&lt;</span>label<span style="color:#00f">></span>, <span style="color:#00f">&lt;</span>select<span style="color:#00f">></span>, <span style="color:#00f">&lt;</span>textarea<span style="color:#00f">></span>, <span style="color:#00f">&lt;</span>body<span style="color:#00f">></span>
+onkeydown   Клавиша нажата Элементы формы и <span style="color:#00f">&lt;</span>body<span style="color:#00f">></span>
+onkeypress  Клавиша нажата и  отпущена   Элементы формы и <span style="color:#00f">&lt;</span>body<span style="color:#00f">></span>
+onkeyup Клавиша отпущена Элементы формы и <span style="color:#00f">&lt;</span>body<span style="color:#00f">></span>
+onload  Загрузка завершена <span style="color:#00f">&lt;</span>body<span style="color:#00f">></span>, <span style="color:#00f">&lt;</span>frameset<span style="color:#00f">></span>, <span style="color:#00f">&lt;</span>img<span style="color:#00f">></span>
+onmousedown Нажата кнопка мыши  Большинство элементов
+onmousemove Перемещение указателя мыши  Большинство элементов
+onmouseout  Указатель мыши выходит за границы элемента Большинство элементов
+onmouseover Указатель мыши находит на элемент  Большинство элементов
+onmouseup   Отпущена клавиша мыши    Большинство элементов
+onreset Запрос на очистку полей формы  <span style="color:#00f">&lt;</span>form<span style="color:#00f">></span>
+onresize    Изменение размера окна  <span style="color:#00f">&lt;</span>body<span style="color:#00f">></span>, <span style="color:#00f">&lt;</span>frameset<span style="color:#00f">></span>
+onselect    Выбор текста <span style="color:#00f">&lt;</span>input<span style="color:#00f">></span>, <span style="color:#00f">&lt;</span>textarea<span style="color:#00f">></span>
+onsubmit    Запрос на передачу данных формы  <span style="color:#00f">&lt;</span>form<span style="color:#00f">></span>
+onunload    Документ выгружен   <span style="color:#00f">&lt;</span>body<span style="color:#00f">></span>, <span style="color:#00f">&lt;</span>frameset<span style="color:#00f">></span>
+
+</pre>
+
+
+
+
+
+
+<h4>RegExp / регулярные выражения</h4>
+<pre style="background:rgba(238,238,238,0.92);color:#000"><span style="color:#06f;font-style:italic">//   \d - метасимвол, заменяющий любой числовой символ</span>
+<span style="color:#06f;font-style:italic">//   \d\d\d - соответствует подстроке из трех чисел.</span>
+<span style="font-weight:700">var</span> pattern1 <span style="color:#00f">=</span><span style="color:#ff0080"> /<span style="color:#6782d3">\d</span><span style="color:#6782d3">\d</span><span style="color:#6782d3">\d</span>/</span>; 
+<span style="font-weight:700">var</span> pattern2 <span style="color:#00f">=</span> <span style="color:#00f">new</span> <span style="">RegExp</span>(<span style="color:#093">"<span style="color:#6782d3">\d</span><span style="color:#6782d3">\d</span><span style="color:#6782d3">\d</span>"</span>);<span style="color:#093">"   "</span>есть два способа: через литерал и через ФК
+
+<span style="color:#06f;font-style:italic">// search() - возвращает индекс ПЕРВОГО найденного символа подстроки по шаблону или -1 если подстрока не найдена </span>
+<span style="font-weight:700">var</span> text <span style="color:#00f">=</span> <span style="color:#093">""</span>Строка <span style="color:#06f">123</span> для тестирования примера.<span style="color:#093">""</span>;
+<span style="font-weight:700">var</span> pattern <span style="color:#00f">=</span><span style="color:#ff0080"> /<span style="color:#6782d3">\d</span><span style="color:#6782d3">\d</span><span style="color:#6782d3">\d</span>/</span>;
+<span style="font-weight:700">var</span> firstIndex <span style="color:#00f">=</span> text.<span style="color:#33f;font-weight:700">search</span>(pattern);
+<span style="color:#33f;font-weight:700">document</span>.<span style="color:#33f;font-weight:700">write</span>(<span style="color:#093">""</span>Подстрока найдена по индексу <span style="color:#093">""</span> <span style="color:#00f">+</span> firstIndex);<span style="color:#06f;font-style:italic">//7</span>
+
+<span style="color:#06f;font-style:italic">// replace() -  производит операцию поиска с заменой.</span>
+<span style="color:#06f;font-style:italic">// g - глобальный поиск - все вхождения, а не только первое." </span>
+<span style="font-weight:700">var</span> text <span style="color:#00f">=</span> <span style="color:#093">"Строка для 123тести456рования при789мера."</span>;
+<span style="font-weight:700">var</span> pattern <span style="color:#00f">=</span><span style="color:#ff0080"> /<span style="color:#6782d3">\d</span><span style="color:#6782d3">\d</span><span style="color:#6782d3">\d</span>/g</span>; 
+<span style="font-weight:700">var</span> result <span style="color:#00f">=</span> text.<span style="color:#33f;font-weight:700">replace</span>(pattern, <span style="color:#093">""</span>);
+<span style="color:#33f;font-weight:700">document</span>.<span style="color:#33f;font-weight:700">write</span>(result);
+    
+<span style="color:#06f;font-style:italic">// match возвращает массив ['1', '2', '3']  </span>
+<span style="font-weight:700">var</span> text <span style="color:#00f">=</span> <span style="color:#093">"1 плюс 2 равно 3"</span>;
+<span style="font-weight:700">var</span> res <span style="color:#00f">=</span> text.<span style="color:#33f;font-weight:700">match</span>(<span style="color:#ff0080">/<span style="color:#6782d3">\d</span>/g</span>); 
+<span style="color:#33f;font-weight:700">document</span>.<span style="color:#33f;font-weight:700">write</span>(res);
+    
+<span style="color:#06f;font-style:italic">//split - разбивает строку на массив подстрок в соответствии с регулярным выражением.</span>
+<span style="font-weight:700">var</span> text <span style="color:#00f">=</span> <span style="color:#093">"test-А123test-B123test-C111test-D567"</span>;
+<span style="font-weight:700">var</span> res <span style="color:#00f">=</span> text.<span style="color:#33f;font-weight:700">split</span>(<span style="color:#ff0080">/<span style="color:#6782d3">\d</span><span style="color:#6782d3">\d</span><span style="color:#6782d3">\d</span>/g</span>); 
+<span style="color:#33f;font-weight:700">document</span>.<span style="color:#33f;font-weight:700">write</span>(res);<span style="color:#06f;font-style:italic">// возвращает массив ['test-A', 'test-B', 'test-C', 'test-D']Разбито по ""123"""</span>
+
+
+<span style="color:#06f;font-style:italic">// exec -  работает точно так же как и метод match типа данных string.</span>
+<span style="color:#06f;font-style:italic">// Но всегда возвращает только одно значение или null</span>
+<span style="color:#06f;font-style:italic">// При глобальном поиске (флаг g) метод возвращает найденную подстроку и продолжает поиск далее по строке."</span>
+<span style="font-weight:700">var</span> test <span style="color:#00f">=</span> <span style="color:#093">"Строка №2 для тестирования примера с регулярными выражениями в файле 6_RegExMethods_exec.htm"</span>;
+<span style="font-weight:700">var</span> pattern <span style="color:#00f">=</span><span style="color:#ff0080"> /<span style="color:#6782d3">\d</span>/g</span>;
+<span style="font-weight:700">var</span> res;
+<span style="color:#00f">while</span> ((res <span style="color:#00f">=</span> pattern.<span style="color:#33f;font-weight:700">exec</span>(test)) <span style="color:#00f">!</span><span style="color:#00f">=</span> <span style="color:#9700cc">null</span>) {
+    <span style="color:#33f;font-weight:700">alert</span>(<span style="color:#093">"Найдено "</span> <span style="color:#00f">+</span> res <span style="color:#00f">+</span> <span style="color:#093">" в позиции"</span> 
+    <span style="color:#00f">+</span> res.<span style="color:#6782d3">index</span> <span style="color:#00f">+</span> <span style="color:#093">". Следующий поиск начнется с индекса "</span> <span style="color:#00f">+</span> pattern.<span style="color:#6782d3">lastIndex</span>);
+} 
+        
+<span style="color:#06f;font-style:italic">//  test -  возвращает true если метод exec возвращает не null;</span>
+<span style="font-weight:700">var</span> pattern <span style="color:#00f">=</span><span style="color:#ff0080"> /<span style="color:#6782d3">\d</span><span style="color:#6782d3">\d</span><span style="color:#6782d3">\d</span>/</span>;
+<span style="font-weight:700">var</span> input <span style="color:#00f">=</span> <span style="color:#093">"hello world"</span>;
+<span style="color:#00f">if</span> (pattern.<span style="color:#33f;font-weight:700">test</span>(input)) {
+    <span style="color:#33f;font-weight:700">document</span>.<span style="color:#33f;font-weight:700">write</span>(<span style="color:#093">"Строка "</span> <span style="color:#00f">+</span> input <span style="color:#00f">+</span> <span style="color:#093">" соответствует шаблону&lt;br />"</span>);
+}
+<span style="color:#00f">else</span> {
+    <span style="color:#33f;font-weight:700">document</span>.<span style="color:#33f;font-weight:700">write</span>(<span style="color:#093">"Строка "</span> <span style="color:#00f">+</span> input <span style="color:#00f">+</span> <span style="color:#093">" НЕ соответствует шаблону&lt;br />"</span>);
+}<span style="color:#06f;font-style:italic">// Проверяет, равен ли pattern=input (если да true)</span>
+input <span style="color:#00f">=</span> <span style="color:#093">"123"</span>;
+<span style="color:#00f">if</span> (pattern.<span style="color:#33f;font-weight:700">test</span>(input)) {
+    <span style="color:#33f;font-weight:700">document</span>.<span style="color:#33f;font-weight:700">write</span>(<span style="color:#093">"Строка "</span> <span style="color:#00f">+</span> input <span style="color:#00f">+</span> <span style="color:#093">" соответствует шаблону&lt;br />"</span>);
+}
+<span style="color:#00f">else</span> {
+    <span style="color:#33f;font-weight:700">document</span>.<span style="color:#33f;font-weight:700">write</span>(<span style="color:#093">"Строка "</span> <span style="color:#00f">+</span> input <span style="color:#00f">+</span> <span style="color:#093">" НЕ соответствует шаблону&lt;br />"</span>);
+}<span style="color:#06f;font-style:italic">// Проверяет, равен ли pattern=input (если да true)</span>
+</pre>
+
+<pre style="background:rgba(238,238,238,0.92);color:#000">МЕТАДАННЫЕ RegExp
+\w  Любой алфавитно<span style="color:#00f">-</span>цифровой символ в верхнем и нижнем регистре и символ подчеркивания(тоже самое, что и [a<span style="color:#00f">-</span>zA<span style="color:#00f">-</span>Z0<span style="color:#00f">-</span>9_]). 
+\W  Любой символ не являющийся подчеркиванием и не относящийся к алфавитно<span style="color:#00f">-</span>цифровым      
+\s  любой пробельный символ (тоже самое, что [\r\n\f\v\t])         
+\S  Любой не пробельный символ (тоже самое, что [^\r\n\f\v\t])        
+\d  любая цифра (digit)             
+\D  любой не цифровой символ (тоже самое, что [^<span style="color:#06f">0</span><span style="color:#00f">-</span><span style="color:#06f">9</span>])        
+                   
+\v  (вертикальная табуляция)              
+\t  (табуляция)               
+\r  (перевод каретки)              
+\n  (перевод строки)              
+\f  (перевод страницы)              
+                   
+Наборы    символов               
+[RrGgBb]    <span style="color:#00f">-</span> Соответствие указанным символам            
+[a<span style="color:#00f">-</span>z]   Соответствие символам английского алфавита в нижнем регистре         
+[<span style="color:#06f">0</span><span style="color:#00f">-</span><span style="color:#06f">9</span>]   Соответствие указанным цифрам             
+[^<span style="color:#06f">0</span><span style="color:#00f">-</span><span style="color:#06f">9</span>]  Соответствие с чем угодно кроме цифр заданного диапазона        
+                   
+Квантификатор  (Кванторы)               
+<span style="color:#00f">+</span>   Один или несколько символов            
+<span style="color:#00f">*</span>   ноль и более символов            
+?   ноль или одно вхождение            
+                   
+Интервалы                 
+{<span style="color:#06f">3</span>} точное количество совпадений             
+{<span style="color:#06f">2</span>,<span style="color:#06f">3</span>}   диапазон               
+{<span style="color:#06f">3</span>,}    не менее              
+{,<span style="color:#06f">3</span>}    не более    
+</pre>
+
+<<<<<<< HEAD
+<h4>Всплывающая подсказка / tooltip</h4>
+<pre class="javascript" style="font-family:monospace;"><span style="color: #000066; font-weight: bold;">function</span> tShow<span style="color: #009900;">&#40;</span>text<span style="color: #339933;">,</span>x<span style="color: #339933;">,</span>y<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+	tt.<span style="color: #660066;">style</span>.<span style="color: #660066;">visibility</span> <span style="color: #339933;">=</span> <span style="color: #3366CC;">&quot;visible&quot;</span><span style="color: #339933;">;</span>
+	tt.<span style="color: #660066;">innerHTML</span> <span style="color: #339933;">=</span> text<span style="color: #339933;">;</span>
+	tt.<span style="color: #660066;">style</span>.<span style="color: #660066;">top</span> <span style="color: #339933;">=</span> x <span style="color: #339933;">+</span> <span style="color: #3366CC;">&quot;px&quot;</span><span style="color: #339933;">;</span>
+	tt.<span style="color: #660066;">style</span>.<span style="color: #660066;">left</span> <span style="color: #339933;">=</span> y <span style="color: #339933;">+</span> <span style="color: #3366CC;">&quot;px&quot;</span><span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span>
+document.<span style="color: #660066;">onmousemove</span> <span style="color: #339933;">=</span> <span style="color: #000066; font-weight: bold;">function</span><span style="color: #009900;">&#40;</span>e<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+	<span style="color: #000066; font-weight: bold;">if</span><span style="color: #009900;">&#40;</span>e.<span style="color: #660066;">target</span>.<span style="color: #660066;">tagName</span> <span style="color: #339933;">!=</span> <span style="color: #3366CC;">&quot;HTML&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+		tShow<span style="color: #009900;">&#40;</span>e.<span style="color: #660066;">target</span>.<span style="color: #660066;">innerText</span><span style="color: #339933;">,</span> e.<span style="color: #660066;">clientY</span> <span style="color: #339933;">+</span> <span style="color: #CC0000;">10</span><span style="color: #339933;">,</span> e.<span style="color: #660066;">clientX</span> <span style="color: #339933;">+</span> <span style="color: #CC0000;">10</span> <span style="color: #009900;">&#41;</span>			
+	<span style="color: #009900;">&#125;</span>
+<span style="color: #009900;">&#125;</span>
+document.<span style="color: #660066;">onmouseout</span> <span style="color: #339933;">=</span> <span style="color: #000066; font-weight: bold;">function</span><span style="color: #009900;">&#40;</span>e<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+	tt.<span style="color: #660066;">style</span>.<span style="color: #660066;">visibility</span> <span style="color: #339933;">=</span> <span style="color: #3366CC;">&quot;hidden&quot;</span>
+<span style="color: #009900;">&#125;</span>
+&nbsp;</pre>
+
+<h4>Плавная Анимация цвета / Animation color</h4>
+<pre class="javascript" style="font-family:monospace;"><span style="color: #000066; font-weight: bold;">var</span> divColor <span style="color: #339933;">=</span> document.<span style="color: #660066;">createElement</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;div&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+document.<span style="color: #660066;">body</span>.<span style="color: #660066;">appendChild</span><span style="color: #009900;">&#40;</span>divColor<span style="color: #009900;">&#41;</span>
+&nbsp;
+divColor.<span style="color: #660066;">style</span>.<span style="color: #660066;">width</span> <span style="color: #339933;">=</span> <span style="color: #3366CC;">&quot;300px&quot;</span><span style="color: #339933;">;</span>
+divColor.<span style="color: #660066;">style</span>.<span style="color: #660066;">height</span> <span style="color: #339933;">=</span> <span style="color: #3366CC;">&quot;300px&quot;</span><span style="color: #339933;">;</span>
+divColor.<span style="color: #660066;">style</span>.<span style="color: #660066;">border</span> <span style="color: #339933;">=</span> <span style="color: #3366CC;">&quot;solid black 1px&quot;</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #000066; font-weight: bold;">var</span> color <span style="color: #339933;">=</span> <span style="color: #CC0000;">0</span><span style="color: #339933;">;</span>
+&nbsp;
+setInterval<span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">function</span> <span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+	color <span style="color: #339933;">=</span> color <span style="color: #339933;">+</span> <span style="color: #CC0000;">1</span> <span style="color: #339933;">%</span> <span style="color: #CC0000;">360</span><span style="color: #339933;">;</span>
+	divColor.<span style="color: #660066;">style</span>.<span style="color: #660066;">backgroundColor</span> <span style="color: #339933;">=</span> <span style="color: #3366CC;">&quot;hsl(&quot;</span> <span style="color: #339933;">+</span> color <span style="color: #339933;">+</span> <span style="color: #3366CC;">&quot;, 100%, 100%)&quot;</span><span style="color: #339933;">;</span> <span style="color: #006600; font-style: italic;">// H — тон [0; 360] S — насыщенность[%] L — светлота [%]</span>
+<span style="color: #009900;">&#125;</span><span style="color: #339933;">,</span> <span style="color: #CC0000;">50</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></pre>
+
+<h4>getComputedStyle</h4>
+<pre class="javascript" style="font-family:monospace;"><span style="color: #000066; font-weight: bold;">var</span> computedStyle <span style="color: #339933;">=</span> getComputedStyle<span style="color: #009900;">&#40;</span>document.<span style="color: #660066;">body</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+v.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span> computedStyle.<span style="color: #660066;">marginTop</span> <span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> <span style="color: #006600; font-style: italic;">// выведет отступ в пикселях</span>
+v.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span> computedStyle.<span style="color: #660066;">color</span> <span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> <span style="color: #006600; font-style: italic;">// выведет цвет</span>
+v.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span>computedStyle<span style="color: #009900;">&#41;</span></pre>
+
+<h4>Всплытие true / Перехват false // Bubbling/Capchure</h4>
+<pre class="javascript" style="font-family:monospace;">document.<span style="color: #660066;">body</span>.<span style="color: #660066;">addEventListener</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;click&quot;</span><span style="color: #339933;">,</span> <span style="color: #000066; font-weight: bold;">function</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+	v.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;This is a body&quot;</span><span style="color: #009900;">&#41;</span>
+<span style="color: #009900;">&#125;</span><span style="color: #339933;">,</span> <span style="color: #003366; font-weight: bold;">true</span> <span style="color: #009900;">&#41;</span>
+&nbsp;
+container.<span style="color: #660066;">addEventListener</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;click&quot;</span><span style="color: #339933;">,</span> <span style="color: #000066; font-weight: bold;">function</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+	v.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;This is a DIV&quot;</span><span style="color: #009900;">&#41;</span>
+<span style="color: #009900;">&#125;</span><span style="color: #339933;">,</span> <span style="color: #003366; font-weight: bold;">false</span> <span style="color: #009900;">&#41;</span>
+&nbsp;
+button1.<span style="color: #660066;">addEventListener</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;click&quot;</span><span style="color: #339933;">,</span> <span style="color: #000066; font-weight: bold;">function</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+	v.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;This is a BUTTON in DIV&quot;</span><span style="color: #009900;">&#41;</span>
+<span style="color: #009900;">&#125;</span><span style="color: #339933;">,</span> <span style="color: #003366; font-weight: bold;">true</span> <span style="color: #009900;">&#41;</span></pre>
+
+<h4>Удаление события по умолчанию / preventDefault()</h4>
+<pre class="javascript" style="font-family:monospace;"><span style="color: #006600; font-style: italic;">//Удаление события по умолчанию</span>
+<span style="color: #006600; font-style: italic;">//Здесь при нажатии на кнопку должен происходить метод POST. Но если поле формы пустое то событие отменяется </span>
+<span style="color: #006600; font-style: italic;">//preventDefault</span>
+&nbsp;
+document.<span style="color: #660066;">forms</span><span style="color: #009900;">&#91;</span><span style="color: #CC0000;">0</span><span style="color: #009900;">&#93;</span>.<span style="color: #660066;">addEventListener</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;&quot;</span>submit<span style="color: #3366CC;">&quot;&quot;</span><span style="color: #339933;">,</span> <span style="color: #000066; font-weight: bold;">function</span> <span style="color: #009900;">&#40;</span>e<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+	<span style="color: #000066; font-weight: bold;">if</span> <span style="color: #009900;">&#40;</span>document.<span style="color: #660066;">getElementById</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;&quot;</span>nameInput<span style="color: #3366CC;">&quot;&quot;</span><span style="color: #009900;">&#41;</span>.<span style="color: #660066;">value</span>.<span style="color: #660066;">length</span> <span style="color: #339933;">==</span> <span style="color: #CC0000;">0</span><span style="color: #009900;">&#41;</span>
+	<span style="color: #009900;">&#123;</span>
+	   <span style="color: #006600; font-style: italic;">// Если поле ввода пустое отменить действие по умолчанию, которое связанно с событием.</span>
+	   e.<span style="color: #660066;">preventDefault</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+	   alert<span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;&quot;</span>Введите имя<span style="color: #3366CC;">&quot;&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+	<span style="color: #009900;">&#125;</span>
+<span style="color: #009900;">&#125;</span><span style="color: #339933;">,</span> <span style="color: #003366; font-weight: bold;">false</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></pre>
+<pre class="javascript" style="font-family:monospace;"><span style="color: #006600; font-style: italic;">//________________________________</span>
+&nbsp;
+but.<span style="color: #660066;">onclick</span> <span style="color: #339933;">=</span> <span style="color: #000066; font-weight: bold;">function</span><span style="color: #009900;">&#40;</span>e<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+	<span style="color: #000066; font-weight: bold;">if</span><span style="color: #009900;">&#40;</span>inp.<span style="color: #660066;">value</span>.<span style="color: #660066;">length</span> <span style="color: #339933;">==</span> <span style="color: #CC0000;">0</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+		e.<span style="color: #660066;">preventDefault</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+		<span style="color: #000066; font-weight: bold;">throw</span> <span style="color: #000066; font-weight: bold;">new</span> Error<span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;UPS&quot;</span><span style="color: #009900;">&#41;</span> <span style="color: #006600; font-style: italic;">// My Eroor</span>
+	<span style="color: #009900;">&#125;</span> <span style="color: #000066; font-weight: bold;">else</span><span style="color: #009900;">&#123;</span>
+		v.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span>inp.<span style="color: #660066;">value</span><span style="color: #009900;">&#41;</span>
+		inp.<span style="color: #660066;">value</span> <span style="color: #339933;">=</span> <span style="color: #3366CC;">&quot;&quot;</span>
+		inp.<span style="color: #660066;">focus</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>		
+	<span style="color: #009900;">&#125;</span>	
+<span style="color: #009900;">&#125;</span></pre>
+<pre class="javascript" style="font-family:monospace;"><span style="color: #006600; font-style: italic;">//______________________________</span>
+inp.<span style="color: #660066;">addEventListener</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;keypress&quot;</span><span style="color: #339933;">,</span> <span style="color: #000066; font-weight: bold;">function</span> <span style="color: #009900;">&#40;</span>e<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+	<span style="color: #000066; font-weight: bold;">if</span> <span style="color: #009900;">&#40;</span><span style="">String</span>.<span style="color: #660066;">fromCharCode</span><span style="color: #009900;">&#40;</span>e.<span style="color: #660066;">charCode</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">!=</span> <span style="color: #3366CC;">'1'</span>
+		<span style="color: #339933;">&amp;&amp;</span> <span style="">String</span>.<span style="color: #660066;">fromCharCode</span><span style="color: #009900;">&#40;</span>e.<span style="color: #660066;">charCode</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">!=</span> <span style="color: #3366CC;">'0'</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+		<span style="color: #006600; font-style: italic;">// если нажатая кнопка не 0 или 1 отменить действие по умолчанию.</span>
+		e.<span style="color: #660066;">preventDefault</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+	<span style="color: #009900;">&#125;</span>
+<span style="color: #009900;">&#125;</span><span style="color: #339933;">,</span> <span style="color: #003366; font-weight: bold;">true</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></pre>
+
+<h4>e.stopPropagation() //Остановка сценария</h4>
+<pre class="javascript" style="font-family:monospace;"><span style="color: #000066; font-weight: bold;">var</span> isTunnel <span style="color: #339933;">=</span> <span style="color: #003366; font-weight: bold;">true</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #000066; font-weight: bold;">var</span> e1 <span style="color: #339933;">=</span> document.<span style="color: #660066;">getElementById</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;first&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #000066; font-weight: bold;">var</span> e2 <span style="color: #339933;">=</span> document.<span style="color: #660066;">getElementById</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;second&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #000066; font-weight: bold;">var</span> e3 <span style="color: #339933;">=</span> document.<span style="color: #660066;">getElementById</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;third&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+e1.<span style="color: #660066;">addEventListener</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;click&quot;</span><span style="color: #339933;">,</span>
+	<span style="color: #006600; font-style: italic;">// e - параметр хранит объект с информацией о событии.</span>
+	<span style="color: #000066; font-weight: bold;">function</span> <span style="color: #009900;">&#40;</span>e<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>		
+		<span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">style</span>.<span style="color: #660066;">backgroundColor</span> <span style="color: #339933;">=</span> <span style="color: #3366CC;">&quot;green&quot;</span><span style="color: #339933;">;</span>
+		alert<span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;Обработчик DIV 1&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+		<span style="color: #006600; font-style: italic;">// прекращение дальнейшего маршрута события.</span>
+		e.<span style="color: #660066;">stopPropagation</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+	<span style="color: #009900;">&#125;</span><span style="color: #339933;">,</span>
+isTunnel<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+e2.<span style="color: #660066;">addEventListener</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;click&quot;</span><span style="color: #339933;">,</span>
+	<span style="color: #000066; font-weight: bold;">function</span> <span style="color: #009900;">&#40;</span>e<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+		<span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">style</span>.<span style="color: #660066;">backgroundColor</span> <span style="color: #339933;">=</span> <span style="color: #3366CC;">&quot;yellow&quot;</span><span style="color: #339933;">;</span>
+		alert<span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;Обработчик DIV 2&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+		e.<span style="color: #660066;">stopPropagation</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+	<span style="color: #009900;">&#125;</span><span style="color: #339933;">,</span>
+isTunnel<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+e3.<span style="color: #660066;">addEventListener</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;click&quot;</span><span style="color: #339933;">,</span>
+	<span style="color: #000066; font-weight: bold;">function</span> <span style="color: #009900;">&#40;</span>e<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+		<span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">style</span>.<span style="color: #660066;">backgroundColor</span> <span style="color: #339933;">=</span> <span style="color: #3366CC;">&quot;red&quot;</span><span style="color: #339933;">;</span>
+		alert<span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;Обработчик DIV 3&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+		e.<span style="color: #660066;">stopPropagation</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+	<span style="color: #009900;">&#125;</span><span style="color: #339933;">,</span>
+isTunnel<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></pre>
+
+<h4>События // Handlers</h4>
+<pre class="javascript" style="font-family:monospace;"><span style="color: #000066; font-weight: bold;">function</span> handler<span style="color: #009900;">&#40;</span>e<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+	<span style="color: #000066; font-weight: bold;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #339933;">!</span>e<span style="color: #009900;">&#41;</span> e <span style="color: #339933;">=</span> window.<span style="color: #660066;">event</span><span style="color: #339933;">;</span> <span style="color: #006600; font-style: italic;">// получение информации о событии в IE. </span>
+&nbsp;
+	<span style="color: #000066; font-weight: bold;">var</span> message <span style="color: #339933;">=</span> <span style="color: #3366CC;">&quot;&quot;</span><span style="color: #339933;">;</span>
+	message <span style="color: #339933;">+=</span> <span style="color: #3366CC;">&quot;type: &quot;</span> <span style="color: #339933;">+</span> e.<span style="color: #660066;">type</span> <span style="color: #339933;">+</span> <span style="color: #3366CC;">&quot;&lt;br /&gt;&quot;</span><span style="color: #339933;">;</span>                    <span style="color: #006600; font-style: italic;">// тип события.</span>
+	message <span style="color: #339933;">+=</span> <span style="color: #3366CC;">&quot;srcElement:&quot;</span> <span style="color: #339933;">+</span> e.<span style="color: #660066;">srcElement</span> <span style="color: #339933;">+</span> <span style="color: #3366CC;">&quot;&lt;br /&gt;&quot;</span><span style="color: #339933;">;</span>         <span style="color: #006600; font-style: italic;">// отправитель события.</span>
+	message <span style="color: #339933;">+=</span> <span style="color: #3366CC;">&quot;button:&quot;</span> <span style="color: #339933;">+</span> e.<span style="color: #660066;">button</span> <span style="color: #339933;">+</span> <span style="color: #3366CC;">&quot;&lt;br /&gt;&quot;</span><span style="color: #339933;">;</span>                 <span style="color: #006600; font-style: italic;">// 1 - левая клавиша, 2 - правая клавиша, 4 - средняя.</span>
+	message <span style="color: #339933;">+=</span> <span style="color: #3366CC;">&quot;clientX:&quot;</span> <span style="color: #339933;">+</span> e.<span style="color: #660066;">clientX</span> <span style="color: #339933;">+</span> <span style="color: #3366CC;">&quot;&lt;br /&gt;&quot;</span><span style="color: #339933;">;</span>               <span style="color: #006600; font-style: italic;">// координаты мыши относительно окна.</span>
+	message <span style="color: #339933;">+=</span> <span style="color: #3366CC;">&quot;clientY:&quot;</span> <span style="color: #339933;">+</span> e.<span style="color: #660066;">clientY</span> <span style="color: #339933;">+</span> <span style="color: #3366CC;">&quot;&lt;br /&gt;&quot;</span><span style="color: #339933;">;</span>               <span style="color: #006600; font-style: italic;">// координаты мыши относительно окна.</span>
+	message <span style="color: #339933;">+=</span> <span style="color: #3366CC;">&quot;offsetX:&quot;</span> <span style="color: #339933;">+</span> e.<span style="color: #660066;">offsetX</span> <span style="color: #339933;">+</span> <span style="color: #3366CC;">&quot;&lt;br /&gt;&quot;</span><span style="color: #339933;">;</span>               <span style="color: #006600; font-style: italic;">// координаты относительно элемента в котором произошло событие.</span>
+	message <span style="color: #339933;">+=</span> <span style="color: #3366CC;">&quot;offsetY:&quot;</span> <span style="color: #339933;">+</span> e.<span style="color: #660066;">offsetY</span> <span style="color: #339933;">+</span> <span style="color: #3366CC;">&quot;&lt;br /&gt;&quot;</span><span style="color: #339933;">;</span>               <span style="color: #006600; font-style: italic;">// координаты относительно элемента в котором произошло событие.</span>
+	message <span style="color: #339933;">+=</span> <span style="color: #3366CC;">&quot;altKey:&quot;</span> <span style="color: #339933;">+</span> e.<span style="color: #660066;">altKey</span> <span style="color: #339933;">+</span> <span style="color: #3366CC;">&quot;&lt;br /&gt;&quot;</span><span style="color: #339933;">;</span>                 <span style="color: #006600; font-style: italic;">// true если зажата клавиша Alt</span>
+	message <span style="color: #339933;">+=</span> <span style="color: #3366CC;">&quot;ctrlKey:&quot;</span> <span style="color: #339933;">+</span> e.<span style="color: #660066;">ctrlKey</span> <span style="color: #339933;">+</span> <span style="color: #3366CC;">&quot;&lt;br /&gt;&quot;</span><span style="color: #339933;">;</span>               <span style="color: #006600; font-style: italic;">// true если зажата клавиша Ctrl</span>
+	message <span style="color: #339933;">+=</span> <span style="color: #3366CC;">&quot;shiftKey:&quot;</span> <span style="color: #339933;">+</span> e.<span style="color: #660066;">shiftKey</span> <span style="color: #339933;">+</span> <span style="color: #3366CC;">&quot;&lt;br /&gt;&quot;</span><span style="color: #339933;">;</span>             <span style="color: #006600; font-style: italic;">// true если зажата клавиша Shift</span>
+	message <span style="color: #339933;">+=</span> <span style="color: #3366CC;">&quot;keyCode:&quot;</span> <span style="color: #339933;">+</span> e.<span style="color: #660066;">keyCode</span> <span style="color: #339933;">+</span> <span style="color: #3366CC;">&quot;&lt;br /&gt;&quot;</span><span style="color: #339933;">;</span>               <span style="color: #006600; font-style: italic;">// код клавиши для события keydown и keyup или код unicode символа для события keypress</span>
+	message <span style="color: #339933;">+=</span> <span style="color: #3366CC;">&quot;cancelBubble:&quot;</span> <span style="color: #339933;">+</span> e.<span style="color: #660066;">cancelBubble</span> <span style="color: #339933;">+</span> <span style="color: #3366CC;">&quot;&lt;br /&gt;&quot;</span><span style="color: #339933;">;</span>     <span style="color: #006600; font-style: italic;">// присвоить true для предотвращения &quot;всплывания&quot; события.</span>
+	message <span style="color: #339933;">+=</span> <span style="color: #3366CC;">&quot;returnValue:&quot;</span> <span style="color: #339933;">+</span> e.<span style="color: #660066;">returnValue</span> <span style="color: #339933;">+</span> <span style="color: #3366CC;">&quot;&lt;br /&gt;&quot;</span><span style="color: #339933;">;</span>       <span style="color: #006600; font-style: italic;">// присвоить false для предотвращения выполнения операции по умолчанию.</span>
+&nbsp;
+	document.<span style="color: #660066;">body</span>.<span style="color: #660066;">innerHTML</span> <span style="color: #339933;">=</span> message<span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span></pre>
+
+
+
+
+
+
+=======
+<h4>ООП, this, конструктор, прототипы</h4>
+<p class="lead">
+<pre style="background:rgba(238,238,238,0.92);color:#000"><span style="font-weight:700">function</span> <span style="color:#ff8000">MAN</span>(name){
+    this.a <span style="color:#00f">=</span> <span style="color:#06f">5</span>;
+    this.<span style="color:#6782d3">name</span> <span style="color:#00f">=</span> name;
+};
+<span style="color:#33f;font-weight:700">MAN</span>.<span style="color:#6782d3">prototype</span> <span style="color:#00f">=</span> {
+    <span style="color:#ff8000">hi</span>: <span style="font-weight:700">function</span>(){
+        v<span style="color:#33f;font-weight:700">.log</span>(`Hi, <span style="color:#00f">$</span>{this.<span style="color:#6782d3">name</span>}`)
+    },
+    <span style="color:#ff8000">by</span>: <span style="font-weight:700">function</span>(){
+        v<span style="color:#33f;font-weight:700">.log</span>(`By, <span style="color:#00f">$</span>{this.<span style="color:#6782d3">name</span>}`)
+    }
+} <span style="color:#06f;font-style:italic">// таким способом можно делать и а и name</span>
+<span style="font-weight:700">var</span> vova <span style="color:#00f">=</span> <span style="color:#00f">new</span> <span style="">MAN</span>()
+vova.hi();
+vova.by();
+
+
+<span style="font-weight:700">var</span> ob1 <span style="color:#00f">=</span> {a: <span style="color:#06f">5</span>};
+<span style="font-weight:700">var</span> ob2 <span style="color:#00f">=</span> {b: <span style="color:#06f">7</span>};
+ob1.__proto__ <span style="color:#00f">=</span> ob2
+v<span style="color:#33f;font-weight:700">.log</span>(ob1.b) <span style="color:#06f;font-style:italic">//7 положили в прототип обьекта другой обьект. Теперь у этого обьекта есть свойства и методы другого обьекта</span>
+ob1.<span style="color:#33f;font-weight:700">toString</span>() <span style="color:#06f;font-style:italic">// При этом у обьекта остаются системные свойства (ищет сперва у родителя, не находит, и ищет дальше)</span>
+</pre></pre>	
+
+<p class="lead">
+<pre style="background:rgba(238,238,238,0.92);color:#000"><span style="color:#06f;font-style:italic">// что бы спиздить у обьекта его методы и свойства используют ПРИМЕСИ(MixIn):</span>
+<span style="font-weight:700">function</span> <span style="color:#ff8000">ANIMAL</span>(name){ <span style="color:#06f;font-style:italic">// создали новый коструктор</span>
+    this.<span style="color:#6782d3">name</span> <span style="color:#00f">=</span> name;
+}
+<span style="color:#00f">for</span>(<span style="font-weight:700">var</span> key <span style="color:#00f">in</span> vova){
+    ANIMAL.<span style="color:#6782d3">prototype</span>[key] <span style="color:#00f">=</span> vova[key]; <span style="color:#06f;font-style:italic">// собственно, пиздим у обьекта vova (экземпляр MAN)</span>
+}
+<span style="color:#00f">new</span> <span style="">ANIMAL</span>(<span style="color:#093">"Tolik"</span>).hi() <span style="color:#06f;font-style:italic">// Hi, Tolik</span>
+
+<span style="color:#06f;font-style:italic">// современный подход Object.create (как в примере с __proto__)</span>
+<span style="color:#06f;font-style:italic">// суть: не нужно два обьекта. Второй создаем на лету чз. var</span>
+<span style="font-weight:700">var</span> ob3 <span style="color:#00f">=</span> {a: <span style="color:#06f">15</span>};
+<span style="font-weight:700">var</span> ob4 <span style="color:#00f">=</span> <span style="color:#33f;font-weight:700">Object</span>.create(ob3);
+ob4.on <span style="color:#00f">=</span> <span style="color:#093">"true"</span>; <span style="color:#06f;font-style:italic">//просто добавили свойство в новый об</span>
+<span style="color:#33f;font-weight:700">ob4</span>.<span style="color:#ff8000">hi</span> <span style="color:#00f">=</span> <span style="font-weight:700">function</span>(){<span style="color:#00f">return</span> <span style="color:#093">"Hi"</span>} <span style="color:#06f;font-style:italic">// просто метод</span>
+
+v<span style="color:#33f;font-weight:700">.log</span>(ob4)
+>>>>>>> e6ee00c3b7698f999054895d853f6837b7a94b8d
+
+v<span style="color:#33f;font-weight:700">.log</span>(ob4.hasOwnProperty(<span style="color:#093">"on"</span>)) <span style="color:#06f;font-style:italic">//проверка на спижженое свойство/метод</span>
+v<span style="color:#33f;font-weight:700">.log</span>(ob4.hasOwnProperty(<span style="color:#093">"hi"</span>))
+v<span style="color:#33f;font-weight:700">.log</span>(ob4.hasOwnProperty(<span style="color:#093">"a"</span>))
+
+<span style="font-weight:700">var</span> full <span style="color:#00f">=</span> <span style="color:#00f">$</span>.extend({}, ob1, ob2, ob3, ob4, vova) <span style="color:#06f;font-style:italic">//$.extend - склеивает кучу обьектов (extend - расширять, продлевать)</span>
+</pre>
+</p>
+<p class="lead">
+<pre style="background:rgba(238,238,238,0.92);color:#000"><span style="color:#06f;font-style:italic">//ИТОГО</span>
+<span style="color:#06f;font-style:italic">// КЛАСС - это функция конструктор и обьект записаный в ее свойство прототип:</span>
+        <span style="font-weight:700">function</span> <span style="color:#ff8000">FK</span>(){
+        <span style="color:#06f;font-style:italic">//  ...</span>
+            this.prop
+        <span style="color:#06f;font-style:italic">//  ...</span>
+        }
+        <span style="color:#33f;font-weight:700">FK</span>.<span style="color:#6782d3">prototype</span> <span style="color:#00f">=</span> {
+            <span style="color:#ff8000">ask</span>: <span style="font-weight:700">function</span>(){},
+            <span style="color:#ff8000">say</span>: <span style="font-weight:700">function</span>(){},
+            <span style="color:#ff8000">doit</span>:  <span style="font-weight:700">function</span>(){},
+        }
+</pre>
+</p>
+<p class="lead">
+<pre style="background:rgba(238,238,238,0.92);color:#000"><span style="color:#06f;font-style:italic">// Полноценная реализация</span>
+<span style="color:#06f;font-style:italic">//создаем два класса</span>
+<span style="font-weight:700">function</span> <span style="color:#ff8000">Car</span>(marka){ <span style="color:#06f;font-style:italic">// КЛАСС 1</span>
+    this.marka <span style="color:#00f">=</span> marka;
+    this.old <span style="color:#00f">=</span> <span style="color:#06f">5</span>;
+}
+<span style="color:#33f;font-weight:700">Car</span>.<span style="color:#6782d3">prototype</span>.<span style="color:#ff8000">getMarka</span> <span style="color:#00f">=</span> <span style="font-weight:700">function</span>(){
+    v<span style="color:#33f;font-weight:700">.log</span>(this.marka);
+};
+<span style="color:#33f;font-weight:700">Car</span>.<span style="color:#6782d3">prototype</span>.<span style="color:#ff8000">getOld</span> <span style="color:#00f">=</span> <span style="font-weight:700">function</span>(){
+    v<span style="color:#33f;font-weight:700">.log</span>(this.old);
+};
+<span style="color:#33f;font-weight:700">Car</span>.<span style="color:#6782d3">prototype</span>.<span style="color:#ff8000">setold</span> <span style="color:#00f">=</span> <span style="font-weight:700">function</span>(old){
+    v<span style="color:#33f;font-weight:700">.log</span>(this.old <span style="color:#00f">=</span> old);
+};
+let emmy <span style="color:#00f">=</span> <span style="color:#00f">new</span> <span style="">Car</span>(<span style="color:#093">"Emgrand"</span>);
+emmy.getMarka();
+emmy.getOld();
+emmy.setold(<span style="color:#093">"10"</span>);
+
+<span style="font-weight:700">function</span> <span style="color:#ff8000">Room</span>(name){ <span style="color:#06f;font-style:italic">// КЛАСС 2</span>
+    this.<span style="color:#6782d3">name</span> <span style="color:#00f">=</span> name;
+    this.array <span style="color:#00f">=</span> <span style="color:#06f">18</span>;
+    this.free <span style="color:#00f">=</span> <span style="color:#9700cc">true</span>;
+    Car.<span style="color:#33f;font-weight:700">apply</span>(this, arguments) <span style="color:#06f;font-style:italic">// НАСЛЕДУЕМ СВОЙСТВА</span>
+}
+
+
+<span style="color:#33f;font-weight:700">Room</span>.<span style="color:#6782d3">prototype</span> <span style="color:#00f">=</span> <span style="color:#33f;font-weight:700">Object</span>.create(Car.<span style="color:#6782d3">prototype</span>); <span style="color:#06f;font-style:italic">// НАСЛЕДУЕМ МЕТОДЫ (родитель Car)</span>
+
+<span style="color:#06f;font-style:italic">// добавляем в Room функциона</span>
+<span style="color:#33f;font-weight:700">Room</span>.<span style="color:#6782d3">prototype</span>.<span style="color:#ff8000">getRoom</span> <span style="color:#00f">=</span> <span style="font-weight:700">function</span>(){
+    v<span style="color:#33f;font-weight:700">.log</span>(this.<span style="color:#6782d3">name</span>);
+};
+<span style="color:#33f;font-weight:700">Room</span>.<span style="color:#6782d3">prototype</span>.<span style="color:#ff8000">getArray</span> <span style="color:#00f">=</span> <span style="font-weight:700">function</span>(){
+    v<span style="color:#33f;font-weight:700">.log</span>(this.array);
+};
+<span style="color:#33f;font-weight:700">Room</span>.<span style="color:#6782d3">prototype</span>.<span style="color:#ff8000">setArray</span> <span style="color:#00f">=</span> <span style="font-weight:700">function</span>(array){
+    v<span style="color:#33f;font-weight:700">.log</span>(this.array <span style="color:#00f">=</span> array);
+};
+
+let home <span style="color:#00f">=</span> <span style="color:#00f">new</span> <span style="">Room</span>(<span style="color:#093">"Hata"</span>);
+home.getRoom();
+home.getArray();
+home.setArray(<span style="color:#093">"56"</span>);
+
+<span style="color:#06f;font-style:italic">// создаем цепочку Room - Room.prototype - Car.prototype ?????</span>
+
+<span style="color:#06f;font-style:italic">//v.log(emmy);</span>
+<span style="color:#06f;font-style:italic">//v.log(home);</span>
+</pre>
+</p>
+<p class="lead">
+<pre style="background:rgba(238,238,238,0.92);color:#000"><span style="color:#06f;font-style:italic">// свой</span>
+<span style="font-weight:700">function</span> <span style="color:#ff8000">Car</span>(name, color){
+    this.<span style="color:#6782d3">name</span> <span style="color:#00f">=</span> name;
+    this.<span style="color:#6782d3">color</span> <span style="color:#00f">=</span> color;
+};
+<span style="color:#33f;font-weight:700">Car</span>.<span style="color:#6782d3">prototype</span>.<span style="color:#ff8000">hi</span> <span style="color:#00f">=</span> <span style="font-weight:700">function</span>(){v<span style="color:#33f;font-weight:700">.log</span>(<span style="color:#093">"Hi, "</span> <span style="color:#00f">+</span> this.<span style="color:#6782d3">name</span>)}
+<span style="color:#33f;font-weight:700">Car</span>.<span style="color:#6782d3">prototype</span>.<span style="color:#ff8000">col</span> <span style="color:#00f">=</span> <span style="font-weight:700">function</span>(){v<span style="color:#33f;font-weight:700">.log</span>(<span style="color:#093">"color is "</span> <span style="color:#00f">+</span> this.<span style="color:#6782d3">color</span>)}
+<span style="font-weight:700">var</span> a <span style="color:#00f">=</span> <span style="color:#00f">new</span> <span style="">Car</span>(<span style="color:#093">"BMW"</span>, <span style="color:#093">"white"</span>);
+
+<span style="color:#33f;font-weight:700">Bus</span>.<span style="color:#6782d3">prototype</span> <span style="color:#00f">=</span> <span style="color:#33f;font-weight:700">Object</span>.create(Car.<span style="color:#6782d3">prototype</span>)
+
+<span style="font-weight:700">function</span> <span style="color:#ff8000">Bus</span>(name){
+    this.hg <span style="color:#00f">=</span> <span style="color:#093">"3.5m"</span>;
+    this.wt <span style="color:#00f">=</span> <span style="color:#093">"50t."</span>;
+    Car.<span style="color:#33f;font-weight:700">apply</span>(this, arguments);
+};
+<span style="color:#33f;font-weight:700">Bus</span>.<span style="color:#6782d3">prototype</span>.<span style="color:#ff8000">parh</span> <span style="color:#00f">=</span> <span style="font-weight:700">function</span>(){v<span style="color:#33f;font-weight:700">.log</span>(<span style="color:#093">"Ves, "</span> <span style="color:#00f">+</span> this.hg)};
+<span style="color:#33f;font-weight:700">Bus</span>.<span style="color:#6782d3">prototype</span>.<span style="color:#ff8000">parw</span> <span style="color:#00f">=</span> <span style="font-weight:700">function</span>(){v<span style="color:#33f;font-weight:700">.log</span>(<span style="color:#093">"Visota "</span> <span style="color:#00f">+</span> this.wt)};
+<span style="color:#33f;font-weight:700">Bus</span>.<span style="color:#6782d3">prototype</span>.<span style="color:#ff8000">hi</span> <span style="color:#00f">=</span> <span style="font-weight:700">function</span>(){
+    Car.<span style="color:#6782d3">prototype</span>.hi.<span style="color:#33f;font-weight:700">call</span>(this, name) <span style="color:#06f;font-style:italic">// перекрываем цепочку прототипов родительским методом</span>
+    v<span style="color:#33f;font-weight:700">.log</span>(<span style="color:#093">"Bus Hi"</span>);
+}
+<span style="font-weight:700">var</span> b <span style="color:#00f">=</span> <span style="color:#00f">new</span> <span style="">Bus</span>(<span style="color:#093">"Ikarus"</span>);
+</pre>
+</p>
+<p class="lead">
+<pre style="background:rgba(238,238,238,0.92);color:#000"><span style="color:#06f;font-style:italic">// Разрыв конструкции Bus строчкой с Object.create нарушает целостность кода.</span>
+<span style="color:#06f;font-style:italic">// Выход: ФУНКЦИЯ НАСЛЕДОВАНИЯ</span>
+<span style="color:#06f;font-style:italic">// Окончательный оптимальный вариант</span>
+<span style="font-weight:700">function</span> <span style="color:#ff8000">Car</span>(name, color){
+    this.<span style="color:#6782d3">name</span> <span style="color:#00f">=</span> name;
+    this.<span style="color:#6782d3">color</span> <span style="color:#00f">=</span> color;
+};
+<span style="color:#33f;font-weight:700">Car</span>.<span style="color:#6782d3">prototype</span> <span style="color:#00f">=</span> {
+    <span style="color:#ff8000">hi</span>:  <span style="font-weight:700">function</span>(){v<span style="color:#33f;font-weight:700">.log</span>(<span style="color:#093">"Hi, "</span> <span style="color:#00f">+</span> this.<span style="color:#6782d3">name</span>)},
+    <span style="color:#ff8000">col</span>: <span style="font-weight:700">function</span>(){v<span style="color:#33f;font-weight:700">.log</span>(<span style="color:#093">"color is "</span> <span style="color:#00f">+</span> this.<span style="color:#6782d3">color</span>)}
+};
+
+<span style="font-weight:700">function</span> <span style="color:#ff8000">Bus</span>(name){
+    this.hg <span style="color:#00f">=</span> <span style="color:#093">"3.5m"</span>;
+    this.wt <span style="color:#00f">=</span> <span style="color:#093">"50t."</span>;
+    Car.<span style="color:#33f;font-weight:700">apply</span>(this, arguments);
+};
+<span style="color:#33f;font-weight:700">Bus</span>.<span style="color:#6782d3">prototype</span> <span style="color:#00f">=</span> {
+    <span style="color:#ff8000">parh</span>: <span style="font-weight:700">function</span>(){v<span style="color:#33f;font-weight:700">.log</span>(<span style="color:#093">"Ves, "</span> <span style="color:#00f">+</span> this.hg)},
+    <span style="color:#ff8000">parw</span>: <span style="font-weight:700">function</span>(){v<span style="color:#33f;font-weight:700">.log</span>(<span style="color:#093">"Visota "</span> <span style="color:#00f">+</span> this.wt)},
+    <span style="color:#ff8000">hi</span>: <span style="font-weight:700">function</span>(){
+        Car.<span style="color:#6782d3">prototype</span>.hi.<span style="color:#33f;font-weight:700">call</span>(this, name) <span style="color:#06f;font-style:italic">// перекрываем цепочку прототипов родительским методом</span>
+        v<span style="color:#33f;font-weight:700">.log</span>(<span style="color:#093">"Bus Hi"</span>)
+    }
+}
+inheritance(Car, Bus) <span style="color:#06f;font-style:italic">// ФУНКЦИЯ НАСЛЕДОВАНИЯ</span>
+<span style="font-weight:700">var</span> b <span style="color:#00f">=</span> <span style="color:#00f">new</span> <span style="">Bus</span>(<span style="color:#093">"Ikarus"</span>)
+
+<span style="color:#06f;font-style:italic">//Bus.prototype = Object.create(Car.prototype)</span>
+<span style="font-weight:700">function</span> <span style="color:#ff8000">inheritance</span>(Par, Chi){ <span style="color:#06f;font-style:italic">// ФУНКЦИЯ НАСЛЕДОВАНИЯ реализация</span>
+    <span style="font-weight:700">var</span> tmpChi <span style="color:#00f">=</span> Chi.<span style="color:#6782d3">prototype</span>;
+    <span style="color:#00f">if</span>(<span style="color:#33f;font-weight:700">Object</span>.create){
+        <span style="color:#33f;font-weight:700">child</span>.<span style="color:#6782d3">prototype</span> <span style="color:#00f">=</span> <span style="color:#33f;font-weight:700">Object</span>.create(parent.<span style="color:#6782d3">prototype</span>)
+    } <span style="color:#00f">else</span>{
+        <span style="font-weight:700">function</span> <span style="color:#ff8000">F</span>(){};
+        <span style="color:#33f;font-weight:700">F</span>.<span style="color:#6782d3">prototype</span> <span style="color:#00f">=</span> Par.<span style="color:#6782d3">prototype</span>;
+        <span style="color:#33f;font-weight:700">Chi</span>.<span style="color:#6782d3">prototype</span> <span style="color:#00f">=</span> <span style="color:#00f">new</span> <span style="">F</span>();
+    };
+    <span style="color:#00f">for</span>( key <span style="color:#00f">in</span> tmpChi){
+        <span style="color:#00f">if</span>(tmpChi.hasOwnProperty(key)){
+            Chi.<span style="color:#6782d3">prototype</span>[key] <span style="color:#00f">=</span> tmpChi[key]
+        }
+    }
+}
+</pre>
+</p>
+<p class="lead">
+<pre style="background:rgba(238,238,238,0.92);color:#000"><span style="font-weight:700">function</span> <span style="color:#ff8000">Car</span>(name, color){
+    this.<span style="color:#6782d3">name</span> <span style="color:#00f">=</span> name;
+    this.<span style="color:#6782d3">color</span> <span style="color:#00f">=</span> color;
+};
+<span style="color:#33f;font-weight:700">Car</span>.<span style="color:#6782d3">prototype</span>.<span style="color:#ff8000">hi</span> <span style="color:#00f">=</span> <span style="font-weight:700">function</span>(){v<span style="color:#33f;font-weight:700">.log</span>(<span style="color:#093">"Hi, "</span> <span style="color:#00f">+</span> this.<span style="color:#6782d3">name</span>)}
+<span style="color:#33f;font-weight:700">Car</span>.<span style="color:#6782d3">prototype</span>.<span style="color:#ff8000">col</span> <span style="color:#00f">=</span> <span style="font-weight:700">function</span>(){v<span style="color:#33f;font-weight:700">.log</span>(<span style="color:#093">"color is "</span> <span style="color:#00f">+</span> this.<span style="color:#6782d3">color</span>)}
+<span style="font-weight:700">var</span> a <span style="color:#00f">=</span> <span style="color:#00f">new</span> <span style="">Car</span>(<span style="color:#093">"BMW"</span>, <span style="color:#093">"white"</span>);
+
+<span style="color:#33f;font-weight:700">Bus</span>.<span style="color:#6782d3">prototype</span> <span style="color:#00f">=</span> <span style="color:#33f;font-weight:700">Object</span>.create(Car.<span style="color:#6782d3">prototype</span>)
+
+<span style="font-weight:700">function</span> <span style="color:#ff8000">Bus</span>(name){
+    this.hg <span style="color:#00f">=</span> <span style="color:#093">"3.5m"</span>;
+    this.wt <span style="color:#00f">=</span> <span style="color:#093">"50t."</span>;
+    Car.<span style="color:#33f;font-weight:700">apply</span>(this, arguments);
+};
+<span style="color:#33f;font-weight:700">Bus</span>.<span style="color:#6782d3">prototype</span>.<span style="color:#ff8000">parh</span> <span style="color:#00f">=</span> <span style="font-weight:700">function</span>(){v<span style="color:#33f;font-weight:700">.log</span>(<span style="color:#093">"Ves, "</span> <span style="color:#00f">+</span> this.hg)};
+<span style="color:#33f;font-weight:700">Bus</span>.<span style="color:#6782d3">prototype</span>.<span style="color:#ff8000">parw</span> <span style="color:#00f">=</span> <span style="font-weight:700">function</span>(){v<span style="color:#33f;font-weight:700">.log</span>(<span style="color:#093">"Visota "</span> <span style="color:#00f">+</span> this.wt)};
+<span style="color:#33f;font-weight:700">Bus</span>.<span style="color:#6782d3">prototype</span>.<span style="color:#ff8000">hi</span> <span style="color:#00f">=</span> <span style="font-weight:700">function</span>(){
+    Car.<span style="color:#6782d3">prototype</span>.hi.<span style="color:#33f;font-weight:700">call</span>(this, name) <span style="color:#06f;font-style:italic">// перекрываем цепочку прототипов родительским методом</span>
+    v<span style="color:#33f;font-weight:700">.log</span>(<span style="color:#093">"Bus Hi"</span>);
+}
+<span style="font-weight:700">var</span> b <span style="color:#00f">=</span> <span style="color:#00f">new</span> <span style="">Bus</span>(<span style="color:#093">"Ikarus"</span>);
+</pre>
+</p>
+<p class="lead">
+<pre style="background:rgba(238,238,238,0.92);color:#000"><span style="color:#06f;font-style:italic">//ES6</span>
+<span style="font-weight:700">class</span> Car{
+    constructor(name, age){
+        Car.count <span style="color:#00f">=</span> <span style="color:#00f">++</span>Car.count <span style="color:#00f">||</span> <span style="color:#06f">0</span>;
+        this.num <span style="color:#00f">=</span> Car.count;
+        this.age <span style="color:#00f">=</span> age;
+        this.<span style="color:#6782d3">name</span> <span style="color:#00f">=</span> name;
+        this.<span style="color:#6782d3">color</span> <span style="color:#00f">=</span> <span style="color:#093">"red"</span>;
+    };
+    get doit(){
+        v<span style="color:#33f;font-weight:700">.log</span>(this.<span style="color:#6782d3">name</span>.<span style="color:#33f;font-weight:700">toUpperCase</span>())
+    };
+    set doit(name){
+        this.<span style="color:#6782d3">name</span> <span style="color:#00f">=</span> name;
+        v<span style="color:#33f;font-weight:700">.log</span>(this.<span style="color:#6782d3">name</span>)
+    };
+    hi(){
+        v<span style="color:#33f;font-weight:700">.log</span>(<span style="color:#093">"Hi,"</span> <span style="color:#00f">+</span> this.<span style="color:#6782d3">name</span>);
+    }
+}
+
+<span style="font-weight:700">class</span> Bus <span style="font-weight:700">extends</span> Car{
+    constructor(name, age){
+        
+        super(<span style="color:#093">"Pidr"</span>, <span style="color:#06f">15</span>);
+
+    };
+        hi(){
+            super.hi();
+            v<span style="color:#33f;font-weight:700">.log</span>(<span style="color:#093">"HALLOOO"</span>) <span style="color:#06f;font-style:italic">// дописываем родительский метод своим</span>
+        };
+}
+let b <span style="color:#00f">=</span> <span style="color:#00f">new</span> <span style="">Car</span>(<span style="color:#093">"Mashina"</span>);
+<span style="color:#06f;font-style:italic">//let c = new Bus("Irarus");</span>
+let b2 <span style="color:#00f">=</span> <span style="color:#00f">new</span> <span style="">Car</span>(<span style="color:#093">"Irarus"</span>);
+let b3 <span style="color:#00f">=</span> <span style="color:#00f">new</span> <span style="">Car</span>(<span style="color:#093">"Irarus"</span>);
+</pre>
+</p>
+<h4>Сортировка моя</h4>
+<p class="lead">
+<pre style="background:rgba(238,238,238,0.92);color:#000"><span style="color:#33f;font-weight:700">Array</span>.<span style="color:#6782d3">prototype</span>.<span style="color:#ff8000">upp</span> <span style="color:#00f">=</span> <span style="font-weight:700">function</span> (){<span style="color:#00f">return</span> this.<span style="color:#33f;font-weight:700">sort</span>(<span style="font-weight:700">function</span>(a,b){<span style="color:#00f">return</span> a<span style="color:#00f">-</span>b} )};
+<span style="color:#33f;font-weight:700">Array</span>.<span style="color:#6782d3">prototype</span>.<span style="color:#ff8000">down</span> <span style="color:#00f">=</span> <span style="font-weight:700">function</span> (){<span style="color:#00f">return</span> this.<span style="color:#33f;font-weight:700">sort</span>(<span style="font-weight:700">function</span>(a,b){<span style="color:#00f">return</span> b<span style="color:#00f">-</span>a} )};
+
+<span style="font-weight:700">var</span> arr <span style="color:#00f">=</span> [<span style="color:#06f">1</span>,<span style="color:#06f">5</span>,<span style="color:#06f">12</span>,<span style="color:#06f">7</span>,<span style="color:#06f">102</span>,<span style="color:#06f">54</span>,<span style="color:#06f">72</span>]
+
+v<span style="color:#33f;font-weight:700">.log</span>( arr.<span style="color:#33f;font-weight:700">sort</span>() )
+
+v<span style="color:#33f;font-weight:700">.log</span>( arr.upp() )
+v<span style="color:#33f;font-weight:700">.log</span>( arr.down() )
+</pre>
+</p>
+<h4>localStorage</h4>
+<p class="lead">
+<pre style="background:rgba(238,238,238,0.92);color:#000"><span style="font-weight:700">var</span> el <span style="color:#00f">=</span> <span style="color:#33f;font-weight:700">document</span>.<span style="color:#33f;font-weight:700">getElementById</span>(<span style="color:#093">"but"</span>);
+<span style="font-weight:700">var</span> el2 <span style="color:#00f">=</span> <span style="color:#33f;font-weight:700">document</span>.<span style="color:#33f;font-weight:700">getElementById</span>(<span style="color:#093">"butClearLS"</span>);
+<span style="font-weight:700">var</span> inp <span style="color:#00f">=</span> <span style="color:#33f;font-weight:700">document</span>.<span style="color:#33f;font-weight:700">getElementById</span>(<span style="color:#093">"inp"</span>);
+<span style="font-weight:700">var</span> u <span style="color:#00f">=</span> <span style="color:#33f;font-weight:700">document</span>.<span style="color:#33f;font-weight:700">getElementById</span>(<span style="color:#093">"u"</span>);
+
+v<span style="color:#33f;font-weight:700">.log</span>(localStorage)
+
+<span style="color:#33f;font-weight:700">el</span>.<span style="color:#ff8000">onclick</span> <span style="color:#00f">=</span> <span style="font-weight:700">function</span>(){
+    <span style="font-weight:700">var</span> li <span style="color:#00f">=</span> <span style="color:#33f;font-weight:700">document</span>.<span style="color:#33f;font-weight:700">createElement</span>(<span style="color:#093">"li"</span>);
+        <span style="color:#00f">if</span>(inp.<span style="color:#6782d3">value</span> <span style="color:#00f">==</span> <span style="color:#093">""</span>){inp.<span style="color:#6782d3">value</span> <span style="color:#00f">==</span> <span style="color:#093">"пусто"</span>} <span style="color:#00f">else</span>{
+    li.innerHTML <span style="color:#00f">=</span> inp.<span style="color:#6782d3">value</span>;
+    localStorage.setItem(inp.<span style="color:#6782d3">value</span>, inp.<span style="color:#6782d3">value</span>)
+    u.<span style="color:#33f;font-weight:700">appendChild</span>(li);
+    inp.<span style="color:#6782d3">value</span> <span style="color:#00f">=</span> <span style="color:#093">""</span>;
+    v<span style="color:#33f;font-weight:700">.log</span>(localStorage)
+    }
+};
+
+<span style="color:#33f;font-weight:700">el2</span>.<span style="color:#ff8000">onclick</span> <span style="color:#00f">=</span> <span style="font-weight:700">function</span>(){
+    localStorage.<span style="color:#33f;font-weight:700">clear</span>();
+    v<span style="color:#33f;font-weight:700">.log</span>(localStorage)
+}
+</pre>
+</p>
+<p class="lead">
+<pre style="background:rgba(238,238,238,0.92);color:#000"><span style="color:#06f;font-style:italic">// работа с обьектом</span>
+<span style="font-weight:700">var</span> obj <span style="color:#00f">=</span> {
+    item1: <span style="color:#06f">1</span>,
+    item2: [<span style="color:#06f">123</span>, <span style="color:#093">"two"</span>, <span style="color:#06f">3.0</span>],
+    item3:<span style="color:#093">"hello"</span>
+};
+
+<span style="font-weight:700">var</span> serialObj <span style="color:#00f">=</span> JSON.stringify(obj);
+localStorage.setItem(<span style="color:#093">"Name"</span>, serialObj)
+v<span style="color:#33f;font-weight:700">.log</span>(serialObj)
+
+<span style="font-weight:700">var</span> returnObj <span style="color:#00f">=</span> JSON.<span style="color:#33f;font-weight:700">parse</span>(localStorage.getItem(<span style="color:#093">"Name"</span>))
+v<span style="color:#33f;font-weight:700">.log</span>(returnObj)
+</pre>
+</p>
+<h4>Module / МОДУЛИ</h4>
+<p class="lead">
+<pre style="background:rgba(238,238,238,0.92);color:#000">(<span style="font-weight:700">function</span>(){    
+    <span style="font-weight:700">function</span> <span style="color:#ff8000">Module</span>(a,b){
+        this.a <span style="color:#00f">=</span> a;
+        this.b <span style="color:#00f">=</span> b;
+        <span style="font-weight:700">var</span> p <span style="color:#00f">=</span> <span style="color:#093">"private"</span>; <span style="color:#06f;font-style:italic">// приватный</span>
+    }
+    <span style="color:#33f;font-weight:700">Module</span>.<span style="color:#6782d3">prototype</span>.<span style="color:#ff8000">sum</span> <span style="color:#00f">=</span> <span style="font-weight:700">function</span>(a,b){
+            <span style="color:#00f">return</span> a<span style="color:#00f">+</span>b;
+        };
+    <span style="color:#33f;font-weight:700">window</span>.app <span style="color:#00f">=</span> <span style="color:#33f;font-weight:700">window</span>.app <span style="color:#00f">||</span> {};
+    <span style="color:#33f;font-weight:700">window</span>.app.Module <span style="color:#00f">=</span> Module;
+})()
+
+<span style="font-weight:700">var</span> m <span style="color:#00f">=</span> <span style="color:#00f">new</span> <span style="">app.Module</span>()
+m.sum(<span style="color:#06f">5</span>,<span style="color:#06f">7</span>); <span style="color:#06f;font-style:italic">//12</span>
+</pre>
+</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+	
+</body>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+	<script src="./src/main.js"></script>
+	<link href="./src/main.css" rel="stylesheet">
+	<!-- http://markup.su/highlighter/ -->	
+	<!-- http://highlight.hohli.com/	-->
+</html>
