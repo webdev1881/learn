@@ -1,7 +1,22 @@
-window.onload = function(){
 let v = console;
 let d = document;
 
+window.onload = function(){
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}
 
 
 
@@ -21,5 +36,4 @@ let d = document;
 
 
 //document.getElementsByClassName("cbalink")[0].remove()
-}
 

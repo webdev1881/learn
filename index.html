@@ -838,10 +838,33 @@ v<span style="color:#33f;font-weight:700">.log</span>(returnObj)
 m.sum(<span style="color:#06f">5</span>,<span style="color:#06f">7</span>); <span style="color:#06f;font-style:italic">//12</span>
 </pre>
 </p>
+<h4>ES6</h4>
+<pre class="javascript" style="font-family:monospace;">window.<span style="color: #660066;">onload</span> <span style="color: #339933;">=</span> <span style="color: #000066; font-weight: bold;">function</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+&nbsp;
+    <span style="color: #000066; font-weight: bold;">for</span><span style="color: #009900;">&#40;</span>let i <span style="color: #339933;">=</span> <span style="color: #CC0000;">0</span><span style="color: #339933;">;</span> i <span style="color: #339933;">&lt;</span> <span style="color: #CC0000;">5</span><span style="color: #339933;">;</span> i<span style="color: #339933;">++</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+        v.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span>i<span style="color: #009900;">&#41;</span> <span style="color: #006600; font-style: italic;">// 1,2,3,4</span>
+    <span style="color: #009900;">&#125;</span>
+&nbsp;
+    v.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span>i<span style="color: #009900;">&#41;</span> <span style="color: #006600; font-style: italic;">// ERROR Если let - область видимости только в скобках</span>
+&nbsp;
+    let a <span style="color: #339933;">=</span> <span style="color: #CC0000;">10</span>
+    <span style="color: #000066; font-weight: bold;">function</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+        v.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span>a<span style="color: #009900;">&#41;</span> <span style="color: #006600; font-style: italic;">// 10  let наружная видна внутри (замыкания)</span>
+    <span style="color: #009900;">&#125;</span>
+&nbsp;
+<span style="color: #009900;">&#125;</span></pre>
 
-
-
-
+<pre class="javascript" style="font-family:monospace;"><span style="color: #000066; font-weight: bold;">const</span> a <span style="color: #339933;">=</span> <span style="color: #CC0000;">5</span>
+v.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span>a<span style="color: #009900;">&#41;</span> <span style="color: #006600; font-style: italic;">// 5</span>
+a <span style="color: #339933;">=</span> <span style="color: #CC0000;">10</span> <span style="color: #006600; font-style: italic;">// ERROR - нельзя переопределять</span>
+&nbsp;
+<span style="color: #006600; font-style: italic;">// НО если const обьект, можно записывать в свойства</span>
+<span style="color: #000066; font-weight: bold;">const</span> <span style="color: #000066; font-weight: bold;">set</span> <span style="color: #339933;">=</span> <span style="color: #009900;">&#123;</span>
+    a<span style="color: #339933;">:</span> <span style="color: #CC0000;">5</span><span style="color: #339933;">,</span>
+    b<span style="color: #339933;">:</span> <span style="color: #CC0000;">10</span>
+<span style="color: #009900;">&#125;</span>
+<span style="color: #000066; font-weight: bold;">set</span>.<span style="color: #660066;">a</span> <span style="color: #339933;">=</span> <span style="color: #CC0000;">100</span>
+v.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">set</span>.<span style="color: #660066;">a</span><span style="color: #009900;">&#41;</span> <span style="color: #006600; font-style: italic;">// 100</span></pre>
 
 
 
