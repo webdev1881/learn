@@ -961,7 +961,50 @@ let ob <span style="color: #339933;">=</span> <span style="color: #009900;">&#12
 <span style="color: #009900;">&#125;</span>
 &nbsp;
 ob.<span style="color: #660066;">say</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span></pre>
-
+<pre class="javascript" style="font-family:monospace;"><span style="color: #006600; font-style: italic;">// НАСЛЕДОВАНИЕ</span>
+&nbsp;
+<span style="color: #FF0000;">class</span> myTimer<span style="color: #009900;">&#123;</span>
+&nbsp;
+    constructor<span style="color: #009900;">&#40;</span>t<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>     <span style="color: #006600; font-style: italic;">// параметры принимаются в constructor</span>
+        <span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">time</span> <span style="color: #339933;">=</span> t<span style="color: #339933;">;</span>
+    <span style="color: #009900;">&#125;</span>
+&nbsp;
+    tick<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>                     <span style="color: #006600; font-style: italic;">// методы снаружи без this , а внутри с this</span>
+        <span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">time</span><span style="color: #339933;">--;</span>
+        <span style="color: #006600; font-style: italic;">//v.log(this.time) // отдал потом в наследника consoleMyTimer</span>
+    <span style="color: #009900;">&#125;</span>
+&nbsp;
+    run<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+        setInterval<span style="color: #009900;">&#40;</span> <span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">=&gt;</span> <span style="color: #009900;">&#123;</span>
+            <span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">tick</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+        <span style="color: #009900;">&#125;</span><span style="color: #339933;">,</span> <span style="color: #CC0000;">1000</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+    <span style="color: #009900;">&#125;</span>
+<span style="color: #009900;">&#125;</span>
+&nbsp;
+<span style="color: #FF0000;">class</span> reverseMyTimer <span style="color: #FF0000;">extends</span> myTimer<span style="color: #009900;">&#123;</span> <span style="color: #006600; font-style: italic;">// наследуем consoleMyTimer</span>
+    tick<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>                     
+        <span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">time</span><span style="color: #339933;">++</span>
+    <span style="color: #009900;">&#125;</span>
+<span style="color: #009900;">&#125;</span>
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+<span style="color: #006600; font-style: italic;">//class consoleMyTimer extends myTimer{ // наследуем myTimer</span>
+<span style="color: #FF0000;">class</span> consoleMyTimer <span style="color: #FF0000;">extends</span> reverseMyTimer<span style="color: #009900;">&#123;</span> <span style="color: #006600; font-style: italic;">// наследуем reverseMyTimer</span>
+    tick<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>                     
+        <span style="color: #FF0000;">super</span>.<span style="color: #660066;">tick</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>            <span style="color: #006600; font-style: italic;">// super. - забирает у метода tick все его свойства (this.time--)</span>
+        v.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">time</span><span style="color: #009900;">&#41;</span>        <span style="color: #006600; font-style: italic;">// переопределяем метод для вывода в консоль таймера наследуемого родителя</span>
+    <span style="color: #009900;">&#125;</span>
+<span style="color: #009900;">&#125;</span>
+&nbsp;
+&nbsp;
+&nbsp;
+<span style="color: #006600; font-style: italic;">//let t1 = new myTimer(100); // отдал в наследника consoleMyTimer</span>
+<span style="color: #006600; font-style: italic;">//let t1 = new consoleMyTimer(100); //отдал в наследника reverseMyTimer</span>
+let t1 <span style="color: #339933;">=</span> <span style="color: #000066; font-weight: bold;">new</span> consoleMyTimer<span style="color: #009900;">&#40;</span><span style="color: #CC0000;">100</span><span style="color: #009900;">&#41;</span>
+&nbsp;
+t1.<span style="color: #660066;">run</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span></pre>
 
 
 
