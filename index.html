@@ -4,11 +4,12 @@
 	<meta charset="UTF-8">
 	<title class="fa fa-mortar-board">JavaScript</title>
 	<link rel="icon" href="http://rainstitute.in/images/file.png" type="image/gif" sizes="16x16">
-	
+	<link href="./src/main.css" rel="stylesheet">
 	
 	
 </head>
 <body style="padding-top: 50px;">
+    <p id="test">65464654645654</p>
 
     <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
       <div class="container">
@@ -35,51 +36,6 @@
 <span style="color:#00f">&lt;</span><span style="color:#00f">/</span><span style="color:#6782d3">script</span><span style="color:#00f">></span>
 </pre>
 </p>
-
-<h4>Типы, сравнения</h4>
-<pre style="background:rgba(238,238,238,0.92);color:#000"><span style="color:#06f;font-style:italic">//hasOwnProperty - возращает true, если обьект rect1 имеет свойство wight Только свойства, без прототипов</span>
-<span style="color:#33f;font-weight:700">document</span>.<span style="color:#33f;font-weight:700">write</span>(rect1.hasOwnProperty(<span style="color:#093">"wight"</span>))
-<span style="color:#06f;font-style:italic">//А что бы узнать имеется ли значение и в свойствах и в прототипе можно использовать in                                   </span>
-<span style="color:#33f;font-weight:700">document</span>.<span style="color:#33f;font-weight:700">write</span>( (<span style="color:#093">""</span>getArea<span style="color:#093">""</span> <span style="color:#00f">in</span> rect1) <span style="color:#00f">+</span> <span style="color:#093">""</span><span style="color:#00f">&lt;</span>br/<span style="color:#00f">></span><span style="color:#093">""</span>)                     
-
-<span style="color:#06f;font-style:italic">//"equals - специальный прописаный вручную в прототипе метод для сравнения двух обьектов</span>
-<span style="color:#06f;font-style:italic">//Равен ли один обьект другому: false / true"                       </span>
-<span style="color:#33f;font-weight:700">Rectangle</span>.<span style="color:#6782d3">prototype</span>.<span style="color:#ff8000">equals</span> <span style="color:#00f">=</span> <span style="font-weight:700">function</span> (otherObj) {
-    <span style="color:#00f">if</span> (this.<span style="color:#6782d3">width</span> <span style="color:#00f">===</span> otherObj.<span style="color:#6782d3">width</span> <span style="color:#00f">&amp;</span><span style="color:#00f">&amp;</span> this.<span style="color:#6782d3">height</span> <span style="color:#00f">===</span> otherObj.<span style="color:#6782d3">height</span>) {
-        <span style="color:#00f">return</span> <span style="color:#9700cc">true</span>;
-    }
-    <span style="color:#00f">return</span> <span style="color:#9700cc">false</span>;
-rect1.equals(rect2) <span style="color:#06f;font-style:italic">//false</span>
-
-<span style="color:#06f;font-style:italic">//compareTo - специальный прописаный вручную в прототипе метод для сравнения двух обьектов</span>
-<span style="color:#06f;font-style:italic">//Какой обьект больше, какой меньше или равен: 1 / -1 / 0                       </span>
-<span style="color:#33f;font-weight:700">Rectangle</span>.<span style="color:#6782d3">prototype</span>.<span style="color:#ff8000">compareTo</span> <span style="color:#00f">=</span> <span style="font-weight:700">function</span> (otherObject) {
-<span style="color:#00f">if</span> (this.getArea() <span style="color:#00f">></span> otherObject.getArea()) {
-    <span style="color:#00f">return</span> <span style="color:#06f">1</span>;
-}
-<span style="color:#00f">else</span> <span style="color:#00f">if</span> (this.getArea() <span style="color:#00f">&lt;</span> otherObject.getArea()) {
-    <span style="color:#00f">return</span> <span style="color:#00f">-</span><span style="color:#06f">1</span>;
-}
-<span style="color:#00f">else</span> {
-    <span style="color:#00f">return</span> <span style="color:#06f">0</span>;
-}   
-rect1.compareTo(rect2)  <span style="color:#06f;font-style:italic">//false   -1</span>
-
-<span style="color:#06f;font-style:italic">// instanceof - оператор для проверки типа объекта</span>
-<span style="font-weight:700">var</span> x <span style="color:#00f">=</span> <span style="color:#00f">new</span> <span style="">Array</span>(<span style="color:#06f">10</span>);
-<span style="color:#00f">if</span> (x <span style="color:#00f">instanceof</span> <span style="color:#33f;font-weight:700">Array</span>) { <span style="color:#06f;font-style:italic">// аналог оператора is в C#</span>
-    <span style="color:#33f;font-weight:700">alert</span>(<span style="color:#093">""</span>x is array<span style="color:#093">""</span>);
-}<span style="color:#06f;font-style:italic">//x is array</span>
-
-<span style="color:#06f;font-style:italic">// typeof - оператор для получения типа объекта в виде строкового значения</span>
-<span style="font-weight:700">var</span> test <span style="color:#00f">=</span> <span style="color:#093">""</span>hello<span style="color:#093">""</span>; <span style="color:#33f;font-weight:700">document</span>.<span style="color:#33f;font-weight:700">write</span>( <span style="color:#00f">typeof</span> test);<span style="color:#06f;font-style:italic">//string</span>
-<span style="font-weight:700">var</span> test2 <span style="color:#00f">=</span> <span style="color:#06f">123</span>; <span style="color:#33f;font-weight:700">document</span>.write (<span style="color:#00f">typeof</span> test2);<span style="color:#06f;font-style:italic">//number</span>
-<span style="font-weight:700">var</span> test3 <span style="color:#00f">=</span> <span style="color:#9700cc">true</span>; <span style="color:#33f;font-weight:700">document</span>.<span style="color:#33f;font-weight:700">write</span>( <span style="color:#00f">typeof</span> test3);<span style="color:#06f;font-style:italic">//boolean</span>
-<span style="font-weight:700">var</span> test4 <span style="color:#00f">=</span> <span style="color:#00f">new</span> <span style="">Array</span>(); <span style="color:#33f;font-weight:700">document</span>.<span style="color:#33f;font-weight:700">write</span>( <span style="color:#00f">typeof</span> test4);<span style="color:#06f;font-style:italic">//object       </span>
-<span style="font-weight:700">var</span> test5 <span style="color:#00f">=</span> <span style="color:#00f">new</span> <span style="">Date</span>(); <span style="color:#33f;font-weight:700">document</span>.write (<span style="color:#00f">typeof</span> test5);<span style="color:#06f;font-style:italic">//object</span>
-<span style="color:#33f;font-weight:700">document</span>.<span style="color:#33f;font-weight:700">write</span>(<span style="color:#00f">typeof</span> test6.toString); <span style="color:#33f;font-weight:700">document</span>.<span style="color:#33f;font-weight:700">write</span>(<span style="color:#00f">typeof</span> test6);<span style="color:#06f;font-style:italic">//</span>
-</pre>
-
 
 
 
@@ -199,6 +155,51 @@ arr.<span style="color:#33f;font-weight:700">unshift</span>();<span style="color
 <span style="color:#33f;font-weight:700">toUpperCase</span>() <span style="color:#06f;font-style:italic">//- перевод всех символов в верхний регистр.</span>
 <span style="color:#33f;font-weight:700">substring</span>() <span style="color:#06f;font-style:italic">//-  возвращает строку между двумя указанными индексами, не включая индексы.Т.е. вырезает кусок текста с .. По.."</span>
 <span style="color:#33f;font-weight:700">substr</span>() <span style="color:#06f;font-style:italic">//- возвращает строку начиная с указанного индекса, указанной длины.Т.е. вырезает кусок текста с .. длинна..</span>
+</pre>
+
+
+<h4>Типы, сравнения</h4>
+<pre style="background:rgba(238,238,238,0.92);color:#000"><span style="color:#06f;font-style:italic">//hasOwnProperty - возращает true, если обьект rect1 имеет свойство wight Только свойства, без прототипов</span>
+<span style="color:#33f;font-weight:700">document</span>.<span style="color:#33f;font-weight:700">write</span>(rect1.hasOwnProperty(<span style="color:#093">"wight"</span>))
+<span style="color:#06f;font-style:italic">//А что бы узнать имеется ли значение и в свойствах и в прототипе можно использовать in                                   </span>
+<span style="color:#33f;font-weight:700">document</span>.<span style="color:#33f;font-weight:700">write</span>( (<span style="color:#093">""</span>getArea<span style="color:#093">""</span> <span style="color:#00f">in</span> rect1) <span style="color:#00f">+</span> <span style="color:#093">""</span><span style="color:#00f">&lt;</span>br/<span style="color:#00f">></span><span style="color:#093">""</span>)                     
+
+<span style="color:#06f;font-style:italic">//"equals - специальный прописаный вручную в прототипе метод для сравнения двух обьектов</span>
+<span style="color:#06f;font-style:italic">//Равен ли один обьект другому: false / true"                       </span>
+<span style="color:#33f;font-weight:700">Rectangle</span>.<span style="color:#6782d3">prototype</span>.<span style="color:#ff8000">equals</span> <span style="color:#00f">=</span> <span style="font-weight:700">function</span> (otherObj) {
+    <span style="color:#00f">if</span> (this.<span style="color:#6782d3">width</span> <span style="color:#00f">===</span> otherObj.<span style="color:#6782d3">width</span> <span style="color:#00f">&amp;</span><span style="color:#00f">&amp;</span> this.<span style="color:#6782d3">height</span> <span style="color:#00f">===</span> otherObj.<span style="color:#6782d3">height</span>) {
+        <span style="color:#00f">return</span> <span style="color:#9700cc">true</span>;
+    }
+    <span style="color:#00f">return</span> <span style="color:#9700cc">false</span>;
+rect1.equals(rect2) <span style="color:#06f;font-style:italic">//false</span>
+
+<span style="color:#06f;font-style:italic">//compareTo - специальный прописаный вручную в прототипе метод для сравнения двух обьектов</span>
+<span style="color:#06f;font-style:italic">//Какой обьект больше, какой меньше или равен: 1 / -1 / 0                       </span>
+<span style="color:#33f;font-weight:700">Rectangle</span>.<span style="color:#6782d3">prototype</span>.<span style="color:#ff8000">compareTo</span> <span style="color:#00f">=</span> <span style="font-weight:700">function</span> (otherObject) {
+<span style="color:#00f">if</span> (this.getArea() <span style="color:#00f">></span> otherObject.getArea()) {
+    <span style="color:#00f">return</span> <span style="color:#06f">1</span>;
+}
+<span style="color:#00f">else</span> <span style="color:#00f">if</span> (this.getArea() <span style="color:#00f">&lt;</span> otherObject.getArea()) {
+    <span style="color:#00f">return</span> <span style="color:#00f">-</span><span style="color:#06f">1</span>;
+}
+<span style="color:#00f">else</span> {
+    <span style="color:#00f">return</span> <span style="color:#06f">0</span>;
+}   
+rect1.compareTo(rect2)  <span style="color:#06f;font-style:italic">//false   -1</span>
+
+<span style="color:#06f;font-style:italic">// instanceof - оператор для проверки типа объекта</span>
+<span style="font-weight:700">var</span> x <span style="color:#00f">=</span> <span style="color:#00f">new</span> <span style="">Array</span>(<span style="color:#06f">10</span>);
+<span style="color:#00f">if</span> (x <span style="color:#00f">instanceof</span> <span style="color:#33f;font-weight:700">Array</span>) { <span style="color:#06f;font-style:italic">// аналог оператора is в C#</span>
+    <span style="color:#33f;font-weight:700">alert</span>(<span style="color:#093">""</span>x is array<span style="color:#093">""</span>);
+}<span style="color:#06f;font-style:italic">//x is array</span>
+
+<span style="color:#06f;font-style:italic">// typeof - оператор для получения типа объекта в виде строкового значения</span>
+<span style="font-weight:700">var</span> test <span style="color:#00f">=</span> <span style="color:#093">""</span>hello<span style="color:#093">""</span>; <span style="color:#33f;font-weight:700">document</span>.<span style="color:#33f;font-weight:700">write</span>( <span style="color:#00f">typeof</span> test);<span style="color:#06f;font-style:italic">//string</span>
+<span style="font-weight:700">var</span> test2 <span style="color:#00f">=</span> <span style="color:#06f">123</span>; <span style="color:#33f;font-weight:700">document</span>.write (<span style="color:#00f">typeof</span> test2);<span style="color:#06f;font-style:italic">//number</span>
+<span style="font-weight:700">var</span> test3 <span style="color:#00f">=</span> <span style="color:#9700cc">true</span>; <span style="color:#33f;font-weight:700">document</span>.<span style="color:#33f;font-weight:700">write</span>( <span style="color:#00f">typeof</span> test3);<span style="color:#06f;font-style:italic">//boolean</span>
+<span style="font-weight:700">var</span> test4 <span style="color:#00f">=</span> <span style="color:#00f">new</span> <span style="">Array</span>(); <span style="color:#33f;font-weight:700">document</span>.<span style="color:#33f;font-weight:700">write</span>( <span style="color:#00f">typeof</span> test4);<span style="color:#06f;font-style:italic">//object       </span>
+<span style="font-weight:700">var</span> test5 <span style="color:#00f">=</span> <span style="color:#00f">new</span> <span style="">Date</span>(); <span style="color:#33f;font-weight:700">document</span>.write (<span style="color:#00f">typeof</span> test5);<span style="color:#06f;font-style:italic">//object</span>
+<span style="color:#33f;font-weight:700">document</span>.<span style="color:#33f;font-weight:700">write</span>(<span style="color:#00f">typeof</span> test6.toString); <span style="color:#33f;font-weight:700">document</span>.<span style="color:#33f;font-weight:700">write</span>(<span style="color:#00f">typeof</span> test6);<span style="color:#06f;font-style:italic">//</span>
 </pre>
 
 
@@ -359,23 +360,8 @@ input <span style="color:#00f">=</span> <span style="color:#093">"123"</span>;
 {,<span style="color:#06f">3</span>}    не более    
 </pre>
 
-<<<<<<< HEAD
-<h4>Всплывающая подсказка / tooltip</h4>
-<pre class="javascript" style="font-family:monospace;"><span style="color: #000066; font-weight: bold;">function</span> tShow<span style="color: #009900;">&#40;</span>text<span style="color: #339933;">,</span>x<span style="color: #339933;">,</span>y<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
-	tt.<span style="color: #660066;">style</span>.<span style="color: #660066;">visibility</span> <span style="color: #339933;">=</span> <span style="color: #3366CC;">&quot;visible&quot;</span><span style="color: #339933;">;</span>
-	tt.<span style="color: #660066;">innerHTML</span> <span style="color: #339933;">=</span> text<span style="color: #339933;">;</span>
-	tt.<span style="color: #660066;">style</span>.<span style="color: #660066;">top</span> <span style="color: #339933;">=</span> x <span style="color: #339933;">+</span> <span style="color: #3366CC;">&quot;px&quot;</span><span style="color: #339933;">;</span>
-	tt.<span style="color: #660066;">style</span>.<span style="color: #660066;">left</span> <span style="color: #339933;">=</span> y <span style="color: #339933;">+</span> <span style="color: #3366CC;">&quot;px&quot;</span><span style="color: #339933;">;</span>
-<span style="color: #009900;">&#125;</span>
-document.<span style="color: #660066;">onmousemove</span> <span style="color: #339933;">=</span> <span style="color: #000066; font-weight: bold;">function</span><span style="color: #009900;">&#40;</span>e<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
-	<span style="color: #000066; font-weight: bold;">if</span><span style="color: #009900;">&#40;</span>e.<span style="color: #660066;">target</span>.<span style="color: #660066;">tagName</span> <span style="color: #339933;">!=</span> <span style="color: #3366CC;">&quot;HTML&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
-		tShow<span style="color: #009900;">&#40;</span>e.<span style="color: #660066;">target</span>.<span style="color: #660066;">innerText</span><span style="color: #339933;">,</span> e.<span style="color: #660066;">clientY</span> <span style="color: #339933;">+</span> <span style="color: #CC0000;">10</span><span style="color: #339933;">,</span> e.<span style="color: #660066;">clientX</span> <span style="color: #339933;">+</span> <span style="color: #CC0000;">10</span> <span style="color: #009900;">&#41;</span>			
-	<span style="color: #009900;">&#125;</span>
-<span style="color: #009900;">&#125;</span>
-document.<span style="color: #660066;">onmouseout</span> <span style="color: #339933;">=</span> <span style="color: #000066; font-weight: bold;">function</span><span style="color: #009900;">&#40;</span>e<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
-	tt.<span style="color: #660066;">style</span>.<span style="color: #660066;">visibility</span> <span style="color: #339933;">=</span> <span style="color: #3366CC;">&quot;hidden&quot;</span>
-<span style="color: #009900;">&#125;</span>
-&nbsp;</pre>
+
+
 
 <h4>Плавная Анимация цвета / Animation color</h4>
 <pre class="javascript" style="font-family:monospace;"><span style="color: #000066; font-weight: bold;">var</span> divColor <span style="color: #339933;">=</span> document.<span style="color: #660066;">createElement</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;div&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
@@ -391,6 +377,55 @@ setInterval<span style="color: #009900;">&#40;</span><span style="color: #000066
 	color <span style="color: #339933;">=</span> color <span style="color: #339933;">+</span> <span style="color: #CC0000;">1</span> <span style="color: #339933;">%</span> <span style="color: #CC0000;">360</span><span style="color: #339933;">;</span>
 	divColor.<span style="color: #660066;">style</span>.<span style="color: #660066;">backgroundColor</span> <span style="color: #339933;">=</span> <span style="color: #3366CC;">&quot;hsl(&quot;</span> <span style="color: #339933;">+</span> color <span style="color: #339933;">+</span> <span style="color: #3366CC;">&quot;, 100%, 100%)&quot;</span><span style="color: #339933;">;</span> <span style="color: #006600; font-style: italic;">// H — тон [0; 360] S — насыщенность[%] L — светлота [%]</span>
 <span style="color: #009900;">&#125;</span><span style="color: #339933;">,</span> <span style="color: #CC0000;">50</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></pre>
+
+
+<h4>Всплывающая подсказка / Tooltip</h4>
+<pre class="javascript" style="font-family:monospace;"><span style="color: #000066; font-weight: bold;">function</span> Tooltip<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>  <span style="color: #006600; font-style: italic;">// Конструктор для всплывающей подсказки</span>
+            <span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">tt</span> <span style="color: #339933;">=</span> document.<span style="color: #660066;">createElement</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;div&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> <span style="color: #006600; font-style: italic;">// Создание div для тени</span>
+            <span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">tt</span>.<span style="color: #660066;">style</span>.<span style="color: #660066;">position</span> <span style="color: #339933;">=</span> <span style="color: #3366CC;">&quot;absolute&quot;</span><span style="color: #339933;">;</span>     <span style="color: #006600; font-style: italic;">// Абсолютное позиционирование.</span>
+            <span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">tt</span>.<span style="color: #660066;">style</span>.<span style="color: #660066;">visibility</span> <span style="color: #339933;">=</span> <span style="color: #3366CC;">&quot;hidden&quot;</span><span style="color: #339933;">;</span>
+            <span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">tt</span>.<span style="color: #660066;">className</span> <span style="color: #339933;">=</span> <span style="color: #3366CC;">&quot;tt&quot;</span><span style="color: #339933;">;</span>
+        <span style="color: #009900;">&#125;</span>
+&nbsp;
+        <span style="color: #006600; font-style: italic;">// Установка содержимого для подсказки и отображение</span>
+        Tooltip.<span style="color: #000066; font-weight: bold;">prototype</span>.<span style="color: #660066;">show</span> <span style="color: #339933;">=</span> <span style="color: #000066; font-weight: bold;">function</span> <span style="color: #009900;">&#40;</span>text<span style="color: #339933;">,</span> x<span style="color: #339933;">,</span> y<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+            <span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">tt</span>.<span style="color: #660066;">innerHTML</span> <span style="color: #339933;">=</span> text<span style="color: #339933;">;</span>             <span style="color: #006600; font-style: italic;">// Текст подсказки</span>
+            <span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">tt</span>.<span style="color: #660066;">style</span>.<span style="color: #660066;">left</span> <span style="color: #339933;">=</span> x <span style="color: #339933;">+</span> <span style="color: #3366CC;">&quot;px&quot;</span><span style="color: #339933;">;</span>        <span style="color: #006600; font-style: italic;">// Координаты</span>
+            <span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">tt</span>.<span style="color: #660066;">style</span>.<span style="color: #660066;">top</span> <span style="color: #339933;">=</span> y <span style="color: #339933;">+</span> <span style="color: #3366CC;">&quot;px&quot;</span><span style="color: #339933;">;</span>
+            <span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">tt</span>.<span style="color: #660066;">style</span>.<span style="color: #660066;">visibility</span> <span style="color: #339933;">=</span> <span style="color: #3366CC;">&quot;visible&quot;</span><span style="color: #339933;">;</span>
+&nbsp;
+            <span style="color: #006600; font-style: italic;">// Добавление подсказки в документ если он еще не присутствует.</span>
+            <span style="color: #000066; font-weight: bold;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">tt</span>.<span style="color: #660066;">parentNode</span> <span style="color: #339933;">!=</span> document.<span style="color: #660066;">body</span><span style="color: #009900;">&#41;</span>
+                document.<span style="color: #660066;">body</span>.<span style="color: #660066;">appendChild</span><span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">tt</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+        <span style="color: #009900;">&#125;</span><span style="color: #339933;">;</span>
+&nbsp;
+        <span style="color: #006600; font-style: italic;">// Функция для скрытия подсказки</span>
+        Tooltip.<span style="color: #000066; font-weight: bold;">prototype</span>.<span style="color: #660066;">hide</span> <span style="color: #339933;">=</span> <span style="color: #000066; font-weight: bold;">function</span> <span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+            <span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">tt</span>.<span style="color: #660066;">style</span>.<span style="color: #660066;">visibility</span> <span style="color: #339933;">=</span> <span style="color: #3366CC;">&quot;hidden&quot;</span><span style="color: #339933;">;</span>
+        <span style="color: #009900;">&#125;</span><span style="color: #339933;">;</span>
+&nbsp;
+        window.<span style="color: #660066;">onload</span> <span style="color: #339933;">=</span> <span style="color: #000066; font-weight: bold;">function</span> <span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+            <span style="color: #000066; font-weight: bold;">var</span> elem <span style="color: #339933;">=</span> document.<span style="color: #660066;">getElementById</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;test&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+            d.<span style="color: #660066;">onmousemove</span> <span style="color: #339933;">=</span> mouseMoveHandler<span style="color: #339933;">;</span>
+            d.<span style="color: #660066;">onmouseout</span> <span style="color: #339933;">=</span> mouseOutHandler<span style="color: #339933;">;</span>
+        <span style="color: #009900;">&#125;</span>
+&nbsp;
+        <span style="color: #000066; font-weight: bold;">var</span> t <span style="color: #339933;">=</span> <span style="color: #000066; font-weight: bold;">new</span> Tooltip<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+        <span style="color: #000066; font-weight: bold;">function</span> mouseMoveHandler<span style="color: #009900;">&#40;</span>e<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+&nbsp;
+            <span style="color: #000066; font-weight: bold;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #339933;">!</span>e<span style="color: #009900;">&#41;</span> e <span style="color: #339933;">=</span> window.<span style="color: #660066;">event</span><span style="color: #339933;">;</span>
+            v.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span>e.<span style="color: #660066;">target</span><span style="color: #009900;">&#41;</span>
+            t.<span style="color: #660066;">show</span><span style="color: #009900;">&#40;</span>e.<span style="color: #660066;">target</span>.<span style="color: #660066;">innerHTML</span><span style="color: #339933;">,</span> e.<span style="color: #660066;">clientX</span> <span style="color: #339933;">+</span> <span style="color: #CC0000;">10</span><span style="color: #339933;">,</span> e.<span style="color: #660066;">clientY</span> <span style="color: #339933;">+</span> <span style="color: #CC0000;">10</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+        <span style="color: #009900;">&#125;</span>
+&nbsp;
+        <span style="color: #000066; font-weight: bold;">function</span> mouseOutHandler<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+            v.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;456&quot;</span><span style="color: #009900;">&#41;</span>
+            t.<span style="color: #660066;">hide</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+        <span style="color: #009900;">&#125;</span></pre>
+
+
+
 
 <h4>getComputedStyle</h4>
 <pre class="javascript" style="font-family:monospace;"><span style="color: #000066; font-weight: bold;">var</span> computedStyle <span style="color: #339933;">=</span> getComputedStyle<span style="color: #009900;">&#40;</span>document.<span style="color: #660066;">body</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
@@ -1016,7 +1051,6 @@ t1.<span style="color: #660066;">run</span><span style="color: #009900;">&#40;</
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 	<script src="./src/main.js"></script>
-	<link href="./src/main.css" rel="stylesheet">
 	<!-- http://markup.su/highlighter/ -->	
 	<!-- http://highlight.hohli.com/	-->
 </html>
