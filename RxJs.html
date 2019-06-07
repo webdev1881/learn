@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title class="fa fa-mortar-board">RxJs</title>
+	<link rel="icon" href="http://rainstitute.in/images/file.png" type="image/gif" sizes="16x16">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/rxjs/5.6.0-forward-compat.5/Rx.js"></script>
+	
+</head>
+<body style="padding-top: 70px;">
+  <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        </button>
+      </div>
+      <div class="collapse navbar-collapse">
+        <ul class="nav navbar-nav">
+          <li><a href="./index.html">JavaScript</a></li>
+          <li><a href="./HTML5.html">RxJs</a></li>
+          <li><a href="#css">CSS</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+
+
+
+
+<h3>RxJs</h3>
+
+<pre class="javascript" style="font-family:monospace;">let stream$ <span style="color: #339933;">=</span> Rx.<span style="color: #660066;">Observable</span>.<span style="color: #660066;">create</span><span style="color: #009900;">&#40;</span> <span style="color: #000066; font-weight: bold;">function</span><span style="color: #009900;">&#40;</span> observer <span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span> <span style="color: #006600; font-style: italic;">// создаем стрим</span>
+&nbsp;
+  console.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">'Стрим создан'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>         <span style="color: #006600; font-style: italic;">// без подписке не создастся</span>
+&nbsp;
+  observer.<span style="color: #660066;">next</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">'One'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>                <span style="color: #006600; font-style: italic;">// первое событие</span>
+&nbsp;
+  observer.<span style="color: #660066;">complete</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>                 <span style="color: #006600; font-style: italic;">// форсировано останавливает , без этого третий аргумент подписки не сработает</span>
+&nbsp;
+  setTimeout<span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">function</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>             <span style="color: #006600; font-style: italic;">// второе событие</span>
+    observer.<span style="color: #660066;">next</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">'After 1 seconds'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+  <span style="color: #009900;">&#125;</span><span style="color: #339933;">,</span> <span style="color: #CC0000;">1000</span><span style="color: #009900;">&#41;</span>
+&nbsp;
+<span style="color: #009900;">&#125;</span> <span style="color: #009900;">&#41;</span>
+&nbsp;
+stream$
+  .<span style="color: #660066;">subscribe</span><span style="color: #009900;">&#40;</span>
+   <span style="color: #000066; font-weight: bold;">function</span><span style="color: #009900;">&#40;</span> data <span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span> console.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span>data<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#125;</span><span style="color: #339933;">,</span>      <span style="color: #006600; font-style: italic;">// подписка работает вечно (слушает), все события асинхронны</span>
+   <span style="color: #000066; font-weight: bold;">function</span><span style="color: #009900;">&#40;</span> error <span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span> console.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span>error<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#125;</span><span style="color: #339933;">,</span>    <span style="color: #006600; font-style: italic;">// второй аргумент подписки - ERROR </span>
+   <span style="color: #000066; font-weight: bold;">function</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span> console.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">'comleted'</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#125;</span>    <span style="color: #006600; font-style: italic;">// третий аргумент подписки - COMLETE </span>
+ <span style="color: #009900;">&#41;</span></pre>
+
+<h3>Events</h3>
+<pre class="javascript" style="font-family:monospace;">
+ <button style='margin: 5px' >Event$</button>
+<input type="text">
+<h4></h4>
+
+  <span style="color: #000066; font-weight: bold;">var</span> button <span style="color: #339933;">=</span> document.<span style="color: #660066;">querySelector</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">'button'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+Rx.<span style="color: #660066;">Observable</span>.<span style="color: #660066;">fromEvent</span><span style="color: #009900;">&#40;</span>button<span style="color: #339933;">,</span> <span style="color: #3366CC;">'click'</span><span style="color: #009900;">&#41;</span>
+  .<span style="color: #660066;">subscribe</span><span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">function</span><span style="color: #009900;">&#40;</span>e<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+      console.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span>e<span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+  <span style="color: #009900;">&#125;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+Rx.<span style="color: #660066;">Observable</span>.<span style="color: #660066;">fromEvent</span><span style="color: #009900;">&#40;</span>document.<span style="color: #660066;">querySelector</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">'input'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span> <span style="color: #3366CC;">'keyup'</span><span style="color: #009900;">&#41;</span>
+   .<span style="color: #660066;">subscribe</span><span style="color: #009900;">&#40;</span>e <span style="color: #339933;">=&gt;</span> console.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span>e<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+Rx.<span style="color: #660066;">Observable</span>.<span style="color: #660066;">fromEvent</span><span style="color: #009900;">&#40;</span>document<span style="color: #339933;">,</span> <span style="color: #3366CC;">'mousemove'</span><span style="color: #009900;">&#41;</span>
+  .<span style="color: #660066;">subscribe</span><span style="color: #009900;">&#40;</span>e <span style="color: #339933;">=&gt;</span> <span style="color: #009900;">&#123;</span>
+      document.<span style="color: #660066;">querySelector</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">'h1'</span><span style="color: #009900;">&#41;</span>.<span style="color: #660066;">innerHTML</span> <span style="color: #339933;">=</span> `X<span style="color: #339933;">:</span> $<span style="color: #009900;">&#123;</span>e.<span style="color: #660066;">clientX</span><span style="color: #009900;">&#125;</span><span style="color: #339933;">,</span> Y<span style="color: #339933;">:</span> $<span style="color: #009900;">&#123;</span>e.<span style="color: #660066;">clientY</span><span style="color: #009900;">&#125;</span>`<span style="color: #339933;">;</span>
+  <span style="color: #009900;">&#125;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></pre>
+
+
+<h3>Of</h3>
+<pre class="javascript" style="font-family:monospace;">Rx.<span style="color: #660066;">Observable</span>.<span style="color: #660066;">of</span><span style="color: #009900;">&#40;</span><span style="color: #CC0000;">5</span><span style="color: #339933;">,</span> <span style="color: #CC0000;">7</span><span style="color: #339933;">,</span> <span style="color: #3366CC;">'9'</span><span style="color: #339933;">,</span> <span style="color: #CC0000;">2</span><span style="color: #339933;">,</span> <span style="color: #009900;">&#91;</span><span style="color: #CC0000;">5</span><span style="color: #339933;">,</span><span style="color: #CC0000;">4</span><span style="color: #339933;">,</span><span style="color: #CC0000;">7</span><span style="color: #339933;">,</span><span style="color: #CC0000;">1</span><span style="color: #339933;">,</span><span style="color: #CC0000;">2</span><span style="color: #009900;">&#93;</span> <span style="color: #009900;">&#41;</span>  <span style="color: #006600; font-style: italic;">// создаем стрим из любых данныхъ</span>
+  .<span style="color: #660066;">subscribe</span><span style="color: #009900;">&#40;</span>
+    <span style="color: #009900;">&#40;</span>x<span style="color: #009900;">&#41;</span> <span style="color: #339933;">=&gt;</span> console.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span>x<span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+    <span style="color: #009900;">&#40;</span>err<span style="color: #009900;">&#41;</span> <span style="color: #339933;">=&gt;</span> console.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span>err<span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+    <span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">=&gt;</span> console.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">'comlete'</span><span style="color: #009900;">&#41;</span> <span style="color: #006600; font-style: italic;">// метод OF завершает стрим сам</span>
+  <span style="color: #009900;">&#41;</span></pre>
+
+
+<h3>Interval, Take</h3>
+<pre class="javascript" style="font-family:monospace;">Rx.<span style="color: #660066;">Observable</span>.<span style="color: #660066;">interval</span><span style="color: #009900;">&#40;</span><span style="color: #CC0000;">1000</span><span style="color: #009900;">&#41;</span>  <span style="color: #006600; font-style: italic;">// счетчит с нуля с заданым тнтервалом (1000мс)</span>
+  .<span style="color: #660066;">take</span><span style="color: #009900;">&#40;</span><span style="color: #CC0000;">5</span><span style="color: #009900;">&#41;</span>                     <span style="color: #006600; font-style: italic;">// сколько получить значений из непрерывного потока. На 5 будет complete</span>
+  .<span style="color: #660066;">subscribe</span><span style="color: #009900;">&#40;</span>
+    <span style="color: #009900;">&#40;</span>x<span style="color: #009900;">&#41;</span> <span style="color: #339933;">=&gt;</span> console.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span>x<span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+    <span style="color: #009900;">&#40;</span>err<span style="color: #009900;">&#41;</span> <span style="color: #339933;">=&gt;</span> console.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span>err<span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+    <span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">=&gt;</span> console.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">'comlete'</span><span style="color: #009900;">&#41;</span> <span style="color: #006600; font-style: italic;"></span>
+  <span style="color: #009900;">&#41;</span></pre>
+
+
+<h3>Timer, Take</h3>
+<pre class="javascript" style="font-family:monospace;">Rx.<span style="color: #660066;">Observable</span>.<span style="color: #660066;">timer</span><span style="color: #009900;">&#40;</span><span style="color: #CC0000;">500</span><span style="color: #339933;">,</span> <span style="color: #CC0000;">1000</span><span style="color: #009900;">&#41;</span>  <span style="color: #006600; font-style: italic;">// как Интервал, но с задержкой перед выполнением стрима</span>
+  .<span style="color: #660066;">take</span><span style="color: #009900;">&#40;</span><span style="color: #CC0000;">5</span><span style="color: #009900;">&#41;</span>                     <span style="color: #006600; font-style: italic;">// сколько получить значений из непрерывного потока. На 5 будет complete</span>
+  .<span style="color: #660066;">subscribe</span><span style="color: #009900;">&#40;</span>
+    <span style="color: #009900;">&#40;</span>x<span style="color: #009900;">&#41;</span> <span style="color: #339933;">=&gt;</span> console.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span>x<span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+    <span style="color: #009900;">&#40;</span>err<span style="color: #009900;">&#41;</span> <span style="color: #339933;">=&gt;</span> console.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span>err<span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+    <span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">=&gt;</span> console.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">'comlete'</span><span style="color: #009900;">&#41;</span>
+  <span style="color: #009900;">&#41;</span></pre>
+
+
+<h3>Range</h3>
+<pre class="javascript" style="font-family:monospace;">Rx.<span style="color: #660066;">Observable</span>.<span style="color: #660066;">range</span><span style="color: #009900;">&#40;</span><span style="color: #CC0000;">10</span><span style="color: #339933;">,</span> <span style="color: #CC0000;">5</span><span style="color: #009900;">&#41;</span>  <span style="color: #006600; font-style: italic;">// числа (мгновенно) с первого значения + плюс еще второе значение</span>
+  .<span style="color: #660066;">subscribe</span><span style="color: #009900;">&#40;</span>
+    <span style="color: #009900;">&#40;</span>x<span style="color: #009900;">&#41;</span> <span style="color: #339933;">=&gt;</span> console.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span>x<span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+    <span style="color: #009900;">&#40;</span>err<span style="color: #009900;">&#41;</span> <span style="color: #339933;">=&gt;</span> console.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span>err<span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+    <span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">=&gt;</span> console.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">'comlete'</span><span style="color: #009900;">&#41;</span> 
+  <span style="color: #009900;">&#41;</span></pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	</div>
+</body>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	
+	<script src="./src/main.js"></script>
+	<link href="./src/main.css" rel="stylesheet">
+</html>
