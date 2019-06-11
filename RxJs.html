@@ -112,13 +112,55 @@ Rx.<span style="color: #660066;">Observable</span>.<span style="color: #660066;"
     <span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">=&gt;</span> console.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">'comlete'</span><span style="color: #009900;">&#41;</span> 
   <span style="color: #009900;">&#41;</span></pre>
 
+<h3>From</h3>
+<pre class="javascript" style="font-family:monospace;">let arr <span style="color: #339933;">=</span> <span style="color: #009900;">&#91;</span><span style="color: #CC0000;">1</span><span style="color: #339933;">,</span><span style="color: #CC0000;">5</span><span style="color: #339933;">,</span><span style="color: #CC0000;">7</span><span style="color: #339933;">,</span><span style="color: #CC0000;">4</span><span style="color: #339933;">,</span><span style="color: #CC0000;">3</span><span style="color: #339933;">,</span><span style="color: #CC0000;">6</span><span style="color: #339933;">,</span><span style="color: #CC0000;">8</span><span style="color: #009900;">&#93;</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #006600; font-style: italic;">//ES6</span>
+arr <span style="color: #339933;">=</span> <span style="color: #000066; font-weight: bold;">new</span> Set<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#91;</span><span style="color: #CC0000;">1</span><span style="color: #339933;">,</span><span style="color: #CC0000;">2</span><span style="color: #339933;">,</span><span style="color: #CC0000;">3</span><span style="color: #339933;">,</span><span style="color: #CC0000;">4</span><span style="color: #339933;">,</span><span style="color: #CC0000;">5</span><span style="color: #009900;">&#93;</span><span style="color: #009900;">&#41;</span>
+arr <span style="color: #339933;">=</span> <span style="color: #000066; font-weight: bold;">new</span> Map<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#91;</span> <span style="color: #009900;">&#91;</span><span style="color: #CC0000;">1</span><span style="color: #339933;">,</span><span style="color: #CC0000;">2</span><span style="color: #009900;">&#93;</span><span style="color: #339933;">,</span> <span style="color: #009900;">&#91;</span><span style="color: #CC0000;">3</span><span style="color: #339933;">,</span><span style="color: #CC0000;">4</span><span style="color: #009900;">&#93;</span> <span style="color: #009900;">&#93;</span><span style="color: #009900;">&#41;</span>
+&nbsp;
+Rx.<span style="color: #660066;">Observable</span>.<span style="color: #660066;">from</span><span style="color: #009900;">&#40;</span>arr<span style="color: #009900;">&#41;</span>  <span style="color: #006600; font-style: italic;">// итерация по МАССИВУ</span>
+  .<span style="color: #660066;">subscribe</span><span style="color: #009900;">&#40;</span>
+    <span style="color: #009900;">&#40;</span>x<span style="color: #009900;">&#41;</span> <span style="color: #339933;">=&gt;</span> console.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span>x<span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+    <span style="color: #009900;">&#40;</span>err<span style="color: #009900;">&#41;</span> <span style="color: #339933;">=&gt;</span> console.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span>err<span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+    <span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">=&gt;</span> console.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">'comlete'</span><span style="color: #009900;">&#41;</span> 
+  <span style="color: #009900;">&#41;</span></pre>
 
 
+<h3>fromPromise</h3>
+<pre class="javascript" style="font-family:monospace;"><span style="color: #000066; font-weight: bold;">function</span> delay<span style="color: #009900;">&#40;</span> ms<span style="color: #339933;">=</span><span style="color: #CC0000;">1000</span> <span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+  <span style="color: #000066; font-weight: bold;">return</span> <span style="color: #000066; font-weight: bold;">new</span> Promise<span style="color: #009900;">&#40;</span> <span style="color: #009900;">&#40;</span>res<span style="color: #339933;">,</span> rej<span style="color: #009900;">&#41;</span>  <span style="color: #339933;">=&gt;</span> <span style="color: #009900;">&#123;</span>
+    setTimeout<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">=&gt;</span> <span style="color: #009900;">&#123;</span>
+      res <span style="color: #009900;">&#40;</span> ms <span style="color: #009900;">&#41;</span> <span style="color: #006600; font-style: italic;">// что бы что то показывать потом</span>
+    <span style="color: #009900;">&#125;</span><span style="color: #339933;">,</span> ms<span style="color: #009900;">&#41;</span>
+  <span style="color: #009900;">&#125;</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span>
+&nbsp;
+<span style="color: #006600; font-style: italic;">// delay( 3000 ).then( () =&gt; {</span>
+<span style="color: #006600; font-style: italic;">//  console.log('test');</span>
+<span style="color: #006600; font-style: italic;">// } )</span>
+&nbsp;
+Rx.<span style="color: #660066;">Observable</span>.<span style="color: #660066;">fromPromise</span><span style="color: #009900;">&#40;</span> delay<span style="color: #009900;">&#40;</span><span style="color: #CC0000;">2000</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#41;</span>
+  .<span style="color: #660066;">subscribe</span><span style="color: #009900;">&#40;</span>
+    <span style="color: #009900;">&#40;</span>x<span style="color: #009900;">&#41;</span> <span style="color: #339933;">=&gt;</span> console.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span>x<span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+    <span style="color: #009900;">&#40;</span>err<span style="color: #009900;">&#41;</span> <span style="color: #339933;">=&gt;</span> console.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span>err<span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+    <span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">=&gt;</span> console.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">'comlete'</span><span style="color: #009900;">&#41;</span> 
+  <span style="color: #009900;">&#41;</span></pre>
 
 
+<h3>Map, Pluck</h3>
 
-
-
+<pre class="javascript" style="font-family:monospace;"><span style="color: #006600; font-style: italic;">// Map служит для переобразования элементов итерации </span>
+&nbsp;
+ Rx.<span style="color: #660066;">Observable</span>.<span style="color: #660066;">fromEvent</span><span style="color: #009900;">&#40;</span> document.<span style="color: #660066;">querySelector</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">'input'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span> <span style="color: #3366CC;">'keyup'</span> <span style="color: #009900;">&#41;</span>
+  .<span style="color: #660066;">map</span><span style="color: #009900;">&#40;</span> x <span style="color: #339933;">=&gt;</span> <span style="color: #009900;">&#123;</span><span style="color: #000066; font-weight: bold;">return</span> x.<span style="color: #660066;">target</span>.<span style="color: #660066;">value</span> <span style="color: #009900;">&#125;</span> <span style="color: #009900;">&#41;</span> <span style="color: #006600; font-style: italic;">// Метод Map всегда RETURN</span>
+  .<span style="color: #660066;">pluck</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">'target'</span><span style="color: #339933;">,</span> <span style="color: #3366CC;">'value'</span><span style="color: #009900;">&#41;</span>             <span style="color: #006600; font-style: italic;">// Метод Pluck - то же самое, только по принципу: ключ-значение</span>
+  .<span style="color: #660066;">map</span><span style="color: #009900;">&#40;</span> x <span style="color: #339933;">=&gt;</span> <span style="color: #009900;">&#123;</span><span style="color: #000066; font-weight: bold;">return</span> x.<span style="color: #660066;">toUpperCase</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#125;</span> <span style="color: #009900;">&#41;</span> <span style="color: #006600; font-style: italic;">// Метод Map можно вызывать сколько угодно</span>
+    .<span style="color: #660066;">subscribe</span><span style="color: #009900;">&#40;</span>
+      <span style="color: #009900;">&#40;</span>x<span style="color: #009900;">&#41;</span> <span style="color: #339933;">=&gt;</span> console.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span>x<span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+      <span style="color: #009900;">&#40;</span>err<span style="color: #009900;">&#41;</span> <span style="color: #339933;">=&gt;</span> console.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span>err<span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+      <span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">=&gt;</span> console.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">'comlete'</span><span style="color: #009900;">&#41;</span> 
+    <span style="color: #009900;">&#41;</span></pre>
 
 
 
@@ -144,3 +186,6 @@ Rx.<span style="color: #660066;">Observable</span>.<span style="color: #660066;"
 	<script src="./src/main.js"></script>
 	<link href="./src/main.css" rel="stylesheet">
 </html>
+
+
+<!-- http://highlight.hohli.com/index.php -->

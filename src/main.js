@@ -39,18 +39,52 @@
 // 	)
 
 
-console.log( [1,2,3,4,5] );
-console.log( new Set([1,2,3,4,5]) );
-console.log( new Map([ [1,2], [3,4] ]) );
+// console.log( [1,2,3,4,5] );
+// console.log( new Set([1,2,3,4,5]) );
+// console.log( new Map([ [1,2], [3,4] ]) );
+
+// let arr = [1,5,7,4,3,6,8];
+
+// //ES6
+// arr = new Set([1,2,3,4,5])
+// arr = new Map([ [1,2], [3,4] ])
+
+// Rx.Observable.from(arr)  // итерация по массиву
+// 	.subscribe(
+// 		(x) => console.log(x),
+// 		(err) => console.log(err),
+// 		() => console.log('comlete') 
+// 	)
 
 
+// function delay( ms=1000 ) {
+// 	return new Promise( (res, rej)  => {
+// 		setTimeout(() => {
+// 		  res ( ms ) // что бы что то показывать потом
+// 		}, ms)
+// 	}) ;
+// }
+
+// // delay( 3000 ).then( () => {
+// // 	console.log('test');
+// // } )
+
+// Rx.Observable.fromPromise( delay(2000) )
+// 	.subscribe(
+// 		(x) => console.log(x),
+// 		(err) => console.log(err),
+// 		() => console.log('comlete') 
+// 	)
 
 
+// Map служит для переобразования элементов итерации 
 
-
-
-
-
-
-
-
+ Rx.Observable.fromEvent( document.querySelector('input'), 'keyup' )
+ 	.map( x => {return x.target.value } ) // Метод Map всегда RETURN
+ 	.pluck('target', 'value')             // Метод Pluck - то же самое, только по принципу: ключ-значение
+ 	.map( x => {return x.toUpperCase() } ) // Метод Map можно вызывать сколько угодно
+		.subscribe(
+			(x) => console.log(x),
+			(err) => console.log(err),
+			() => console.log('comlete') 
+		)
