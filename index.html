@@ -1039,7 +1039,168 @@ let t1 <span style="color: #339933;">=</span> <span style="color: #000066; font-
 &nbsp;
 t1.<span style="color: #660066;">run</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span></pre>
 
-
+<pre class="javascript" style="font-family:monospace;"><span style="color: #006600; font-style: italic;">// 1</span>
+    <span style="color: #000066; font-weight: bold;">const</span> num <span style="color: #339933;">=</span> <span style="color: #CC0000;">42</span>
+    <span style="color: #006600; font-style: italic;">// let result</span>
+    <span style="color: #006600; font-style: italic;">//</span>
+    <span style="color: #006600; font-style: italic;">// if (num &gt; 20) {</span>
+    <span style="color: #006600; font-style: italic;">//   result = 'More than 20'</span>
+    <span style="color: #006600; font-style: italic;">// } else {</span>
+    <span style="color: #006600; font-style: italic;">//   result = 'Less than 20'</span>
+    <span style="color: #006600; font-style: italic;">// }</span>
+    &nbsp;
+    <span style="color: #000066; font-weight: bold;">const</span> result <span style="color: #339933;">=</span> num <span style="color: #339933;">&gt;</span> <span style="color: #CC0000;">20</span> <span style="color: #339933;">?</span> <span style="color: #3366CC;">'More than 20'</span> <span style="color: #339933;">:</span> <span style="color: #3366CC;">'Less than 20'</span>
+    &nbsp;
+    <span style="color: #006600; font-style: italic;">// 2</span>
+    let variable <span style="color: #339933;">=</span> <span style="color: #3366CC;">'variable'</span> <span style="color: #006600; font-style: italic;">// undefined</span>
+    let variable2
+    &nbsp;
+    <span style="color: #006600; font-style: italic;">// if (variable) {</span>
+    <span style="color: #006600; font-style: italic;">//   variable2 = variable</span>
+    <span style="color: #006600; font-style: italic;">// } else {</span>
+    <span style="color: #006600; font-style: italic;">//   variable2 = 'some value'</span>
+    <span style="color: #006600; font-style: italic;">// }</span>
+    variable2 <span style="color: #339933;">=</span> variable <span style="color: #339933;">||</span> <span style="color: #3366CC;">'some value'</span>
+    <span style="color: #006600; font-style: italic;">// console.log(variable2)</span>
+    &nbsp;
+    <span style="color: #006600; font-style: italic;">// 3</span>
+    <span style="color: #006600; font-style: italic;">// let x</span>
+    <span style="color: #006600; font-style: italic;">// let y</span>
+    <span style="color: #006600; font-style: italic;">// let z = 42</span>
+    &nbsp;
+    <span style="color: #006600; font-style: italic;">// let x, y, z = 42</span>
+    &nbsp;
+    <span style="color: #006600; font-style: italic;">// 4</span>
+    let isSame <span style="color: #339933;">=</span> <span style="color: #003366; font-weight: bold;">true</span>
+    <span style="color: #000066; font-weight: bold;">if</span> <span style="color: #009900;">&#40;</span>isSame <span style="color: #339933;">===</span> <span style="color: #003366; font-weight: bold;">true</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span><span style="color: #009900;">&#125;</span>
+    <span style="color: #000066; font-weight: bold;">if</span> <span style="color: #009900;">&#40;</span>isSame<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span><span style="color: #009900;">&#125;</span>
+    &nbsp;
+    <span style="color: #000066; font-weight: bold;">if</span> <span style="color: #009900;">&#40;</span>isSame <span style="color: #339933;">!==</span> <span style="color: #003366; font-weight: bold;">true</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span><span style="color: #009900;">&#125;</span>
+    <span style="color: #000066; font-weight: bold;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #339933;">!</span>isSame<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span><span style="color: #009900;">&#125;</span>
+    &nbsp;
+    <span style="color: #006600; font-style: italic;">// 5</span>
+    <span style="color: #000066; font-weight: bold;">const</span> names <span style="color: #339933;">=</span> <span style="color: #009900;">&#91;</span><span style="color: #3366CC;">'Igor'</span><span style="color: #339933;">,</span> <span style="color: #3366CC;">'Elena'</span><span style="color: #339933;">,</span> <span style="color: #3366CC;">'Olga'</span><span style="color: #009900;">&#93;</span>
+    <span style="color: #000066; font-weight: bold;">for</span> <span style="color: #009900;">&#40;</span>let i <span style="color: #339933;">=</span> <span style="color: #CC0000;">0</span><span style="color: #339933;">;</span> i <span style="color: #339933;">&lt;</span> names.<span style="color: #660066;">length</span><span style="color: #339933;">;</span> i<span style="color: #339933;">++</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+      <span style="color: #006600; font-style: italic;">// names[i]</span>
+    <span style="color: #009900;">&#125;</span>
+    <span style="color: #000066; font-weight: bold;">for</span> <span style="color: #009900;">&#40;</span>let name of names<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span><span style="color: #009900;">&#125;</span>
+    <span style="color: #000066; font-weight: bold;">for</span> <span style="color: #009900;">&#40;</span>let index <span style="color: #000066; font-weight: bold;">in</span> names<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span><span style="color: #009900;">&#125;</span>
+    &nbsp;
+    <span style="color: #000066; font-weight: bold;">function</span> logArrayItems<span style="color: #009900;">&#40;</span>el<span style="color: #339933;">,</span> index<span style="color: #339933;">,</span> array<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+      console.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span>`names<span style="color: #009900;">&#91;</span>$<span style="color: #009900;">&#123;</span>index<span style="color: #009900;">&#125;</span><span style="color: #009900;">&#93;</span> <span style="color: #339933;">=</span> $<span style="color: #009900;">&#123;</span>el<span style="color: #009900;">&#125;</span>`<span style="color: #009900;">&#41;</span>
+    <span style="color: #009900;">&#125;</span>
+    &nbsp;
+    <span style="color: #006600; font-style: italic;">// names.forEach(logArrayItems)</span>
+    &nbsp;
+    <span style="color: #006600; font-style: italic;">// 6</span>
+    <span style="color: #006600; font-style: italic;">// let port</span>
+    <span style="color: #006600; font-style: italic;">// if (process.env.PORT) {</span>
+    <span style="color: #006600; font-style: italic;">//   port = process.env.PORT</span>
+    <span style="color: #006600; font-style: italic;">// } else {</span>
+    <span style="color: #006600; font-style: italic;">//   port = 4200</span>
+    <span style="color: #006600; font-style: italic;">// }</span>
+    &nbsp;
+    <span style="color: #000066; font-weight: bold;">const</span> port <span style="color: #339933;">=</span> process.<span style="color: #660066;">env</span>.<span style="color: #660066;">PORT</span> <span style="color: #339933;">||</span> <span style="color: #CC0000;">4200</span>
+    <span style="color: #006600; font-style: italic;">// 7</span>
+    &nbsp;
+    <span style="color: #006600; font-style: italic;">// for (let i = 0; i &lt; 1000000; i++) {}</span>
+    <span style="color: #006600; font-style: italic;">// for (let i = 0; i &lt; 10e6; i++) {}</span>
+    &nbsp;
+    <span style="color: #006600; font-style: italic;">// 8</span>
+    <span style="color: #000066; font-weight: bold;">const</span> a <span style="color: #339933;">=</span> <span style="color: #CC0000;">1</span><span style="color: #339933;">,</span> b <span style="color: #339933;">=</span> <span style="color: #CC0000;">2</span>
+    <span style="color: #000066; font-weight: bold;">const</span> myObj <span style="color: #339933;">=</span> <span style="color: #009900;">&#123;</span>a<span style="color: #339933;">,</span> b<span style="color: #009900;">&#125;</span>
+    &nbsp;
+    <span style="color: #006600; font-style: italic;">// 9</span>
+    <span style="color: #006600; font-style: italic;">// setTimeout(function() {</span>
+    <span style="color: #006600; font-style: italic;">//   console.log('After 2 seconds')</span>
+    <span style="color: #006600; font-style: italic;">// }, 2000)</span>
+    <span style="color: #006600; font-style: italic;">//</span>
+    <span style="color: #006600; font-style: italic;">// function tripple(num) {</span>
+    <span style="color: #006600; font-style: italic;">//   return num * 3</span>
+    <span style="color: #006600; font-style: italic;">// }</span>
+    &nbsp;
+    <span style="color: #006600; font-style: italic;">// setTimeout(() =&gt; console.log('After 2 seconds'), 2000)</span>
+    <span style="color: #006600; font-style: italic;">// const tripple = num =&gt; num * 3</span>
+    &nbsp;
+    <span style="color: #006600; font-style: italic;">// 10</span>
+    <span style="color: #006600; font-style: italic;">// function rgb(r, g, b) {</span>
+    <span style="color: #006600; font-style: italic;">//   if (r === undefined) {</span>
+    <span style="color: #006600; font-style: italic;">//     r = 0</span>
+    <span style="color: #006600; font-style: italic;">//   }</span>
+    <span style="color: #006600; font-style: italic;">//</span>
+    <span style="color: #006600; font-style: italic;">//   if (g === undefined) {</span>
+    <span style="color: #006600; font-style: italic;">//     g = 255</span>
+    <span style="color: #006600; font-style: italic;">//   }</span>
+    <span style="color: #006600; font-style: italic;">//</span>
+    <span style="color: #006600; font-style: italic;">//   return `rgb(${r}, ${g}, ${b})`</span>
+    <span style="color: #006600; font-style: italic;">// }</span>
+    &nbsp;
+    <span style="color: #000066; font-weight: bold;">const</span> rgb <span style="color: #339933;">=</span> <span style="color: #009900;">&#40;</span>r <span style="color: #339933;">=</span> <span style="color: #CC0000;">0</span><span style="color: #339933;">,</span> g <span style="color: #339933;">=</span> <span style="color: #CC0000;">255</span><span style="color: #339933;">,</span> b<span style="color: #009900;">&#41;</span> <span style="color: #339933;">=&gt;</span> `rgb<span style="color: #009900;">&#40;</span>$<span style="color: #009900;">&#123;</span>r<span style="color: #009900;">&#125;</span><span style="color: #339933;">,</span> $<span style="color: #009900;">&#123;</span>g<span style="color: #009900;">&#125;</span><span style="color: #339933;">,</span> $<span style="color: #009900;">&#123;</span>b<span style="color: #009900;">&#125;</span><span style="color: #009900;">&#41;</span>`
+    &nbsp;
+    <span style="color: #006600; font-style: italic;">// 11</span>
+    <span style="color: #006600; font-style: italic;">// function createUrl(base, domain) {</span>
+    <span style="color: #006600; font-style: italic;">//   return 'http://' + base + '.' + domain</span>
+    <span style="color: #006600; font-style: italic;">// }</span>
+    &nbsp;
+    <span style="color: #000066; font-weight: bold;">function</span> createUrl<span style="color: #009900;">&#40;</span>base<span style="color: #339933;">,</span> domain<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+      <span style="color: #000066; font-weight: bold;">return</span> `http<span style="color: #339933;">:</span><span style="color: #006600; font-style: italic;">//${base}.${domain}`</span>
+    <span style="color: #009900;">&#125;</span>
+    &nbsp;
+    <span style="color: #006600; font-style: italic;">// 12</span>
+    <span style="color: #006600; font-style: italic;">// const alert = window.alert</span>
+    <span style="color: #006600; font-style: italic;">// const confirm = window.confirm</span>
+    <span style="color: #006600; font-style: italic;">// const prompt = window.prompt</span>
+    &nbsp;
+    <span style="color: #006600; font-style: italic;">// const {alert, prompt, confirm} = window</span>
+    &nbsp;
+    <span style="color: #006600; font-style: italic;">// 13</span>
+    <span style="color: #000066; font-weight: bold;">const</span> arr <span style="color: #339933;">=</span> <span style="color: #009900;">&#91;</span><span style="color: #CC0000;">1</span><span style="color: #339933;">,</span> <span style="color: #CC0000;">2</span><span style="color: #339933;">,</span> <span style="color: #CC0000;">3</span><span style="color: #009900;">&#93;</span>
+    <span style="color: #006600; font-style: italic;">// const nums = [4, 5, 6].concat(arr)</span>
+    <span style="color: #006600; font-style: italic;">// const cloned = nums.concat()</span>
+    &nbsp;
+    <span style="color: #000066; font-weight: bold;">const</span> nums <span style="color: #339933;">=</span> <span style="color: #009900;">&#91;</span><span style="color: #CC0000;">4</span><span style="color: #339933;">,</span> ...<span style="color: #660066;">arr</span><span style="color: #339933;">,</span> <span style="color: #CC0000;">5</span><span style="color: #339933;">,</span> <span style="color: #CC0000;">6</span><span style="color: #009900;">&#93;</span>
+    <span style="color: #000066; font-weight: bold;">const</span> cloned <span style="color: #339933;">=</span> <span style="color: #009900;">&#91;</span>...<span style="color: #660066;">nums</span><span style="color: #009900;">&#93;</span>
+    &nbsp;
+    <span style="color: #006600; font-style: italic;">// console.log(nums)</span>
+    &nbsp;
+    <span style="color: #006600; font-style: italic;">// 14</span>
+    <span style="color: #006600; font-style: italic;">// console.log(Math.floor(9.7) === 9)</span>
+    <span style="color: #006600; font-style: italic;">// console.log(~~9.7 === 9)</span>
+    &nbsp;
+    <span style="color: #006600; font-style: italic;">// 15</span>
+    <span style="color: #006600; font-style: italic;">// console.log(Math.pow(2, 3))</span>
+    <span style="color: #006600; font-style: italic;">// console.log(Math.pow(2, 4))</span>
+    <span style="color: #006600; font-style: italic;">// console.log(Math.pow(4, 3))</span>
+    <span style="color: #006600; font-style: italic;">//</span>
+    <span style="color: #006600; font-style: italic;">// console.log(2 ** 3)</span>
+    <span style="color: #006600; font-style: italic;">// console.log(2 ** 4)</span>
+    <span style="color: #006600; font-style: italic;">// console.log(4 ** 3)</span>
+    &nbsp;
+    <span style="color: #006600; font-style: italic;">// 16</span>
+    <span style="color: #006600; font-style: italic;">// const int = parseInt('42')</span>
+    <span style="color: #006600; font-style: italic;">// const float = parseFloat('42.42')</span>
+    &nbsp;
+    <span style="color: #000066; font-weight: bold;">const</span> <span style="color: #FF0000;">int</span> <span style="color: #339933;">=</span> <span style="color: #339933;">+</span><span style="color: #3366CC;">'42'</span>
+    <span style="color: #000066; font-weight: bold;">const</span> <span style="color: #FF0000;">float</span> <span style="color: #339933;">=</span> <span style="color: #339933;">+</span><span style="color: #3366CC;">'42.42'</span>
+    &nbsp;
+    <span style="color: #006600; font-style: italic;">// console.log(typeof int, typeof float)</span>
+    &nbsp;
+    <span style="color: #006600; font-style: italic;">// 17</span>
+    <span style="color: #000066; font-weight: bold;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #009900;">&#91;</span><span style="color: #CC0000;">1</span><span style="color: #339933;">,</span> <span style="color: #CC0000;">2</span><span style="color: #339933;">,</span> <span style="color: #CC0000;">3</span><span style="color: #009900;">&#93;</span>.<span style="color: #660066;">indexOf</span><span style="color: #009900;">&#40;</span><span style="color: #CC0000;">3</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">&gt;</span> <span style="color: #339933;">-</span><span style="color: #CC0000;">1</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span><span style="color: #009900;">&#125;</span>
+    <span style="color: #000066; font-weight: bold;">if</span> <span style="color: #009900;">&#40;</span>~<span style="color: #009900;">&#91;</span><span style="color: #CC0000;">1</span><span style="color: #339933;">,</span> <span style="color: #CC0000;">2</span><span style="color: #339933;">,</span> <span style="color: #CC0000;">3</span><span style="color: #009900;">&#93;</span>.<span style="color: #660066;">indexOf</span><span style="color: #009900;">&#40;</span><span style="color: #CC0000;">3</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span><span style="color: #009900;">&#125;</span> <span style="color: #006600; font-style: italic;">// найдено</span>
+    <span style="color: #000066; font-weight: bold;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #339933;">!</span>~<span style="color: #009900;">&#91;</span><span style="color: #CC0000;">1</span><span style="color: #339933;">,</span> <span style="color: #CC0000;">2</span><span style="color: #339933;">,</span> <span style="color: #CC0000;">3</span><span style="color: #009900;">&#93;</span>.<span style="color: #660066;">indexOf</span><span style="color: #009900;">&#40;</span><span style="color: #CC0000;">3</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span><span style="color: #009900;">&#125;</span> <span style="color: #006600; font-style: italic;">// не найдено</span>
+    <span style="color: #000066; font-weight: bold;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #009900;">&#91;</span><span style="color: #CC0000;">1</span><span style="color: #339933;">,</span> <span style="color: #CC0000;">2</span><span style="color: #339933;">,</span> <span style="color: #CC0000;">3</span><span style="color: #009900;">&#93;</span>.<span style="color: #660066;">includes</span><span style="color: #009900;">&#40;</span><span style="color: #CC0000;">3</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span><span style="color: #009900;">&#125;</span>
+    &nbsp;
+    <span style="color: #006600; font-style: italic;">// 18</span>
+    <span style="color: #000066; font-weight: bold;">const</span> car <span style="color: #339933;">=</span> <span style="color: #009900;">&#123;</span>
+      model<span style="color: #339933;">:</span> <span style="color: #3366CC;">'Ford'</span><span style="color: #339933;">,</span>
+      year<span style="color: #339933;">:</span> <span style="color: #CC0000;">2019</span><span style="color: #339933;">,</span>
+      color<span style="color: #339933;">:</span> <span style="color: #3366CC;">'red'</span>
+    <span style="color: #009900;">&#125;</span>
+    &nbsp;
+    console.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span><span style="">Object</span>.<span style="color: #660066;">entries</span><span style="color: #009900;">&#40;</span>car<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span>
+    console.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span><span style="">Object</span>.<span style="color: #660066;">values</span><span style="color: #009900;">&#40;</span>car<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span>
+    console.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span><span style="">Object</span>.<span style="color: #660066;">keys</span><span style="color: #009900;">&#40;</span>car<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span></pre>
 
 </div>
 	
