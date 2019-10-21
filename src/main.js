@@ -88,3 +88,5 @@
 			(err) => console.log(err),
 			() => console.log('comlete') 
 		)
+
+		{"fields":[{"name":"sw","value":true},{"name":"payment_dog","value":null},{"name":"ind_matrix","value":false},{"name":"extra1","value":"1"},{"name":"extra2","value":null},{"name":"extra3","value":null},{"name":"extra4","value":null}],"id":0,"client_id":14548,"contractor_id":40736,"program_id":"7","shop_matrix":""}

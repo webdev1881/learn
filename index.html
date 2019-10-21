@@ -1202,6 +1202,686 @@ t1.<span style="color: #660066;">run</span><span style="color: #009900;">&#40;</
     console.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span><span style="">Object</span>.<span style="color: #660066;">values</span><span style="color: #009900;">&#40;</span>car<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span>
     console.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span><span style="">Object</span>.<span style="color: #660066;">keys</span><span style="color: #009900;">&#40;</span>car<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span></pre>
 
+    <h4>ПАТТЕРНЫ</h4>
+    <pre class="javascript" style="font-family:monospace;"><span style="color: #006600; font-style: italic;">//_________________________________________________________КОНСТРУКТОР</span>
+        <span style="color: #006600; font-style: italic;">// function Server(name, ip) {</span>
+        <span style="color: #006600; font-style: italic;">//   this.name = name</span>
+        <span style="color: #006600; font-style: italic;">//   this.ip = ip</span>
+        <span style="color: #006600; font-style: italic;">// }</span>
+        <span style="color: #006600; font-style: italic;">//</span>
+        <span style="color: #006600; font-style: italic;">// Server.prototype.getUrl = function() {</span>
+        <span style="color: #006600; font-style: italic;">//   return `https://${this.ip}:80`</span>
+        <span style="color: #006600; font-style: italic;">// }</span>
+        &nbsp;
+        <span style="color: #FF0000;">class</span> Server <span style="color: #009900;">&#123;</span>
+          constructor<span style="color: #009900;">&#40;</span>name<span style="color: #339933;">,</span> ip<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+            <span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">name</span> <span style="color: #339933;">=</span> name
+            <span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">ip</span> <span style="color: #339933;">=</span> ip
+          <span style="color: #009900;">&#125;</span>
+        &nbsp;
+          getUrl<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+            <span style="color: #000066; font-weight: bold;">return</span> `https<span style="color: #339933;">:</span><span style="color: #006600; font-style: italic;">//${this.ip}:80`</span>
+          <span style="color: #009900;">&#125;</span>
+        <span style="color: #009900;">&#125;</span>
+        &nbsp;
+        <span style="color: #000066; font-weight: bold;">const</span> aws <span style="color: #339933;">=</span> <span style="color: #000066; font-weight: bold;">new</span> Server<span style="color: #009900;">&#40;</span><span style="color: #3366CC;">'AWS German'</span><span style="color: #339933;">,</span> <span style="color: #3366CC;">'82.21.21.32'</span><span style="color: #009900;">&#41;</span>
+        console.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span>aws.<span style="color: #660066;">getUrl</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span></pre>
+
+        <pre class="javascript" style="font-family:monospace;"><span style="color: #006600; font-style: italic;">//_______________________________________________________Фабрика (обработка коллекций ...)</span>
+            <span style="color: #FF0000;">class</span> SimpleMembership <span style="color: #009900;">&#123;</span>
+              constructor<span style="color: #009900;">&#40;</span>name<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+                <span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">name</span> <span style="color: #339933;">=</span> name
+                <span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">cost</span> <span style="color: #339933;">=</span> <span style="color: #CC0000;">50</span>
+              <span style="color: #009900;">&#125;</span>
+            <span style="color: #009900;">&#125;</span>
+            &nbsp;
+            <span style="color: #FF0000;">class</span> StandardMembership <span style="color: #009900;">&#123;</span>
+              constructor<span style="color: #009900;">&#40;</span>name<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+                <span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">name</span> <span style="color: #339933;">=</span> name
+                <span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">cost</span> <span style="color: #339933;">=</span> <span style="color: #CC0000;">150</span>
+              <span style="color: #009900;">&#125;</span>
+            <span style="color: #009900;">&#125;</span>
+            &nbsp;
+            <span style="color: #FF0000;">class</span> PremiumMembership <span style="color: #009900;">&#123;</span>
+              constructor<span style="color: #009900;">&#40;</span>name<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+                <span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">name</span> <span style="color: #339933;">=</span> name
+                <span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">cost</span> <span style="color: #339933;">=</span> <span style="color: #CC0000;">500</span>
+              <span style="color: #009900;">&#125;</span>
+            <span style="color: #009900;">&#125;</span>
+            &nbsp;
+            <span style="color: #FF0000;">class</span> MemberFactory <span style="color: #009900;">&#123;</span>
+              <span style="color: #000066; font-weight: bold;">static</span> list <span style="color: #339933;">=</span> <span style="color: #009900;">&#123;</span>
+                simple<span style="color: #339933;">:</span> SimpleMembership<span style="color: #339933;">,</span>
+                standard<span style="color: #339933;">:</span> StandardMembership<span style="color: #339933;">,</span>
+                premium<span style="color: #339933;">:</span> PremiumMembership
+              <span style="color: #009900;">&#125;</span>
+            &nbsp;
+              create<span style="color: #009900;">&#40;</span>name<span style="color: #339933;">,</span> type <span style="color: #339933;">=</span> <span style="color: #3366CC;">'simple'</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+                <span style="color: #000066; font-weight: bold;">const</span> Membership <span style="color: #339933;">=</span> MemberFactory.<span style="color: #660066;">list</span><span style="color: #009900;">&#91;</span>type<span style="color: #009900;">&#93;</span> <span style="color: #339933;">||</span> MemberFactory.<span style="color: #660066;">list</span>.<span style="color: #660066;">simple</span>
+                <span style="color: #000066; font-weight: bold;">const</span> member <span style="color: #339933;">=</span> <span style="color: #000066; font-weight: bold;">new</span> Membership<span style="color: #009900;">&#40;</span>name<span style="color: #009900;">&#41;</span>
+                member.<span style="color: #660066;">type</span> <span style="color: #339933;">=</span> type
+                member.<span style="color: #660066;">define</span> <span style="color: #339933;">=</span> <span style="color: #000066; font-weight: bold;">function</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+                  console.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span>`$<span style="color: #009900;">&#123;</span><span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">name</span><span style="color: #009900;">&#125;</span> <span style="color: #009900;">&#40;</span>$<span style="color: #009900;">&#123;</span><span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">type</span><span style="color: #009900;">&#125;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">:</span> $<span style="color: #009900;">&#123;</span><span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">cost</span><span style="color: #009900;">&#125;</span>`<span style="color: #009900;">&#41;</span>
+                <span style="color: #009900;">&#125;</span>
+                <span style="color: #000066; font-weight: bold;">return</span> member
+              <span style="color: #009900;">&#125;</span>
+            <span style="color: #009900;">&#125;</span>
+            &nbsp;
+            <span style="color: #000066; font-weight: bold;">const</span> factory <span style="color: #339933;">=</span> <span style="color: #000066; font-weight: bold;">new</span> MemberFactory<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>
+            &nbsp;
+            <span style="color: #000066; font-weight: bold;">const</span> members <span style="color: #339933;">=</span> <span style="color: #009900;">&#91;</span>
+              factory.<span style="color: #660066;">create</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">'Vladilen'</span><span style="color: #339933;">,</span> <span style="color: #3366CC;">'simple'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+              factory.<span style="color: #660066;">create</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">'Elena'</span><span style="color: #339933;">,</span> <span style="color: #3366CC;">'premium'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+              factory.<span style="color: #660066;">create</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">'Vasilisa'</span><span style="color: #339933;">,</span> <span style="color: #3366CC;">'standard'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+              factory.<span style="color: #660066;">create</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">'Ivan'</span><span style="color: #339933;">,</span> <span style="color: #3366CC;">'premium'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+              factory.<span style="color: #660066;">create</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">'Petr'</span><span style="color: #009900;">&#41;</span>
+            <span style="color: #009900;">&#93;</span>
+            &nbsp;
+            members.<span style="color: #660066;">forEach</span><span style="color: #009900;">&#40;</span>m <span style="color: #339933;">=&gt;</span> <span style="color: #009900;">&#123;</span>
+              m.<span style="color: #660066;">define</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>
+            <span style="color: #009900;">&#125;</span><span style="color: #009900;">&#41;</span></pre>
+
+            <pre class="javascript" style="font-family:monospace;"><span style="color: #006600; font-style: italic;">//_____________________________________________________________________prototype</span>
+                <span style="color: #000066; font-weight: bold;">const</span> car <span style="color: #339933;">=</span> <span style="color: #009900;">&#123;</span>
+                  wheels<span style="color: #339933;">:</span> <span style="color: #CC0000;">4</span><span style="color: #339933;">,</span>
+                &nbsp;
+                  init<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+                    console.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span>`У меня есть $<span style="color: #009900;">&#123;</span><span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">wheels</span><span style="color: #009900;">&#125;</span> колеса<span style="color: #339933;">,</span> мой владелец $<span style="color: #009900;">&#123;</span><span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">owner</span><span style="color: #009900;">&#125;</span>`<span style="color: #009900;">&#41;</span>
+                  <span style="color: #009900;">&#125;</span>
+                <span style="color: #009900;">&#125;</span>
+                &nbsp;
+                <span style="color: #000066; font-weight: bold;">const</span> carWithOwner <span style="color: #339933;">=</span> <span style="">Object</span>.<span style="color: #660066;">create</span><span style="color: #009900;">&#40;</span>car<span style="color: #339933;">,</span> <span style="color: #009900;">&#123;</span>
+                  owner<span style="color: #339933;">:</span> <span style="color: #009900;">&#123;</span>
+                    value<span style="color: #339933;">:</span> <span style="color: #3366CC;">'Дмитрий'</span>
+                  <span style="color: #009900;">&#125;</span>
+                <span style="color: #009900;">&#125;</span><span style="color: #009900;">&#41;</span>
+                &nbsp;
+                console.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span>carWithOwner.<span style="color: #000066;">__proto__</span> <span style="color: #339933;">===</span> car<span style="color: #009900;">&#41;</span>
+                &nbsp;
+                carWithOwner.<span style="color: #660066;">init</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span></pre>
+
+                <pre class="javascript" style="font-family:monospace;"><span style="color: #006600; font-style: italic;">//__________________________________________________________________________singleton</span>
+                    <span style="color: #FF0000;">class</span> Database <span style="color: #009900;">&#123;</span>
+                      constructor<span style="color: #009900;">&#40;</span>data<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+                        <span style="color: #000066; font-weight: bold;">if</span> <span style="color: #009900;">&#40;</span>Database.<span style="color: #660066;">exists</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+                          <span style="color: #000066; font-weight: bold;">return</span> Database.<span style="color: #660066;">instance</span>
+                        <span style="color: #009900;">&#125;</span>
+                        Database.<span style="color: #660066;">instance</span> <span style="color: #339933;">=</span> <span style="color: #000066; font-weight: bold;">this</span>
+                        Database.<span style="color: #660066;">exists</span> <span style="color: #339933;">=</span> <span style="color: #003366; font-weight: bold;">true</span>
+                        <span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">data</span> <span style="color: #339933;">=</span> data
+                      <span style="color: #009900;">&#125;</span>
+                    &nbsp;
+                      getData<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+                        <span style="color: #000066; font-weight: bold;">return</span> <span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">data</span>
+                      <span style="color: #009900;">&#125;</span>
+                    <span style="color: #009900;">&#125;</span>
+                    &nbsp;
+                    <span style="color: #000066; font-weight: bold;">const</span> mongo <span style="color: #339933;">=</span> <span style="color: #000066; font-weight: bold;">new</span> Database<span style="color: #009900;">&#40;</span><span style="color: #3366CC;">'MongoDB'</span><span style="color: #009900;">&#41;</span>
+                    console.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span>mongo.<span style="color: #660066;">getData</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span>
+                    &nbsp;
+                    <span style="color: #000066; font-weight: bold;">const</span> mysql <span style="color: #339933;">=</span> <span style="color: #000066; font-weight: bold;">new</span> Database<span style="color: #009900;">&#40;</span><span style="color: #3366CC;">'MySQL'</span><span style="color: #009900;">&#41;</span>
+                    console.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span>mysql.<span style="color: #660066;">getData</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span></pre>
+                    
+
+
+                    <pre class="javascript" style="font-family:monospace;"><span style="color: #006600; font-style: italic;">//_____________________________________________________________________adapter</span>
+                        <span style="color: #FF0000;">class</span> OldCalc <span style="color: #009900;">&#123;</span>
+                          operations<span style="color: #009900;">&#40;</span>t1<span style="color: #339933;">,</span> t2<span style="color: #339933;">,</span> operation<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+                            <span style="color: #000066; font-weight: bold;">switch</span> <span style="color: #009900;">&#40;</span>operation<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+                              <span style="color: #000066; font-weight: bold;">case</span> <span style="color: #3366CC;">'add'</span><span style="color: #339933;">:</span> <span style="color: #000066; font-weight: bold;">return</span> t1 <span style="color: #339933;">+</span> t2
+                              <span style="color: #000066; font-weight: bold;">case</span> <span style="color: #3366CC;">'sub'</span><span style="color: #339933;">:</span> <span style="color: #000066; font-weight: bold;">return</span> t1 <span style="color: #339933;">-</span> t2
+                              <span style="color: #000066; font-weight: bold;">default</span><span style="color: #339933;">:</span> <span style="color: #000066; font-weight: bold;">return</span> <span style="color: #003366; font-weight: bold;">NaN</span>
+                            <span style="color: #009900;">&#125;</span>
+                          <span style="color: #009900;">&#125;</span>
+                        <span style="color: #009900;">&#125;</span>
+                        &nbsp;
+                        <span style="color: #FF0000;">class</span> NewCalc <span style="color: #009900;">&#123;</span>
+                          add<span style="color: #009900;">&#40;</span>t1<span style="color: #339933;">,</span> t2<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+                            <span style="color: #000066; font-weight: bold;">return</span> t1 <span style="color: #339933;">+</span> t2
+                          <span style="color: #009900;">&#125;</span>
+                        &nbsp;
+                          sub<span style="color: #009900;">&#40;</span>t1<span style="color: #339933;">,</span> t2<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+                            <span style="color: #000066; font-weight: bold;">return</span> t1 <span style="color: #339933;">-</span> t2
+                          <span style="color: #009900;">&#125;</span>
+                        <span style="color: #009900;">&#125;</span>
+                        &nbsp;
+                        <span style="color: #FF0000;">class</span> CalcAdapter <span style="color: #009900;">&#123;</span>
+                          constructor<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+                            <span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">calc</span> <span style="color: #339933;">=</span> <span style="color: #000066; font-weight: bold;">new</span> NewCalc<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>
+                          <span style="color: #009900;">&#125;</span>
+                        &nbsp;
+                          operations<span style="color: #009900;">&#40;</span>t1<span style="color: #339933;">,</span> t2<span style="color: #339933;">,</span> operation<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+                            <span style="color: #000066; font-weight: bold;">switch</span> <span style="color: #009900;">&#40;</span>operation<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+                              <span style="color: #000066; font-weight: bold;">case</span> <span style="color: #3366CC;">'add'</span><span style="color: #339933;">:</span> <span style="color: #000066; font-weight: bold;">return</span> <span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">calc</span>.<span style="color: #660066;">add</span><span style="color: #009900;">&#40;</span>t1<span style="color: #339933;">,</span> t2<span style="color: #009900;">&#41;</span>
+                              <span style="color: #000066; font-weight: bold;">case</span> <span style="color: #3366CC;">'sub'</span><span style="color: #339933;">:</span> <span style="color: #000066; font-weight: bold;">return</span> <span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">calc</span>.<span style="color: #660066;">sub</span><span style="color: #009900;">&#40;</span>t1<span style="color: #339933;">,</span> t2<span style="color: #009900;">&#41;</span>
+                              <span style="color: #000066; font-weight: bold;">default</span><span style="color: #339933;">:</span> <span style="color: #000066; font-weight: bold;">return</span> <span style="color: #003366; font-weight: bold;">NaN</span>
+                            <span style="color: #009900;">&#125;</span>
+                          <span style="color: #009900;">&#125;</span>
+                        <span style="color: #009900;">&#125;</span>
+                        &nbsp;
+                        <span style="color: #000066; font-weight: bold;">const</span> oldCalc <span style="color: #339933;">=</span> <span style="color: #000066; font-weight: bold;">new</span> OldCalc<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>
+                        console.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span>oldCalc.<span style="color: #660066;">operations</span><span style="color: #009900;">&#40;</span><span style="color: #CC0000;">10</span><span style="color: #339933;">,</span> <span style="color: #CC0000;">5</span><span style="color: #339933;">,</span> <span style="color: #3366CC;">'add'</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span>
+                        &nbsp;
+                        <span style="color: #000066; font-weight: bold;">const</span> newCalc <span style="color: #339933;">=</span> <span style="color: #000066; font-weight: bold;">new</span> NewCalc<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>
+                        console.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span>newCalc.<span style="color: #660066;">add</span><span style="color: #009900;">&#40;</span><span style="color: #CC0000;">10</span><span style="color: #339933;">,</span> <span style="color: #CC0000;">5</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span>
+                        &nbsp;
+                        <span style="color: #000066; font-weight: bold;">const</span> adapter <span style="color: #339933;">=</span> <span style="color: #000066; font-weight: bold;">new</span> CalcAdapter<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>
+                        console.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span>adapter.<span style="color: #660066;">operations</span><span style="color: #009900;">&#40;</span><span style="color: #CC0000;">25</span><span style="color: #339933;">,</span> <span style="color: #CC0000;">10</span><span style="color: #339933;">,</span> <span style="color: #3366CC;">'sub'</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span>
+                        &nbsp;</pre>
+                        
+                        <pre class="javascript" style="font-family:monospace;"><span style="color: #006600; font-style: italic;">//______________________________________________________________decorator</span>
+                            <span style="color: #FF0000;">class</span> Server <span style="color: #009900;">&#123;</span>
+                              constructor<span style="color: #009900;">&#40;</span>ip<span style="color: #339933;">,</span> port<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+                                <span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">ip</span> <span style="color: #339933;">=</span> ip
+                                <span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">port</span> <span style="color: #339933;">=</span> port
+                              <span style="color: #009900;">&#125;</span>
+                            &nbsp;
+                              <span style="color: #000066; font-weight: bold;">get</span> url<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+                                <span style="color: #000066; font-weight: bold;">return</span> `https<span style="color: #339933;">:</span><span style="color: #006600; font-style: italic;">//${this.ip}:${this.port}`</span>
+                              <span style="color: #009900;">&#125;</span>
+                            <span style="color: #009900;">&#125;</span>
+                            &nbsp;
+                            <span style="color: #000066; font-weight: bold;">function</span> aws<span style="color: #009900;">&#40;</span>server<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+                              server.<span style="color: #660066;">isAWS</span> <span style="color: #339933;">=</span> <span style="color: #003366; font-weight: bold;">true</span>
+                              server.<span style="color: #660066;">awsInfo</span> <span style="color: #339933;">=</span> <span style="color: #000066; font-weight: bold;">function</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+                                <span style="color: #000066; font-weight: bold;">return</span> server.<span style="color: #660066;">url</span>
+                              <span style="color: #009900;">&#125;</span>
+                              <span style="color: #000066; font-weight: bold;">return</span> server
+                            <span style="color: #009900;">&#125;</span>
+                            &nbsp;
+                            <span style="color: #000066; font-weight: bold;">function</span> azure<span style="color: #009900;">&#40;</span>server<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+                              server.<span style="color: #660066;">isAzure</span> <span style="color: #339933;">=</span> <span style="color: #003366; font-weight: bold;">true</span>
+                              server.<span style="color: #660066;">port</span> <span style="color: #339933;">+=</span> <span style="color: #CC0000;">500</span>
+                              <span style="color: #000066; font-weight: bold;">return</span> server
+                            <span style="color: #009900;">&#125;</span>
+                            &nbsp;
+                            <span style="color: #000066; font-weight: bold;">const</span> s1 <span style="color: #339933;">=</span> aws<span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">new</span> Server<span style="color: #009900;">&#40;</span><span style="color: #3366CC;">'12.34.56.78'</span><span style="color: #339933;">,</span> <span style="color: #CC0000;">8080</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span>
+                            console.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span>s1.<span style="color: #660066;">isAWS</span><span style="color: #009900;">&#41;</span>
+                            console.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span>s1.<span style="color: #660066;">awsInfo</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span>
+                            &nbsp;
+                            <span style="color: #000066; font-weight: bold;">const</span> s2 <span style="color: #339933;">=</span> azure<span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">new</span> Server<span style="color: #009900;">&#40;</span><span style="color: #3366CC;">'98.87.76.12'</span><span style="color: #339933;">,</span> <span style="color: #CC0000;">1000</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span>
+                            console.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span>s2.<span style="color: #660066;">isAzure</span><span style="color: #009900;">&#41;</span>
+                            console.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span>s2.<span style="color: #660066;">url</span><span style="color: #009900;">&#41;</span></pre>
+
+                            <pre class="javascript" style="font-family:monospace;"><span style="color: #006600; font-style: italic;">//_____________________________________________________________________facade</span>
+                                <span style="color: #FF0000;">class</span> Complaints <span style="color: #009900;">&#123;</span>
+                                  constructor<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+                                    <span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">complaints</span> <span style="color: #339933;">=</span> <span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span>
+                                  <span style="color: #009900;">&#125;</span>
+                                &nbsp;
+                                  reply<span style="color: #009900;">&#40;</span>complaint<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span><span style="color: #009900;">&#125;</span>
+                                &nbsp;
+                                  add<span style="color: #009900;">&#40;</span>complaint<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+                                    <span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">complaints</span>.<span style="color: #660066;">push</span><span style="color: #009900;">&#40;</span>complaint<span style="color: #009900;">&#41;</span>
+                                    <span style="color: #000066; font-weight: bold;">return</span> <span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">reply</span><span style="color: #009900;">&#40;</span>complaint<span style="color: #009900;">&#41;</span>
+                                  <span style="color: #009900;">&#125;</span>
+                                <span style="color: #009900;">&#125;</span>
+                                &nbsp;
+                                <span style="color: #FF0000;">class</span> ProductComplaints <span style="color: #FF0000;">extends</span> Complaints <span style="color: #009900;">&#123;</span>
+                                  reply<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#123;</span>id<span style="color: #339933;">,</span> customer<span style="color: #339933;">,</span> details<span style="color: #009900;">&#125;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+                                    <span style="color: #000066; font-weight: bold;">return</span> `Product<span style="color: #339933;">:</span> $<span style="color: #009900;">&#123;</span>id<span style="color: #009900;">&#125;</span><span style="color: #339933;">:</span> $<span style="color: #009900;">&#123;</span>customer<span style="color: #009900;">&#125;</span> <span style="color: #009900;">&#40;</span>$<span style="color: #009900;">&#123;</span>details<span style="color: #009900;">&#125;</span><span style="color: #009900;">&#41;</span>`
+                                  <span style="color: #009900;">&#125;</span>
+                                <span style="color: #009900;">&#125;</span>
+                                &nbsp;
+                                <span style="color: #FF0000;">class</span> ServiceComplaints <span style="color: #FF0000;">extends</span> Complaints <span style="color: #009900;">&#123;</span>
+                                  reply<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#123;</span>id<span style="color: #339933;">,</span> customer<span style="color: #339933;">,</span> details<span style="color: #009900;">&#125;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+                                    <span style="color: #000066; font-weight: bold;">return</span> `Service<span style="color: #339933;">:</span> $<span style="color: #009900;">&#123;</span>id<span style="color: #009900;">&#125;</span><span style="color: #339933;">:</span> $<span style="color: #009900;">&#123;</span>customer<span style="color: #009900;">&#125;</span> <span style="color: #009900;">&#40;</span>$<span style="color: #009900;">&#123;</span>details<span style="color: #009900;">&#125;</span><span style="color: #009900;">&#41;</span>`
+                                  <span style="color: #009900;">&#125;</span>
+                                <span style="color: #009900;">&#125;</span>
+                                &nbsp;
+                                <span style="color: #FF0000;">class</span> ComplaintRegistry <span style="color: #009900;">&#123;</span>
+                                  register<span style="color: #009900;">&#40;</span>customer<span style="color: #339933;">,</span> type<span style="color: #339933;">,</span> details<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+                                    <span style="color: #000066; font-weight: bold;">const</span> id <span style="color: #339933;">=</span> <span style="">Date</span>.<span style="color: #660066;">now</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>
+                                    let complaint
+                                &nbsp;
+                                    <span style="color: #000066; font-weight: bold;">if</span> <span style="color: #009900;">&#40;</span>type <span style="color: #339933;">===</span> <span style="color: #3366CC;">'service'</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+                                      complaint <span style="color: #339933;">=</span> <span style="color: #000066; font-weight: bold;">new</span> ServiceComplaints<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>
+                                    <span style="color: #009900;">&#125;</span> <span style="color: #000066; font-weight: bold;">else</span> <span style="color: #009900;">&#123;</span>
+                                      complaint <span style="color: #339933;">=</span> <span style="color: #000066; font-weight: bold;">new</span> ProductComplaints<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>
+                                    <span style="color: #009900;">&#125;</span>
+                                &nbsp;
+                                    <span style="color: #000066; font-weight: bold;">return</span> complaint.<span style="color: #660066;">add</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#123;</span>id<span style="color: #339933;">,</span> customer<span style="color: #339933;">,</span> details<span style="color: #009900;">&#125;</span><span style="color: #009900;">&#41;</span>
+                                  <span style="color: #009900;">&#125;</span>
+                                <span style="color: #009900;">&#125;</span>
+                                &nbsp;
+                                <span style="color: #000066; font-weight: bold;">const</span> registry <span style="color: #339933;">=</span> <span style="color: #000066; font-weight: bold;">new</span> ComplaintRegistry<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>
+                                &nbsp;
+                                console.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span>registry.<span style="color: #660066;">register</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">'Vladilen'</span><span style="color: #339933;">,</span> <span style="color: #3366CC;">'service'</span><span style="color: #339933;">,</span> <span style="color: #3366CC;">'недоступен'</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span>
+                                console.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span>registry.<span style="color: #660066;">register</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">'Elena'</span><span style="color: #339933;">,</span> <span style="color: #3366CC;">'product'</span><span style="color: #339933;">,</span> <span style="color: #3366CC;">'вылазит ошибка'</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span></pre>
+                                <pre class="javascript" style="font-family:monospace;"><span style="color: #006600; font-style: italic;">//_____________________________________________________________________________flyweight</span>
+                                    <span style="color: #FF0000;">class</span> Car <span style="color: #009900;">&#123;</span>
+                                      constructor<span style="color: #009900;">&#40;</span>model<span style="color: #339933;">,</span> price<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+                                        <span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">model</span> <span style="color: #339933;">=</span> model
+                                        <span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">price</span> <span style="color: #339933;">=</span> price
+                                      <span style="color: #009900;">&#125;</span>
+                                    <span style="color: #009900;">&#125;</span>
+                                    &nbsp;
+                                    <span style="color: #FF0000;">class</span> CarFactory <span style="color: #009900;">&#123;</span>
+                                      constructor<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+                                        <span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">cars</span> <span style="color: #339933;">=</span> <span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span>
+                                      <span style="color: #009900;">&#125;</span>
+                                    &nbsp;
+                                      create<span style="color: #009900;">&#40;</span>model<span style="color: #339933;">,</span> price<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+                                        <span style="color: #000066; font-weight: bold;">const</span> candidate <span style="color: #339933;">=</span> <span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">getCar</span><span style="color: #009900;">&#40;</span>model<span style="color: #009900;">&#41;</span>
+                                        <span style="color: #000066; font-weight: bold;">if</span> <span style="color: #009900;">&#40;</span>candidate<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+                                          <span style="color: #000066; font-weight: bold;">return</span> candidate
+                                        <span style="color: #009900;">&#125;</span>
+                                    &nbsp;
+                                        <span style="color: #000066; font-weight: bold;">const</span> newCar <span style="color: #339933;">=</span> <span style="color: #000066; font-weight: bold;">new</span> Car<span style="color: #009900;">&#40;</span>model<span style="color: #339933;">,</span> price<span style="color: #009900;">&#41;</span>
+                                        <span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">cars</span>.<span style="color: #660066;">push</span><span style="color: #009900;">&#40;</span>newCar<span style="color: #009900;">&#41;</span>
+                                        <span style="color: #000066; font-weight: bold;">return</span> newCar
+                                      <span style="color: #009900;">&#125;</span>
+                                    &nbsp;
+                                      getCar<span style="color: #009900;">&#40;</span>model<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+                                        <span style="color: #000066; font-weight: bold;">return</span> <span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">cars</span>.<span style="color: #660066;">find</span><span style="color: #009900;">&#40;</span>car <span style="color: #339933;">=&gt;</span> car.<span style="color: #660066;">model</span> <span style="color: #339933;">===</span> model<span style="color: #009900;">&#41;</span>
+                                      <span style="color: #009900;">&#125;</span>
+                                    <span style="color: #009900;">&#125;</span>
+                                    &nbsp;
+                                    <span style="color: #000066; font-weight: bold;">const</span> factory <span style="color: #339933;">=</span> <span style="color: #000066; font-weight: bold;">new</span> CarFactory<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>
+                                    &nbsp;
+                                    <span style="color: #000066; font-weight: bold;">const</span> bmwX6 <span style="color: #339933;">=</span> factory.<span style="color: #660066;">create</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">'bmw'</span><span style="color: #339933;">,</span> <span style="color: #CC0000;">10000</span><span style="color: #009900;">&#41;</span>
+                                    <span style="color: #000066; font-weight: bold;">const</span> audi <span style="color: #339933;">=</span> factory.<span style="color: #660066;">create</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">'audi'</span><span style="color: #339933;">,</span> <span style="color: #CC0000;">12000</span><span style="color: #009900;">&#41;</span>
+                                    <span style="color: #000066; font-weight: bold;">const</span> bmwX3 <span style="color: #339933;">=</span> factory.<span style="color: #660066;">create</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">'bmw'</span><span style="color: #339933;">,</span> <span style="color: #CC0000;">8000</span><span style="color: #009900;">&#41;</span>
+                                    &nbsp;
+                                    console.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span>bmwX3 <span style="color: #339933;">===</span> bmwX6<span style="color: #009900;">&#41;</span></pre>
+                                    <pre class="javascript" style="font-family:monospace;"><span style="color: #006600; font-style: italic;">//_____________________________________________________________________________proxy</span>
+                                        <span style="color: #000066; font-weight: bold;">function</span> networkFetch<span style="color: #009900;">&#40;</span>url<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+                                          <span style="color: #000066; font-weight: bold;">return</span> `$<span style="color: #009900;">&#123;</span>url<span style="color: #009900;">&#125;</span> <span style="color: #339933;">-</span> Ответ с сервера`
+                                        <span style="color: #009900;">&#125;</span>
+                                        &nbsp;
+                                        <span style="color: #000066; font-weight: bold;">const</span> cache <span style="color: #339933;">=</span> <span style="color: #000066; font-weight: bold;">new</span> Set<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>
+                                        <span style="color: #000066; font-weight: bold;">const</span> proxiedFetch <span style="color: #339933;">=</span> <span style="color: #000066; font-weight: bold;">new</span> Proxy<span style="color: #009900;">&#40;</span>networkFetch<span style="color: #339933;">,</span> <span style="color: #009900;">&#123;</span>
+                                          apply<span style="color: #009900;">&#40;</span>target<span style="color: #339933;">,</span> thisArg<span style="color: #339933;">,</span> args<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+                                            <span style="color: #000066; font-weight: bold;">const</span> url <span style="color: #339933;">=</span> args<span style="color: #009900;">&#91;</span><span style="color: #CC0000;">0</span><span style="color: #009900;">&#93;</span>
+                                            <span style="color: #000066; font-weight: bold;">if</span> <span style="color: #009900;">&#40;</span>cache.<span style="color: #660066;">has</span><span style="color: #009900;">&#40;</span>url<span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+                                              <span style="color: #000066; font-weight: bold;">return</span> `$<span style="color: #009900;">&#123;</span>url<span style="color: #009900;">&#125;</span> <span style="color: #339933;">-</span> Ответ из кэша`
+                                            <span style="color: #009900;">&#125;</span> <span style="color: #000066; font-weight: bold;">else</span> <span style="color: #009900;">&#123;</span>
+                                              cache.<span style="color: #660066;">add</span><span style="color: #009900;">&#40;</span>url<span style="color: #009900;">&#41;</span>
+                                              <span style="color: #000066; font-weight: bold;">return</span> Reflect.<span style="color: #660066;">apply</span><span style="color: #009900;">&#40;</span>target<span style="color: #339933;">,</span> thisArg<span style="color: #339933;">,</span> args<span style="color: #009900;">&#41;</span>
+                                            <span style="color: #009900;">&#125;</span>
+                                          <span style="color: #009900;">&#125;</span>
+                                        <span style="color: #009900;">&#125;</span><span style="color: #009900;">&#41;</span>
+                                        &nbsp;
+                                        console.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span>proxiedFetch<span style="color: #009900;">&#40;</span><span style="color: #3366CC;">'angular.io'</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span>
+                                        console.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span>proxiedFetch<span style="color: #009900;">&#40;</span><span style="color: #3366CC;">'react.io'</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span>
+                                        console.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span>proxiedFetch<span style="color: #009900;">&#40;</span><span style="color: #3366CC;">'angular.io'</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span>
+                                        &nbsp;</pre>
+        <pre class="javascript" style="font-family:monospace;"><span style="color: #006600; font-style: italic;">//____________________________________________________________________chain_of_responsibility</span>
+            <span style="color: #FF0000;">class</span> MySum <span style="color: #009900;">&#123;</span>
+                constructor<span style="color: #009900;">&#40;</span>initialValue <span style="color: #339933;">=</span> <span style="color: #CC0000;">42</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+                <span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">sum</span> <span style="color: #339933;">=</span> initialValue
+                <span style="color: #009900;">&#125;</span>
+            &nbsp;
+                add<span style="color: #009900;">&#40;</span>value<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+                <span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">sum</span> <span style="color: #339933;">+=</span> value
+                <span style="color: #000066; font-weight: bold;">return</span> <span style="color: #000066; font-weight: bold;">this</span>
+                <span style="color: #009900;">&#125;</span>
+            <span style="color: #009900;">&#125;</span>
+            &nbsp;
+            <span style="color: #000066; font-weight: bold;">const</span> sum1 <span style="color: #339933;">=</span> <span style="color: #000066; font-weight: bold;">new</span> MySum<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>
+            console.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span>sum1.<span style="color: #660066;">add</span><span style="color: #009900;">&#40;</span><span style="color: #CC0000;">8</span><span style="color: #009900;">&#41;</span>.<span style="color: #660066;">add</span><span style="color: #009900;">&#40;</span><span style="color: #CC0000;">10</span><span style="color: #009900;">&#41;</span>.<span style="color: #660066;">add</span><span style="color: #009900;">&#40;</span><span style="color: #CC0000;">1</span><span style="color: #009900;">&#41;</span>.<span style="color: #660066;">add</span><span style="color: #009900;">&#40;</span><span style="color: #CC0000;">9</span><span style="color: #009900;">&#41;</span>.<span style="color: #660066;">sum</span><span style="color: #009900;">&#41;</span>
+            &nbsp;
+            <span style="color: #000066; font-weight: bold;">const</span> sum2 <span style="color: #339933;">=</span> <span style="color: #000066; font-weight: bold;">new</span> MySum<span style="color: #009900;">&#40;</span><span style="color: #CC0000;">0</span><span style="color: #009900;">&#41;</span>
+            console.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span>sum2.<span style="color: #660066;">add</span><span style="color: #009900;">&#40;</span><span style="color: #CC0000;">1</span><span style="color: #009900;">&#41;</span>.<span style="color: #660066;">add</span><span style="color: #009900;">&#40;</span><span style="color: #CC0000;">2</span><span style="color: #009900;">&#41;</span>.<span style="color: #660066;">add</span><span style="color: #009900;">&#40;</span><span style="color: #CC0000;">3</span><span style="color: #009900;">&#41;</span>.<span style="color: #660066;">sum</span><span style="color: #009900;">&#41;</span></pre>
+            <pre class="javascript" style="font-family:monospace;"><span style="color: #006600; font-style: italic;">//___________________________________________________________________comand</span>
+                <span style="color: #FF0000;">class</span> MyMath <span style="color: #009900;">&#123;</span>
+                  constructor<span style="color: #009900;">&#40;</span>initialValue <span style="color: #339933;">=</span> <span style="color: #CC0000;">0</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+                    <span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">num</span> <span style="color: #339933;">=</span> initialValue
+                  <span style="color: #009900;">&#125;</span>
+                &nbsp;
+                  square<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+                    <span style="color: #000066; font-weight: bold;">return</span> <span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">num</span> <span style="color: #339933;">**</span> <span style="color: #CC0000;">2</span>
+                  <span style="color: #009900;">&#125;</span>
+                &nbsp;
+                  cube<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+                    <span style="color: #000066; font-weight: bold;">return</span> <span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">num</span> <span style="color: #339933;">**</span> <span style="color: #CC0000;">3</span>
+                  <span style="color: #009900;">&#125;</span>
+                <span style="color: #009900;">&#125;</span>
+                &nbsp;
+                <span style="color: #FF0000;">class</span> Command <span style="color: #009900;">&#123;</span>
+                  constructor<span style="color: #009900;">&#40;</span>subject<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+                    <span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">subject</span> <span style="color: #339933;">=</span> subject
+                    <span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">commandsExecuted</span> <span style="color: #339933;">=</span> <span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span>
+                  <span style="color: #009900;">&#125;</span>
+                &nbsp;
+                  execute<span style="color: #009900;">&#40;</span>command<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+                    <span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">commandsExecuted</span>.<span style="color: #660066;">push</span><span style="color: #009900;">&#40;</span>command<span style="color: #009900;">&#41;</span>
+                    <span style="color: #000066; font-weight: bold;">return</span> <span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">subject</span><span style="color: #009900;">&#91;</span>command<span style="color: #009900;">&#93;</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>
+                  <span style="color: #009900;">&#125;</span>
+                <span style="color: #009900;">&#125;</span>
+                &nbsp;
+                <span style="color: #000066; font-weight: bold;">const</span> x <span style="color: #339933;">=</span> <span style="color: #000066; font-weight: bold;">new</span> Command<span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">new</span> MyMath<span style="color: #009900;">&#40;</span><span style="color: #CC0000;">2</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span>
+                &nbsp;
+                console.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span>x.<span style="color: #660066;">execute</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">'square'</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span>
+                console.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span>x.<span style="color: #660066;">execute</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">'cube'</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span>
+                &nbsp;
+                console.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span>x.<span style="color: #660066;">commandsExecuted</span><span style="color: #009900;">&#41;</span></pre>
+                <pre class="javascript" style="font-family:monospace;"><span style="color: #006600; font-style: italic;">//_____________________________________________________________iterator</span>
+                    <span style="color: #FF0000;">class</span> MyIterator <span style="color: #009900;">&#123;</span>
+                      constructor<span style="color: #009900;">&#40;</span>data<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+                        <span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">index</span> <span style="color: #339933;">=</span> <span style="color: #CC0000;">0</span>
+                        <span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">data</span> <span style="color: #339933;">=</span> data
+                      <span style="color: #009900;">&#125;</span>
+                    &nbsp;
+                      <span style="color: #009900;">&#91;</span>Symbol.<span style="color: #660066;">iterator</span><span style="color: #009900;">&#93;</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+                        <span style="color: #000066; font-weight: bold;">return</span> <span style="color: #009900;">&#123;</span>
+                          next<span style="color: #339933;">:</span> <span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #339933;">=&gt;</span> <span style="color: #009900;">&#123;</span>
+                            <span style="color: #000066; font-weight: bold;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">index</span> <span style="color: #339933;">&lt;</span> <span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">data</span>.<span style="color: #660066;">length</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+                              <span style="color: #000066; font-weight: bold;">return</span> <span style="color: #009900;">&#123;</span>
+                                value<span style="color: #339933;">:</span> <span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">data</span><span style="color: #009900;">&#91;</span><span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">index</span><span style="color: #339933;">++</span><span style="color: #009900;">&#93;</span><span style="color: #339933;">,</span>
+                                done<span style="color: #339933;">:</span> <span style="color: #003366; font-weight: bold;">false</span>
+                              <span style="color: #009900;">&#125;</span>
+                            <span style="color: #009900;">&#125;</span> <span style="color: #000066; font-weight: bold;">else</span> <span style="color: #009900;">&#123;</span>
+                              <span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">index</span> <span style="color: #339933;">=</span> <span style="color: #CC0000;">0</span>
+                              <span style="color: #000066; font-weight: bold;">return</span> <span style="color: #009900;">&#123;</span>
+                                done<span style="color: #339933;">:</span> <span style="color: #003366; font-weight: bold;">true</span><span style="color: #339933;">,</span>
+                                value<span style="color: #339933;">:</span> <span style="color: #000066; font-weight: bold;">void</span> <span style="color: #CC0000;">0</span>
+                              <span style="color: #009900;">&#125;</span>
+                            <span style="color: #009900;">&#125;</span>
+                          <span style="color: #009900;">&#125;</span>
+                        <span style="color: #009900;">&#125;</span>
+                      <span style="color: #009900;">&#125;</span>
+                    <span style="color: #009900;">&#125;</span>
+                    &nbsp;
+                    <span style="color: #000066; font-weight: bold;">function</span><span style="color: #339933;">*</span> generator<span style="color: #009900;">&#40;</span>collection<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+                      let index <span style="color: #339933;">=</span> <span style="color: #CC0000;">0</span>
+                    &nbsp;
+                      while <span style="color: #009900;">&#40;</span>index <span style="color: #339933;">&lt;</span> collection.<span style="color: #660066;">length</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+                        yield collection<span style="color: #009900;">&#91;</span>index<span style="color: #339933;">++</span><span style="color: #009900;">&#93;</span>
+                      <span style="color: #009900;">&#125;</span>
+                    <span style="color: #009900;">&#125;</span>
+                    &nbsp;
+                    &nbsp;
+                    <span style="color: #000066; font-weight: bold;">const</span> iterator <span style="color: #339933;">=</span> <span style="color: #000066; font-weight: bold;">new</span> MyIterator<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#91;</span><span style="color: #3366CC;">'This'</span><span style="color: #339933;">,</span> <span style="color: #3366CC;">'is'</span><span style="color: #339933;">,</span> <span style="color: #3366CC;">'iterator'</span><span style="color: #009900;">&#93;</span><span style="color: #009900;">&#41;</span>
+                    <span style="color: #000066; font-weight: bold;">const</span> gen <span style="color: #339933;">=</span> generator<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#91;</span><span style="color: #3366CC;">'This'</span><span style="color: #339933;">,</span> <span style="color: #3366CC;">'is'</span><span style="color: #339933;">,</span> <span style="color: #3366CC;">'iterator'</span><span style="color: #009900;">&#93;</span><span style="color: #009900;">&#41;</span>
+                    &nbsp;
+                    <span style="color: #006600; font-style: italic;">// for (const val of gen) {</span>
+                    <span style="color: #006600; font-style: italic;">//   console.log('Value: ', val)</span>
+                    <span style="color: #006600; font-style: italic;">// }</span>
+                    &nbsp;
+                    console.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span>gen.<span style="color: #660066;">next</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>.<span style="color: #660066;">value</span><span style="color: #009900;">&#41;</span>
+                    console.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span>gen.<span style="color: #660066;">next</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>.<span style="color: #660066;">value</span><span style="color: #009900;">&#41;</span>
+                    console.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span>gen.<span style="color: #660066;">next</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>.<span style="color: #660066;">value</span><span style="color: #009900;">&#41;</span></pre>
+                    <pre class="javascript" style="font-family:monospace;"><span style="color: #006600; font-style: italic;">//______________________________________________________________mediator</span>
+                        <span style="color: #FF0000;">class</span> User <span style="color: #009900;">&#123;</span>
+                          constructor<span style="color: #009900;">&#40;</span>name<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+                            <span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">name</span> <span style="color: #339933;">=</span> name
+                            <span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">room</span> <span style="color: #339933;">=</span> <span style="color: #003366; font-weight: bold;">null</span>
+                          <span style="color: #009900;">&#125;</span>
+                        &nbsp;
+                          send<span style="color: #009900;">&#40;</span>message<span style="color: #339933;">,</span> to<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+                            <span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">room</span>.<span style="color: #660066;">send</span><span style="color: #009900;">&#40;</span>message<span style="color: #339933;">,</span> <span style="color: #000066; font-weight: bold;">this</span><span style="color: #339933;">,</span> to<span style="color: #009900;">&#41;</span>
+                          <span style="color: #009900;">&#125;</span>
+                        &nbsp;
+                          receive<span style="color: #009900;">&#40;</span>message<span style="color: #339933;">,</span> from<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+                            console.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span>`$<span style="color: #009900;">&#123;</span>from.<span style="color: #660066;">name</span><span style="color: #009900;">&#125;</span> <span style="color: #339933;">=&gt;</span> $<span style="color: #009900;">&#123;</span><span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">name</span><span style="color: #009900;">&#125;</span><span style="color: #339933;">:</span> $<span style="color: #009900;">&#123;</span>message<span style="color: #009900;">&#125;</span>`<span style="color: #009900;">&#41;</span>
+                          <span style="color: #009900;">&#125;</span>
+                        <span style="color: #009900;">&#125;</span>
+                        &nbsp;
+                        <span style="color: #FF0000;">class</span> ChatRoom <span style="color: #009900;">&#123;</span>
+                          constructor<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+                            <span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">users</span> <span style="color: #339933;">=</span> <span style="color: #009900;">&#123;</span><span style="color: #009900;">&#125;</span>
+                          <span style="color: #009900;">&#125;</span>
+                        &nbsp;
+                          register<span style="color: #009900;">&#40;</span>user<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+                            <span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">users</span><span style="color: #009900;">&#91;</span>user.<span style="color: #660066;">name</span><span style="color: #009900;">&#93;</span> <span style="color: #339933;">=</span> user
+                            user.<span style="color: #660066;">room</span> <span style="color: #339933;">=</span> <span style="color: #000066; font-weight: bold;">this</span>
+                          <span style="color: #009900;">&#125;</span>
+                        &nbsp;
+                          send<span style="color: #009900;">&#40;</span>message<span style="color: #339933;">,</span> from<span style="color: #339933;">,</span> to<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+                            <span style="color: #000066; font-weight: bold;">if</span> <span style="color: #009900;">&#40;</span>to<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+                              to.<span style="color: #660066;">receive</span><span style="color: #009900;">&#40;</span>message<span style="color: #339933;">,</span> from<span style="color: #009900;">&#41;</span>
+                            <span style="color: #009900;">&#125;</span> <span style="color: #000066; font-weight: bold;">else</span> <span style="color: #009900;">&#123;</span>
+                              <span style="">Object</span>.<span style="color: #660066;">keys</span><span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">users</span><span style="color: #009900;">&#41;</span>.<span style="color: #660066;">forEach</span><span style="color: #009900;">&#40;</span>key <span style="color: #339933;">=&gt;</span> <span style="color: #009900;">&#123;</span>
+                                <span style="color: #000066; font-weight: bold;">if</span> <span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">users</span><span style="color: #009900;">&#91;</span>key<span style="color: #009900;">&#93;</span> <span style="color: #339933;">!==</span> from<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+                                  <span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">users</span><span style="color: #009900;">&#91;</span>key<span style="color: #009900;">&#93;</span>.<span style="color: #660066;">receive</span><span style="color: #009900;">&#40;</span>message<span style="color: #339933;">,</span> from<span style="color: #009900;">&#41;</span>
+                                <span style="color: #009900;">&#125;</span>
+                              <span style="color: #009900;">&#125;</span><span style="color: #009900;">&#41;</span>
+                            <span style="color: #009900;">&#125;</span>
+                          <span style="color: #009900;">&#125;</span>
+                        <span style="color: #009900;">&#125;</span>
+                        &nbsp;
+                        <span style="color: #000066; font-weight: bold;">const</span> vlad <span style="color: #339933;">=</span> <span style="color: #000066; font-weight: bold;">new</span> User<span style="color: #009900;">&#40;</span><span style="color: #3366CC;">'Vladilen'</span><span style="color: #009900;">&#41;</span>
+                        <span style="color: #000066; font-weight: bold;">const</span> lena <span style="color: #339933;">=</span> <span style="color: #000066; font-weight: bold;">new</span> User<span style="color: #009900;">&#40;</span><span style="color: #3366CC;">'Elena'</span><span style="color: #009900;">&#41;</span>
+                        <span style="color: #000066; font-weight: bold;">const</span> igor <span style="color: #339933;">=</span> <span style="color: #000066; font-weight: bold;">new</span> User<span style="color: #009900;">&#40;</span><span style="color: #3366CC;">'Igor'</span><span style="color: #009900;">&#41;</span>
+                        &nbsp;
+                        <span style="color: #000066; font-weight: bold;">const</span> room <span style="color: #339933;">=</span> <span style="color: #000066; font-weight: bold;">new</span> ChatRoom<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>
+                        &nbsp;
+                        room.<span style="color: #660066;">register</span><span style="color: #009900;">&#40;</span>vlad<span style="color: #009900;">&#41;</span>
+                        room.<span style="color: #660066;">register</span><span style="color: #009900;">&#40;</span>lena<span style="color: #009900;">&#41;</span>
+                        room.<span style="color: #660066;">register</span><span style="color: #009900;">&#40;</span>igor<span style="color: #009900;">&#41;</span>
+                        &nbsp;
+                        vlad.<span style="color: #660066;">send</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">'Hello!'</span><span style="color: #339933;">,</span> lena<span style="color: #009900;">&#41;</span>
+                        lena.<span style="color: #660066;">send</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">'Hello hello!'</span><span style="color: #339933;">,</span> vlad<span style="color: #009900;">&#41;</span>
+                        igor.<span style="color: #660066;">send</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">'Vsem privet'</span><span style="color: #009900;">&#41;</span></pre>
+                        <pre class="javascript" style="font-family:monospace;"><span style="color: #006600; font-style: italic;">//_______________________________________________________________observer</span>
+                            <span style="color: #FF0000;">class</span> Subject <span style="color: #009900;">&#123;</span>
+                              constructor<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+                                <span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">observers</span> <span style="color: #339933;">=</span> <span style="color: #009900;">&#91;</span><span style="color: #009900;">&#93;</span>
+                              <span style="color: #009900;">&#125;</span>
+                            &nbsp;
+                              subscribe<span style="color: #009900;">&#40;</span>observer<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+                                <span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">observers</span>.<span style="color: #660066;">push</span><span style="color: #009900;">&#40;</span>observer<span style="color: #009900;">&#41;</span>
+                              <span style="color: #009900;">&#125;</span>
+                            &nbsp;
+                              unsubscribe<span style="color: #009900;">&#40;</span>observer<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+                                <span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">observers</span> <span style="color: #339933;">=</span> <span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">observers</span>.<span style="color: #660066;">filter</span><span style="color: #009900;">&#40;</span>obs <span style="color: #339933;">=&gt;</span> obs <span style="color: #339933;">!==</span> observer<span style="color: #009900;">&#41;</span>
+                              <span style="color: #009900;">&#125;</span>
+                            &nbsp;
+                              fire<span style="color: #009900;">&#40;</span>action<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+                                <span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">observers</span>.<span style="color: #660066;">forEach</span><span style="color: #009900;">&#40;</span>observer <span style="color: #339933;">=&gt;</span> <span style="color: #009900;">&#123;</span>
+                                  observer.<span style="color: #660066;">update</span><span style="color: #009900;">&#40;</span>action<span style="color: #009900;">&#41;</span>
+                                <span style="color: #009900;">&#125;</span><span style="color: #009900;">&#41;</span>
+                              <span style="color: #009900;">&#125;</span>
+                            <span style="color: #009900;">&#125;</span>
+                            &nbsp;
+                            <span style="color: #FF0000;">class</span> Observer <span style="color: #009900;">&#123;</span>
+                              constructor<span style="color: #009900;">&#40;</span>state <span style="color: #339933;">=</span> <span style="color: #CC0000;">1</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+                                <span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">state</span> <span style="color: #339933;">=</span> state
+                                <span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">initialState</span> <span style="color: #339933;">=</span> state
+                              <span style="color: #009900;">&#125;</span>
+                            &nbsp;
+                              update<span style="color: #009900;">&#40;</span>action<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+                                <span style="color: #000066; font-weight: bold;">switch</span> <span style="color: #009900;">&#40;</span>action.<span style="color: #660066;">type</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+                                  <span style="color: #000066; font-weight: bold;">case</span> <span style="color: #3366CC;">'INCREMENT'</span><span style="color: #339933;">:</span>
+                                    <span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">state</span> <span style="color: #339933;">=</span> <span style="color: #339933;">++</span><span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">state</span>
+                                    <span style="color: #000066; font-weight: bold;">break</span>
+                                  <span style="color: #000066; font-weight: bold;">case</span> <span style="color: #3366CC;">'DECREMENT'</span><span style="color: #339933;">:</span>
+                                    <span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">state</span> <span style="color: #339933;">=</span> <span style="color: #339933;">--</span><span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">state</span>
+                                    <span style="color: #000066; font-weight: bold;">break</span>
+                                  <span style="color: #000066; font-weight: bold;">case</span> <span style="color: #3366CC;">'ADD'</span><span style="color: #339933;">:</span>
+                                    <span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">state</span> <span style="color: #339933;">+=</span> action.<span style="color: #660066;">payload</span>
+                                    <span style="color: #000066; font-weight: bold;">break</span>
+                                  <span style="color: #000066; font-weight: bold;">default</span><span style="color: #339933;">:</span>
+                                    <span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">state</span> <span style="color: #339933;">=</span> <span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">initialState</span>
+                                <span style="color: #009900;">&#125;</span>
+                              <span style="color: #009900;">&#125;</span>
+                            <span style="color: #009900;">&#125;</span>
+                            &nbsp;
+                            <span style="color: #000066; font-weight: bold;">const</span> stream$ <span style="color: #339933;">=</span> <span style="color: #000066; font-weight: bold;">new</span> Subject<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>
+                            &nbsp;
+                            <span style="color: #000066; font-weight: bold;">const</span> obs1 <span style="color: #339933;">=</span> <span style="color: #000066; font-weight: bold;">new</span> Observer<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>
+                            <span style="color: #000066; font-weight: bold;">const</span> obs2 <span style="color: #339933;">=</span> <span style="color: #000066; font-weight: bold;">new</span> Observer<span style="color: #009900;">&#40;</span><span style="color: #CC0000;">42</span><span style="color: #009900;">&#41;</span>
+                            &nbsp;
+                            stream$.<span style="color: #660066;">subscribe</span><span style="color: #009900;">&#40;</span>obs1<span style="color: #009900;">&#41;</span>
+                            stream$.<span style="color: #660066;">subscribe</span><span style="color: #009900;">&#40;</span>obs2<span style="color: #009900;">&#41;</span>
+                            &nbsp;
+                            stream$.<span style="color: #660066;">fire</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#123;</span>type<span style="color: #339933;">:</span> <span style="color: #3366CC;">'INCREMENT'</span><span style="color: #009900;">&#125;</span><span style="color: #009900;">&#41;</span>
+                            stream$.<span style="color: #660066;">fire</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#123;</span>type<span style="color: #339933;">:</span> <span style="color: #3366CC;">'INCREMENT'</span><span style="color: #009900;">&#125;</span><span style="color: #009900;">&#41;</span>
+                            stream$.<span style="color: #660066;">fire</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#123;</span>type<span style="color: #339933;">:</span> <span style="color: #3366CC;">'DECREMENT'</span><span style="color: #009900;">&#125;</span><span style="color: #009900;">&#41;</span>
+                            stream$.<span style="color: #660066;">fire</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#123;</span>type<span style="color: #339933;">:</span> <span style="color: #3366CC;">'ADD'</span><span style="color: #339933;">,</span> payload<span style="color: #339933;">:</span> <span style="color: #CC0000;">10</span><span style="color: #009900;">&#125;</span><span style="color: #009900;">&#41;</span>
+                            &nbsp;
+                            console.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span>obs1.<span style="color: #660066;">state</span><span style="color: #009900;">&#41;</span>
+                            console.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span>obs2.<span style="color: #660066;">state</span><span style="color: #009900;">&#41;</span></pre>
+                            <pre class="javascript" style="font-family:monospace;"><span style="color: #006600; font-style: italic;">//___________________________________________________________________state</span>
+                                <span style="color: #FF0000;">class</span> Light <span style="color: #009900;">&#123;</span>
+                                  constructor<span style="color: #009900;">&#40;</span>light<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+                                    <span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">light</span> <span style="color: #339933;">=</span> light
+                                  <span style="color: #009900;">&#125;</span>
+                                <span style="color: #009900;">&#125;</span>
+                                &nbsp;
+                                <span style="color: #FF0000;">class</span> RedLight <span style="color: #FF0000;">extends</span> Light <span style="color: #009900;">&#123;</span>
+                                  constructor<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+                                    <span style="color: #FF0000;">super</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">'red'</span><span style="color: #009900;">&#41;</span>
+                                  <span style="color: #009900;">&#125;</span>
+                                &nbsp;
+                                  sign<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+                                    <span style="color: #000066; font-weight: bold;">return</span> <span style="color: #3366CC;">'СТОП'</span>
+                                  <span style="color: #009900;">&#125;</span>
+                                <span style="color: #009900;">&#125;</span>
+                                &nbsp;
+                                <span style="color: #FF0000;">class</span> YellowLight <span style="color: #FF0000;">extends</span> Light <span style="color: #009900;">&#123;</span>
+                                  constructor<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+                                    <span style="color: #FF0000;">super</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">'yellow'</span><span style="color: #009900;">&#41;</span>
+                                  <span style="color: #009900;">&#125;</span>
+                                &nbsp;
+                                  sign<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+                                    <span style="color: #000066; font-weight: bold;">return</span> <span style="color: #3366CC;">'ГОТОВЬСЯ'</span>
+                                  <span style="color: #009900;">&#125;</span>
+                                <span style="color: #009900;">&#125;</span>
+                                &nbsp;
+                                <span style="color: #FF0000;">class</span> GreenLight <span style="color: #FF0000;">extends</span> Light <span style="color: #009900;">&#123;</span>
+                                  constructor<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+                                    <span style="color: #FF0000;">super</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">'green'</span><span style="color: #009900;">&#41;</span>
+                                  <span style="color: #009900;">&#125;</span>
+                                &nbsp;
+                                  sign<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+                                    <span style="color: #000066; font-weight: bold;">return</span> <span style="color: #3366CC;">'ЕДЬ!'</span>
+                                  <span style="color: #009900;">&#125;</span>
+                                <span style="color: #009900;">&#125;</span>
+                                &nbsp;
+                                <span style="color: #FF0000;">class</span> TrafficLight <span style="color: #009900;">&#123;</span>
+                                  constructor<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+                                    <span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">states</span> <span style="color: #339933;">=</span> <span style="color: #009900;">&#91;</span>
+                                      <span style="color: #000066; font-weight: bold;">new</span> RedLight<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+                                      <span style="color: #000066; font-weight: bold;">new</span> YellowLight<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+                                      <span style="color: #000066; font-weight: bold;">new</span> GreenLight<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>
+                                    <span style="color: #009900;">&#93;</span>
+                                    <span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">current</span> <span style="color: #339933;">=</span> <span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">states</span><span style="color: #009900;">&#91;</span><span style="color: #CC0000;">0</span><span style="color: #009900;">&#93;</span>
+                                  <span style="color: #009900;">&#125;</span>
+                                &nbsp;
+                                  change<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+                                    <span style="color: #000066; font-weight: bold;">const</span> total <span style="color: #339933;">=</span> <span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">states</span>.<span style="color: #660066;">length</span>
+                                    let index <span style="color: #339933;">=</span> <span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">states</span>.<span style="color: #660066;">findIndex</span><span style="color: #009900;">&#40;</span>light <span style="color: #339933;">=&gt;</span> light <span style="color: #339933;">===</span> <span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">current</span><span style="color: #009900;">&#41;</span>
+                                &nbsp;
+                                    <span style="color: #000066; font-weight: bold;">if</span> <span style="color: #009900;">&#40;</span>index <span style="color: #339933;">+</span> <span style="color: #CC0000;">1</span> <span style="color: #339933;">&lt;</span> total<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+                                      <span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">current</span> <span style="color: #339933;">=</span> <span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">states</span><span style="color: #009900;">&#91;</span>index <span style="color: #339933;">+</span> <span style="color: #CC0000;">1</span><span style="color: #009900;">&#93;</span>
+                                    <span style="color: #009900;">&#125;</span> <span style="color: #000066; font-weight: bold;">else</span> <span style="color: #009900;">&#123;</span>
+                                      <span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">current</span> <span style="color: #339933;">=</span> <span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">states</span><span style="color: #009900;">&#91;</span><span style="color: #CC0000;">0</span><span style="color: #009900;">&#93;</span>
+                                    <span style="color: #009900;">&#125;</span>
+                                  <span style="color: #009900;">&#125;</span>
+                                &nbsp;
+                                  sign<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+                                    <span style="color: #000066; font-weight: bold;">return</span> <span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">current</span>.<span style="color: #660066;">sign</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>
+                                  <span style="color: #009900;">&#125;</span>
+                                <span style="color: #009900;">&#125;</span>
+                                &nbsp;
+                                <span style="color: #000066; font-weight: bold;">const</span> traffic <span style="color: #339933;">=</span> <span style="color: #000066; font-weight: bold;">new</span> TrafficLight<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>
+                                console.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span>traffic.<span style="color: #660066;">sign</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span>
+                                traffic.<span style="color: #660066;">change</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>
+                                &nbsp;
+                                console.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span>traffic.<span style="color: #660066;">sign</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span>
+                                traffic.<span style="color: #660066;">change</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>
+                                &nbsp;
+                                console.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span>traffic.<span style="color: #660066;">sign</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span>
+                                traffic.<span style="color: #660066;">change</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>
+                                &nbsp;
+                                console.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span>traffic.<span style="color: #660066;">sign</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span>
+                                traffic.<span style="color: #660066;">change</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>
+                                &nbsp;
+                                console.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span>traffic.<span style="color: #660066;">sign</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span>
+                                traffic.<span style="color: #660066;">change</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>
+                                &nbsp;
+                                console.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span>traffic.<span style="color: #660066;">sign</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span>
+                                traffic.<span style="color: #660066;">change</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span></pre>
+
+            <pre class="javascript" style="font-family:monospace;"><span style="color: #006600; font-style: italic;">//______________________________________________________________strategy</span>
+                <span style="color: #FF0000;">class</span> Vehicle <span style="color: #009900;">&#123;</span>
+                    travelTime<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+                    <span style="color: #000066; font-weight: bold;">return</span> <span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">timeTaken</span>
+                    <span style="color: #009900;">&#125;</span>
+                <span style="color: #009900;">&#125;</span>
+                &nbsp;
+                <span style="color: #FF0000;">class</span> Bus <span style="color: #FF0000;">extends</span> Vehicle <span style="color: #009900;">&#123;</span>
+                    constructor<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+                    <span style="color: #FF0000;">super</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>
+                    <span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">timeTaken</span> <span style="color: #339933;">=</span> <span style="color: #CC0000;">10</span>
+                    <span style="color: #009900;">&#125;</span>
+                <span style="color: #009900;">&#125;</span>
+                &nbsp;
+                <span style="color: #FF0000;">class</span> Taxi <span style="color: #FF0000;">extends</span> Vehicle <span style="color: #009900;">&#123;</span>
+                    constructor<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+                    <span style="color: #FF0000;">super</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>
+                    <span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">timeTaken</span> <span style="color: #339933;">=</span> <span style="color: #CC0000;">5</span>
+                    <span style="color: #009900;">&#125;</span>
+                <span style="color: #009900;">&#125;</span>
+                &nbsp;
+                <span style="color: #FF0000;">class</span> Car <span style="color: #FF0000;">extends</span> Vehicle <span style="color: #009900;">&#123;</span>
+                    constructor<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+                    <span style="color: #FF0000;">super</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>
+                    <span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">timeTaken</span> <span style="color: #339933;">=</span> <span style="color: #CC0000;">3</span>
+                    <span style="color: #009900;">&#125;</span>
+                <span style="color: #009900;">&#125;</span>
+                &nbsp;
+                <span style="color: #FF0000;">class</span> Commute <span style="color: #009900;">&#123;</span>
+                    travel<span style="color: #009900;">&#40;</span>transport<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+                    <span style="color: #000066; font-weight: bold;">return</span> transport.<span style="color: #660066;">travelTime</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>
+                    <span style="color: #009900;">&#125;</span>
+                <span style="color: #009900;">&#125;</span>
+                &nbsp;
+                <span style="color: #000066; font-weight: bold;">const</span> commute <span style="color: #339933;">=</span> <span style="color: #000066; font-weight: bold;">new</span> Commute<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span>
+                &nbsp;
+                console.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span>commute.<span style="color: #660066;">travel</span><span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">new</span> Taxi<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span>
+                console.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span>commute.<span style="color: #660066;">travel</span><span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">new</span> Bus<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span>
+                console.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span>commute.<span style="color: #660066;">travel</span><span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">new</span> Car<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span></pre>
+
+                <pre class="javascript" style="font-family:monospace;"><span style="color: #006600; font-style: italic;">//_________________________________________________________template</span>
+                    <span style="color: #FF0000;">class</span> Employee <span style="color: #009900;">&#123;</span>
+                      constructor<span style="color: #009900;">&#40;</span>name<span style="color: #339933;">,</span> salary<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+                        <span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">name</span> <span style="color: #339933;">=</span> name
+                        <span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">salary</span> <span style="color: #339933;">=</span> salary
+                      <span style="color: #009900;">&#125;</span>
+                    &nbsp;
+                      responsibilities<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span><span style="color: #009900;">&#125;</span>
+                    &nbsp;
+                      work<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+                        <span style="color: #000066; font-weight: bold;">return</span> `$<span style="color: #009900;">&#123;</span><span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">name</span><span style="color: #009900;">&#125;</span> выполняет $<span style="color: #009900;">&#123;</span><span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">responsibilities</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#125;</span>`
+                      <span style="color: #009900;">&#125;</span>
+                    &nbsp;
+                      getPaid<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+                        <span style="color: #000066; font-weight: bold;">return</span> `$<span style="color: #009900;">&#123;</span><span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">name</span><span style="color: #009900;">&#125;</span> имеет ЗП $<span style="color: #009900;">&#123;</span><span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">salary</span><span style="color: #009900;">&#125;</span>`
+                      <span style="color: #009900;">&#125;</span>
+                    <span style="color: #009900;">&#125;</span>
+                    &nbsp;
+                    <span style="color: #FF0000;">class</span> Developer <span style="color: #FF0000;">extends</span> Employee <span style="color: #009900;">&#123;</span>
+                      constructor<span style="color: #009900;">&#40;</span>name<span style="color: #339933;">,</span> salary<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+                        <span style="color: #FF0000;">super</span><span style="color: #009900;">&#40;</span>name<span style="color: #339933;">,</span> salary<span style="color: #009900;">&#41;</span>
+                      <span style="color: #009900;">&#125;</span>
+                    &nbsp;
+                      responsibilities<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+                        <span style="color: #000066; font-weight: bold;">return</span> <span style="color: #3366CC;">'процесс создания программ'</span>
+                      <span style="color: #009900;">&#125;</span>
+                    <span style="color: #009900;">&#125;</span>
+                    &nbsp;
+                    <span style="color: #FF0000;">class</span> Tester <span style="color: #FF0000;">extends</span> Employee <span style="color: #009900;">&#123;</span>
+                      constructor<span style="color: #009900;">&#40;</span>name<span style="color: #339933;">,</span> salary<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+                        <span style="color: #FF0000;">super</span><span style="color: #009900;">&#40;</span>name<span style="color: #339933;">,</span> salary<span style="color: #009900;">&#41;</span>
+                      <span style="color: #009900;">&#125;</span>
+                    &nbsp;
+                      responsibilities<span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+                        <span style="color: #000066; font-weight: bold;">return</span> <span style="color: #3366CC;">'процесс тестирования'</span>
+                      <span style="color: #009900;">&#125;</span>
+                    <span style="color: #009900;">&#125;</span>
+                    &nbsp;
+                    <span style="color: #000066; font-weight: bold;">const</span> dev <span style="color: #339933;">=</span> <span style="color: #000066; font-weight: bold;">new</span> Developer<span style="color: #009900;">&#40;</span><span style="color: #3366CC;">'Владилен'</span><span style="color: #339933;">,</span> <span style="color: #CC0000;">100000</span><span style="color: #009900;">&#41;</span>
+                    console.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span>dev.<span style="color: #660066;">getPaid</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span>
+                    console.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span>dev.<span style="color: #660066;">work</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span>
+                    &nbsp;
+                    <span style="color: #000066; font-weight: bold;">const</span> tester <span style="color: #339933;">=</span> <span style="color: #000066; font-weight: bold;">new</span> Tester<span style="color: #009900;">&#40;</span><span style="color: #3366CC;">'Виктория'</span><span style="color: #339933;">,</span> <span style="color: #CC0000;">90000</span><span style="color: #009900;">&#41;</span>
+                    console.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span>tester.<span style="color: #660066;">getPaid</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span>
+                    console.<span style="color: #660066;">log</span><span style="color: #009900;">&#40;</span>tester.<span style="color: #660066;">work</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span></pre>
+                    
+
 </div>
 	
 </body>
