@@ -512,7 +512,27 @@ window.addEventListener("DOMContentLoaded", function() {
 
 
 	
-	
+	let jsn = require("./data")
+
+let nw = [];
+
+function add(ob) {
+  nw.push(ob)
+}
+
+for (var k in jsn) {
+  let f = jsn[k];
+  let ob = {};
+  ob.a = f[1];
+  ob.b = f[2];
+  ob.c = f[3];
+
+  for (var i = 0; i < ob.c; i++) {
+    add(ob)
+  }
+}
+
+console.log( nw );
 	
 	
 	
